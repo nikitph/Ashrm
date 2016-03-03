@@ -1,0 +1,18 @@
+ .main {
+   display: flex;
+   height: calc(100vh - #{$navbar-height});
+   width: 100%;
+
+   & .nav-side {
+     height: 100%;
+     width: $navbar-height;
+   }
+
+   & .content-side {
+
+     width: calc(100% - #{$navbar-height});
+     padding: 20px;
+   }
+
+ }
+

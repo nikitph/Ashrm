@@ -1,0 +1,54 @@
+@import "../components/variables";
+
+.topbar  {
+  width: 100%;
+  height: $navbar-height;
+  display: flex;
+  overflow: hidden;
+
+  & .top-logo {
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: $navbar-height;
+    height: 100%;
+    background-color: $primary-color;
+    padding: 10px;
+//    border-right: 1px solid $border-color;
+
+    & .logo-container {
+      border-radius: 50%;
+      background: #808080;
+      width: 100%;
+      height: 100%;
+      margin: auto;
+    }
+  }
+
+  & .action-menu {
+    width: calc(100% - #{$navbar-height});
+    height: 100%;
+    background-color: white;
+    color: #0000C0;
+    display: flex;
+    padding: 5px;
+    border-bottom: 1px solid $border-color;
+
+
+    & .institute-name {
+      color: #002240;
+      width: 80%;
+      margin: auto;
+    }
+
+    & .name-menu {
+      width: 10%;
+      margin: auto;
+      height: 100%;
+    }
+
+    & .signoff {
+      width: 10%;
+      margin: auto;
+    }
+  }
+}

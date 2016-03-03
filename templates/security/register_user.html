@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <br>
+    <br>
+    <div class="row">
+
+        <div class="col s12 m3">
+            <div class="white-text">
+                <br>
+            </div>
+        </div>
+
+        <div class="col s12 m6 btp">
+            <div class="center">
+                {% from "security/_macros.html" import render_field_with_errors, render_field %}
+                <h4 class="center">Register</h4>
+
+                <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
+                    {{ register_user_form.hidden_tag() }}
+                    {#        {{ render_field_with_errors(register_user_form.first_name) }}#}
+                    {{ render_field_with_errors(register_user_form.email) }}
+                    {{ render_field_with_errors(register_user_form.password) }}
+                    {% if register_user_form.password_confirm %}
+                        {{ render_field_with_errors(register_user_form.password_confirm) }}
+                    {% endif %}
+                <br>
+                <br>
+
+                    <div class="center">
+                        <button class="btn white black-text" type="submit" name="action">Submit
+                        </button>
+                    </div>
+                    <div class="center">
+                        <br>
+                        <br>
+                        The medical information on this site is provided as an information resource only, and is not to
+                        be used or relied on for any diagnostic or treatment purposes. This information is not intended
+                        to be patient education, does not create any patient-physician relationship, and should not be
+                        used as a substitute for professional diagnosis and treatment.
+
+                        Please consult your health care provider before making any healthcare decisions or for guidance
+                        about a specific medical condition. Narayana expressly disclaims responsibility, and shall have
+                        no liability, for any damages, loss, injury, or liability whatsoever suffered as a result of
+                        your reliance on the information contained in this site. Narayana
+                        does not endorse specifically any test, treatment, or procedure mentioned
+                        on the site.
+
+                        By visiting this site you agree to the foregoing terms and conditions, which may from time to
+                        time be changed or supplemented by Narayana. By clicking register you explicitly
+                        agree to the foregoing terms and conditions.
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+
+        <div class="col s12 m3">
+            <div class="white-text">
+                <br>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
