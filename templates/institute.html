@@ -1,12 +1,66 @@
 {% extends template.html %}
 
 {% block content %}
-<div class="icon-container">
+    <div class="icon-container">
 
-<a href="/" class="center brand-logo black-text"><img class="anm"
-                    src="/static/img/ashrm.svg" height="50px" style="margin-top: 4px"></a>
+        <div class="center">
 
-</div>
+            <form action="/institute" method="post">
+
+                <div class="input-field">
+                                    <input placeholder="Please enter Institute name here" id="institute_name" type="text" class="validate">
+          <label for="first_name">Name</label>
+                </div>
+
+                <div class="input-field">
+                                    <textarea id="address" class="materialize-textarea center"
+                                              placeholder="please entet street address here"
+                                              name="address"></textarea>
+                </div>
+
+                <div class="input-field">
+                                    <input placeholder="City" id="city" type="text" class="validate">
+          <label for="city">City</label>
+                </div>
+
+                <div class="input-field">
+                                    <input placeholder="State" id="state" type="text" class="validate">
+          <label for="state">State</label>
+                </div>
+
+                <div class="input-field">
+                                    <input placeholder="Pin Code" id="pincode" type="text" class="validate">
+          <label for="pincode">Pin Code</label>
+                </div>
+
+                <div class="input-field">
+                                    <input placeholder="Contact Number" id="phone" type="text" class="validate">
+          <label for="phone">Contact</label>
+                </div>
+
+                <div class="input-field">
+                                    <input placeholder="Website" id="website type="url" class="validate">
+          <label for="website">Website</label>
+                </div>
+
+                <div class="input-field">
+                                    <input placeholder="email" id="email" type="email" class="validate">
+          <label for="email">Email</label>
+                </div>
+
+                <div class="row center">
+                    <button class="btn white black-text"
+                            type="submit" style="margin-bottom: -55px"
+                            >Record
+                        <i class="material-icons right red-text">fiber_manual_record</i>
+                    </button>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
 
 
 {% endblock %}
