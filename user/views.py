@@ -20,3 +20,10 @@ def index():
 def institute_get():
     return render_template('institute.html')
 
+
+@login_required
+@bp_user.route('/institute', methods=['POST'])
+def institute_post():
+
+    return render_template('institute.html')
+
