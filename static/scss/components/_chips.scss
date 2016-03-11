@@ -9,13 +9,23 @@
   border-radius: 16px;
   background-color: $chip-bg-color;
 
-  img {
+  .img2 {
     float: left;
     margin: 0 8px 0 -12px;
     height: 32px;
     width: 32px;
     border-radius: 50%;
+    border:1px solid darkgreen;
+    background-color: white;
   }
+
+
+
+  .active2 {
+    border:1px solid darkred;
+    background-color: rgba(243, 156, 18,1.0)
+  }
+
 
   i.material-icons {
     cursor: pointer;

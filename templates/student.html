@@ -1,0 +1,128 @@
+{% extends "layout.html" %}
+
+{% macro add_standard(num) %}
+
+    <br>
+    <label for="standard{{ num }}">Enter number of sections for class {{ num }}</label>
+
+    <input placeholder="sections" id="standard{{ num }}" type="number" class="validate"
+           name="standard{{ num }}">
+
+    <br>
+
+
+{% endmacro %}
+
+
+{% macro add_row(nam1, nam2) %}
+
+    <div class="row">
+        <div class="col s12 m6">
+
+            {{ add_standard(nam1) }}
+
+        </div>
+
+        <div class="col s12 m6">
+
+            {{ add_standard(nam1) }}
+        </div>
+    </div>
+
+{% endmacro %}
+
+
+{% block content %}
+
+    <div class="section">
+
+
+        <!--   Icon Section   -->
+        <div class="row">
+            <div class="col s12 m3">
+                <div class="icon-block center">
+                    <br>
+
+                    <div class="chip">
+                        <div class="img2 center">1</div>
+                        School setup
+                    </div>
+                                        <div class="line-linkage"></div>
+
+
+                    <div class="vertical-line"></div>
+                    <div class="chip">
+                        <div class="img2 center active">2</div>
+                        Institute setup
+                    </div>
+
+                    <div class="line-linkage"></div>
+
+
+                    <div class="vertical-line"></div>
+                    <div class="chip">
+                        <div class="img2 center">2</div>
+                        Institute setup
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m6 btp">
+                <div class="icon-block">
+                    <div class="icon-container">
+
+                        <div class="center">
+                            <div class="center">
+                                <button class="btn-flat white black-text disabled" name="action"
+                                        style="margin-top: -22px">Student Information
+                                </button>
+                            </div>
+                            <br>
+
+                            <form action="/classes" method="post">
+                                <div class="row">
+
+
+                                    {% for h in form %}
+                                        {% if h.label.text =='School' %}
+                                            {{ h(type='hidden',value=scid) }}
+
+                                        {% elif h.label.text == 'Street Address' %}
+                                            <div class="col s12 m6">
+
+                                                {{ h(class='materialize-textarea',placeholder=h.label.text) }}
+
+                                            </div>
+                                        {% else %}
+                                            <div class="col s12 m6">
+                                                {{ h(placeholder=h.label.text) }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="row center">
+                                    <button class="btn white black-text btp"
+                                            type="submit" style="margin-bottom: -55px"
+                                            >Submit
+                                        <i class="material-icons right blue-text">send</i>
+                                    </button>
+
+                                </div>
+
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="icon-block">
+                    <br>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

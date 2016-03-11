@@ -1,66 +1,169 @@
-{% extends template.html %}
+{% extends "layout.html" %}
 
-{% block content %}
-    <div class="icon-container">
+{% macro add_field(nam, pholder, label, typ="text") %}
 
-        <div class="center">
+    {#    <div class="input-field">#}
+    <input placeholder="{{ pholder }}" id="{{ nam }}" type="{{ typ }}" class="validate"
+           name="{{ nam }}">
+    <label for="{{ nam }}">{{ label }}</label>
+    {#    </div>#}
 
-            <form action="/institute" method="post">
+{% endmacro %}
 
-                <div class="input-field">
-                                    <input placeholder="Please enter Institute name here" id="institute_name" type="text" class="validate">
-          <label for="first_name">Name</label>
-                </div>
+{% macro add_row(nam1, pholder1, nam2, pholder2) %}
 
-                <div class="input-field">
-                                    <textarea id="address" class="materialize-textarea center"
-                                              placeholder="please entet street address here"
-                                              name="address"></textarea>
-                </div>
+    <div class="row">
+        <div class="col s12 m6">
 
-                <div class="input-field">
-                                    <input placeholder="City" id="city" type="text" class="validate">
-          <label for="city">City</label>
-                </div>
+            {{ add_field(nam1,pholder1) }}
 
-                <div class="input-field">
-                                    <input placeholder="State" id="state" type="text" class="validate">
-          <label for="state">State</label>
-                </div>
-
-                <div class="input-field">
-                                    <input placeholder="Pin Code" id="pincode" type="text" class="validate">
-          <label for="pincode">Pin Code</label>
-                </div>
-
-                <div class="input-field">
-                                    <input placeholder="Contact Number" id="phone" type="text" class="validate">
-          <label for="phone">Contact</label>
-                </div>
-
-                <div class="input-field">
-                                    <input placeholder="Website" id="website type="url" class="validate">
-          <label for="website">Website</label>
-                </div>
-
-                <div class="input-field">
-                                    <input placeholder="email" id="email" type="email" class="validate">
-          <label for="email">Email</label>
-                </div>
-
-                <div class="row center">
-                    <button class="btn white black-text"
-                            type="submit" style="margin-bottom: -55px"
-                            >Record
-                        <i class="material-icons right red-text">fiber_manual_record</i>
-                    </button>
-                </div>
-
-
-            </form>
         </div>
 
+        <div class="col s12 m6">
+
+            {{ add_field(nam2,pholder2) }}
+        </div>
     </div>
 
+{% endmacro %}
+
+
+{% block content %}
+
+        <div class="section">
+
+
+            <!--   Icon Section   -->
+            <div class="row">
+                <div class="col s12 m3">
+                    <div class="icon-block center">
+                        <br>
+
+                        <div class="chip amber lighten-3">
+                            <div class="img2 center">1</div>
+                            Institute Setup
+                        </div>
+                        <div class="line-linkage active"></div>
+
+
+                        <div class="vertical-line"></div>
+                        <div class="chip">
+                            <div class="img2 center">2</div>
+                            School Setup
+                        </div>
+
+                        <div class="line-linkage"></div>
+
+
+                        <div class="vertical-line"></div>
+                        <div class="chip">
+                            <div class="img2 center">3</div>
+                            Class Setup
+                        </div>
+                        <div class="line-linkage"></div>
+
+                    </div>
+                </div>
+
+
+                <div class="col s12 m6 btp">
+                    <div class="icon-block">
+                        <div class="icon-container">
+
+                            <div class="center">
+                                <div class="center">
+                                    <button class="btn-flat white black-text disabled" name="action"
+                                            style="margin-top: -22px">Institute Information
+                                    </button>
+                                </div>
+                                <br>
+
+                                <form action="/institute" method="post">
+
+
+                                    {{ add_field("institute","Please enter Institute name here") }}
+
+
+                                    <div class="input-field">
+                                    <textarea id="address" class="materialize-textarea center"
+                                              placeholder="please enter street address here"
+                                              name="address"></textarea>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col s12 m6">
+
+                                            {{ add_field("city","City") }}
+
+                                        </div>
+
+                                        <div class="col s12 m6">
+
+
+                                            {{ add_field("state","State") }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col s12 m6">
+
+
+                                            {{ add_field("pincode","Pin Code") }}
+                                        </div>
+                                        <div class="col s12 m6">
+
+
+                                            {{ add_field("phone","Contact Number") }}
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+
+                                        <div class="col s12 m6">
+
+
+                                            <div class="input-field">
+                                                <input placeholder="Website" id="website" type="url" class="validate"
+                                                       name="website">
+                                                <label for="website"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col s12 m6">
+
+
+                                            <div class="input-field">
+                                                <input placeholder="email" id="email" type="email" class="validate"
+                                                       name="email">
+                                                <label for="email"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row center">
+                                        <button class="btn white black-text btp"
+                                                type="submit" style="margin-bottom: -55px"
+                                                >Submit
+                                            <i class="material-icons right blue-text">send</i>
+                                        </button>
+                                    </div>
+
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m3">
+                    <div class="icon-block">
+                        <br>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
 {% endblock %}

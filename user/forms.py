@@ -1,10 +1,13 @@
-from flask_security.forms import ConfirmRegisterForm
-from wtforms import StringField, IntegerField
+from flask_security.forms import RegisterForm
+from wtforms import StringField, IntegerField, Form, FieldList
 from wtforms.validators import Required
+from flask.ext.mongoengine.wtf import model_form
+from public.models import Standard1
 
-class ExtendedRegisterForm(ConfirmRegisterForm):
+
+class ExtendedRegisterForm(RegisterForm):
     first_name = StringField('First Name')
     last_name = StringField('Last Name')
-    phone = IntegerField('Phone')
+    phone = StringField('Phone')
 
 

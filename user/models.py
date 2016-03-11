@@ -19,6 +19,7 @@ class User(UserMixin, db.Document):
     active = db.BooleanField(default=False)
     first_name = db.StringField()
     last_name = db.StringField()
+    phone = db.StringField()
     roles = db.ListField(db.ReferenceField(Role),default=[])
     #email confirmation
     confirmed_at = db.DateTimeField()

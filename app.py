@@ -31,8 +31,17 @@ def register_extensions(app):
     admin.init_app(app)
     register_admin_views(admin)
     user_datastore = MongoEngineUserDatastore(db, User, Role)
-    security = Security(app, user_datastore, confirm_register_form=ExtendedRegisterForm)
+    security = Security(app, user_datastore, register_form=ExtendedRegisterForm)
     mail.init_app(app)
+    app.config['DEBUG_TB_PANELS'] = ['flask.ext.mongoengine.panels.MongoDebugPanel',
+                                     'flask_debugtoolbar.panels.versions.VersionDebugPanel',
+                                     'flask_debugtoolbar.panels.timer.TimerDebugPanel',
+                                     'flask_debugtoolbar.panels.headers.HeaderDebugPanel',
+                                     'flask_debugtoolbar.panels.request_vars.RequestVarsDebugPanel',
+                                     'flask_debugtoolbar.panels.config_vars.ConfigVarsDebugPanel',
+                                     'flask_debugtoolbar.panels.template.TemplateDebugPanel',
+                                     'flask_debugtoolbar.panels.logger.LoggingPanel',
+                                     'flask_debugtoolbar.panels.profiler.ProfilerDebugPanel']
     debug_toolbar.init_app(app)
 
     return None
