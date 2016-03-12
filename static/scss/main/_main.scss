@@ -6,6 +6,11 @@
   & .nav-side {
     height: 100%;
     width: $navbar-height;
+
+    & .bottom-links {
+      position: relative;
+      bottom:70px;
+    }
   }
 
   & .content-side {

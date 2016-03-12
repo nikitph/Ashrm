@@ -2222,6 +2222,10 @@
 .topbar .action-menu .signoff {
   width: 10%;
   margin: auto;
+  padding: 10px;
+}
+.topbar .action-menu .signoff i {
+  font-size: 2.5rem;
 }
 
 .main {
@@ -2232,6 +2236,10 @@
 .main .nav-side {
   height: 100%;
   width: 64px;
+}
+.main .nav-side .bottom-links {
+  position: relative;
+  bottom: 70px;
 }
 .main .content-side {
   width: calc(100% - 64px);

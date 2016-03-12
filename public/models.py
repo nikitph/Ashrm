@@ -19,6 +19,7 @@ class Institute(db.Document):
 
 class School(db.Document):
     institute = db.StringField(required=True, max_length=50)
+    user = db.StringField(required=True, max_length=50)
     school_name = db.StringField(required=True, max_length=50)
     street_address = db.StringField(required=True)
     city = db.StringField(required=True, max_length=50)

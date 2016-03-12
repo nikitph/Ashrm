@@ -82,3 +82,11 @@ def student_get(sid):
     student_form = model_form(Student)
     form = student_form(request.form)
     return render_template('student.html', form=form)
+
+
+@login_required
+@bp_user.route('/dashboard/', methods=['GET'])
+def dashboard_get():
+    student_form = model_form(Student)
+    form = student_form(request.form)
+    return render_template('student.html', form=form)

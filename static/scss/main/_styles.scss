@@ -1,0 +1,32 @@
+.btp {
+  border: 1px solid darkgreen;
+  border-radius: 8px;
+  z-index: 70;
+  overflow: visible;
+}
+
+.vertical-line {
+  height: 90px;
+  width: 0px;
+  left: 50%;
+  position: relative;
+  border-left: 1px solid rgb(228, 228, 238);
+  z-index: -999;
+}
+
+.line-linkage {
+  width: calc(50% + 0.75rem);
+  height: 0px;
+  background-color: green;
+  position: relative;
+  top: 0%;
+  right: -50%;
+  z-index: -1000;
+  margin-top: -16px;
+  //  border-top: 1px solid green;
+}
+
+.active {
+height: 1px
+}
+
