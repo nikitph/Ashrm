@@ -84,14 +84,14 @@
     <div class="action-menu">
         <div class="institute-name center">
 
-            SICA school
+            {{ g.user.get_school() }}
 
         </div>
         <div class="name-menu center">
         </div>
 
         <div class="signoff center">
-                    <a href="/logout"><i class="material-icons">exit_to_app</i></a>
+            <a href="/logout"><i class="material-icons">exit_to_app</i></a>
         </div>
     </div>
 </div>

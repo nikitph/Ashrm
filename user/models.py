@@ -1,6 +1,7 @@
 from extensions import db
 from flask.ext.security import UserMixin, RoleMixin
 import datetime
+from public.models import School
 
 
 class Role(db.Document, RoleMixin):
@@ -20,6 +21,7 @@ class User(UserMixin, db.Document):
     first_name = db.StringField()
     last_name = db.StringField()
     phone = db.StringField()
+    school = db.StringField(max_length=255, required=False, default='')
     roles = db.ListField(db.ReferenceField(Role),default=[])
     #email confirmation
     confirmed_at = db.DateTimeField()
@@ -39,6 +41,9 @@ class User(UserMixin, db.Document):
 
     def get_id(self):
         return unicode(self.id)
+
+    def get_school(self):
+        return unicode(self.school)
 
     meta = {
         'allow_inheritance': True,
