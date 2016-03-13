@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!--Import materialize.css-->
-{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">#}
+    {#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">#}
     <link href="/static/css/materialize.css" rel="stylesheet">
     <link href="/static/css/main/app.css" rel="stylesheet">
 
@@ -66,7 +66,6 @@
         }
 
 
-
     </style>
 
     {% block style %}
@@ -80,41 +79,47 @@
     <div class="top-logo">
         <div class="logo-container center">
             T
-        </div> </div><div class="action-menu">
-<div class="institute-name center">
-
-    SICA school
-
-</div>
-    <div class="name-menu center">
+        </div>
     </div>
+    <div class="action-menu">
+        <div class="institute-name center">
 
-    <div class="signoff center">
-phj
+            SICA school
+
+        </div>
+        <div class="name-menu center">
+        </div>
+
+        <div class="signoff center">
+                    <a href="/logout"><i class="material-icons">exit_to_app</i></a>
+        </div>
     </div>
-</div>
 </div>
 
 <div class="main ">
     <div class="nav-side hide-on-med-and-down">
-      <nav>
-      <ul class="hide-on-med-and-down">
+        <nav>
+            <ul class="hide-on-med-and-down">
 
 
-        <li><a href="sass.html"><i class="material-icons">search</i></a></li>
-        <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
-        <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
-        <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
-      </ul>
-  </nav>
+                <li><a href="sass.html"><i class="material-icons">assignment_ind</i></a></li>
+                <li><a href="badges.html"><i class="material-icons">list</i></a></li>
+            </ul>
+        </nav>
+
+        <div class="bottom-links center">
+
+            <a href="mobile.html"><i class="material-icons white-text">more_vert</i></a>
+
+        </div>
 
     </div>
 
     <div class="content-side">
 
-         {% block content %}
+        {% block content %}
 
-    {% endblock %}
+        {% endblock %}
 
     </div>
 

@@ -4,6 +4,7 @@ from flask.templating import render_template
 from wtforms import Form, FieldList, TextField
 from public.models import Institute, School, Standard1, Standards, Student
 from flask.ext.mongoengine.wtf import model_form
+from user.models import User
 
 bp_user = Blueprint('users', __name__, static_folder='../static')
 
@@ -56,6 +57,8 @@ def school_post():
     school_f = model_form(School)
     sc = school_f(request.form)
     t = sc.save()
+    User.objects(id=g.user.get_id()).update_one(set__school=request.form['school_name'])
+    g.user.reload()
     return redirect('/classes/' + str(t.id))
 
 
