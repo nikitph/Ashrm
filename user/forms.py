@@ -2,7 +2,6 @@ from flask_security.forms import RegisterForm
 from wtforms import StringField, IntegerField, Form, FieldList
 from wtforms.validators import Required
 from flask.ext.mongoengine.wtf import model_form
-from public.models import Standard1
 
 
 class ExtendedRegisterForm(RegisterForm):

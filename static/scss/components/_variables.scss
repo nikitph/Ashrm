@@ -1,7 +1,7 @@
 @import "color";
 
 /*** Colors ***/
-$primary-color: color("blue", "lighten-2") !default;
+$primary-color: #A49988 !default;
 $primary-color-light: lighten($primary-color, 15%) !default;
 $primary-color-dark: darken($primary-color, 15%) !default;
 
@@ -66,8 +66,8 @@ $input-error-color: $error-color !default;
 $input-success-color: $success-color !default;
 $input-focus-color: $secondary-color !default;
 $label-font-size: .8rem !default;
-$input-disabled-color: rgba(0,0,0, .26) !default;
-$input-disabled-solid-color: #BDBDBD !default;
+$input-disabled-color: rgba(0,0,0, .5) !default;
+$input-disabled-solid-color: #939393 !default;
 
 // Radio Buttons
 $radio-fill-color: $secondary-color !default;

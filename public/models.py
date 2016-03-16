@@ -1,4 +1,4 @@
-from mongoengine import EmbeddedDocumentField, ListField, Document, DynamicDocument
+from mongoengine import EmbeddedDocumentField, ListField, Document, DynamicDocument, ReferenceField
 from wtforms import FieldList, StringField
 from extensions import db
 from flask.ext.mongoengine.wtf import model_form
@@ -30,16 +30,21 @@ class School(db.Document):
     email = db.StringField(required=True, max_length=50)
 
 
-class Standard1(db.EmbeddedDocument):
+class Standard(db.Document):
     standard = db.StringField(required=True, max_length=20)
     sections = db.IntField(required=True)
     school = db.StringField(required=True, max_length=50)
+
+    def __str__(self):
+        return self.standard
+
+    __rpr__ = __str__
 
 
 class Student(db.Document):
     school = db.StringField(required=True, max_length=20)
     student_name = db.StringField(required=True, max_length=20)
-    standard = db.StringField(required=True, max_length=20)
+    standard = db.ReferenceField(Standard, required=True)
     street_address = db.StringField(required=True)
     city = db.StringField(required=True, max_length=20)
     state = db.StringField(required=True, max_length=20)
@@ -48,5 +53,3 @@ class Student(db.Document):
     email = db.StringField(required=True, max_length=20)
 
 
-class Standards(db.Document):
-    Standrds = db.ListField(EmbeddedDocumentField(Standard1))

@@ -1,10 +1,10 @@
 from flask import Blueprint, request, session, redirect, url_for, flash, g
 from flask.ext.security import login_required, logout_user, login_user, current_user
 from flask.templating import render_template
-from wtforms import Form, FieldList, TextField
-from public.models import Institute, School, Standard1, Standards, Student
+from public.models import Institute, School, Student, Standard
 from flask.ext.mongoengine.wtf import model_form
 from user.models import User
+from user.utility import cruder
 
 bp_user = Blueprint('users', __name__, static_folder='../static')
 
@@ -65,31 +65,33 @@ def school_post():
 @login_required
 @bp_user.route('/classes/<sid>', methods=['GET'])
 def classes_get(sid):
-    ft = model_form(Standards, only=['Standrds'], field_args={'Standrds': {'min_entries': 14}})
-    f = ft()
+    ft = model_form(Standard)
+    f = ft(request.form)
     return render_template('classes.html', form=f, scid=sid)
 
 
 @login_required
 @bp_user.route('/classes', methods=['POST'])
 def classes_post():
-    classes_form = model_form(Standards)
+    classes_form = model_form(Standard)
     form = classes_form(request.form)
     form.save()
     return render_template('complete.html')
 
 
 @login_required
-@bp_user.route('/student/<sid>', methods=['GET'])
-def student_get(sid):
-    student_form = model_form(Student)
-    form = student_form(request.form)
-    return render_template('student.html', form=form)
+@bp_user.route('/student', methods=['GET', 'POST'])
+def student():
+    if request.method == 'GET':
+        return cruder(request, Student, 'student.html', 'student', 'Student')
+
+    else:
+        obj_form = model_form(Student)
+        form = obj_form(request.form)
+        return redirect(url_for('.student', m='r', id=str(form.save().id)))
 
 
 @login_required
 @bp_user.route('/dashboard/', methods=['GET'])
 def dashboard_get():
-    student_form = model_form(Student)
-    form = student_form(request.form)
-    return render_template('student.html', form=form)
+    return render_template('dashboard.html')

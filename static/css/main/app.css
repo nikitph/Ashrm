@@ -2191,12 +2191,12 @@
   flex-grow: 0;
   flex-basis: 64px;
   height: 100%;
-  background-color: #64B5F6;
+  background-color: #A49988;
   padding: 10px;
 }
 .topbar .top-logo .logo-container {
   border-radius: 50%;
-  background: #808080;
+  background: #cacaca;
   width: 100%;
   height: 100%;
   margin: auto;
@@ -2224,10 +2224,7 @@
 .topbar .action-menu .name-menu {
   width: 10%;
   margin: auto;
-  border-left: 2px solid lightgray;
   border-right: 2px solid lightgray;
-}
-.topbar .action-menu .name-menu a {
   font-family: 'Ubuntu', "Avenir", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
   font-size: 16px;
   letter-spacing: 2px;

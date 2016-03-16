@@ -19,7 +19,7 @@
 
     & .logo-container {
       border-radius: 50%;
-      background: #808080;
+      background: #cacaca;
       width: 100%;
       height: 100%;
       margin: auto;
@@ -50,16 +50,15 @@
     & .name-menu {
       width: 10%;
       margin: auto;
-      border-left: 2px solid lightgray;
+//      border-left: 2px solid lightgray;
       border-right: 2px solid lightgray;
 
-      & a {
         font-family: 'Ubuntu', "Avenir", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
         font-size: 16px;
         letter-spacing: 2px;
         font-weight: 300;
         color: rgba(0, 0, 0, 0.7);
-      }
+
 
       i {
         margin-left: -20px;

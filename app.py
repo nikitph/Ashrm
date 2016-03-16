@@ -50,6 +50,7 @@ def register_extensions(app):
 def register_blueprints(app):
     app.register_blueprint(bp_public)
     app.register_blueprint(bp_user)
+    print(app.url_map)
     return None
 
 

@@ -91,20 +91,19 @@
 
                         <form action="/classes" method="post">
 
-                            {% for h in form.Standrds.entries %}
-                                <div class="row">
+                            {% for t in form %}
+                                <div class="row center">
 
-                                    {% for t in h %}
 
                                         {% if t.label.text =='School' %}
                                             {{ t(type='hidden',value=scid) }}
                                         {% elif t.label.text =='Standard' %}
-                                            <div class="col s12 m6">
+                                            <div class="col s12 m12">
 
                                                 {{ t(placeholder='Enter class Name/Number here') }}
                                             </div>
                                         {% elif t.label.text=='Sections' %}
-                                            <div class="col s12 m6">
+                                            <div class="col s12 m12">
 
                                                 {{ t(type='number', placeholder='Enter Number of sections') }}
                                             </div>
@@ -115,7 +114,6 @@
 
                                         {% endif %}
 
-                                    {% endfor %}
                                 </div>
                             {% endfor %}
 
