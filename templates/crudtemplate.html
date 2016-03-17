@@ -1,0 +1,98 @@
+{% extends "template.html" %}
+
+{% macro add_row(nam1, nam2) %}
+
+    <div class="row">
+        <div class="col s12 m6">
+
+            {{ add_standard(nam1) }}
+
+        </div>
+
+        <div class="col s12 m6">
+
+            {{ add_standard(nam1) }}
+        </div>
+    </div>
+
+{% endmacro %}
+
+
+{% block content %}
+
+    <div class="section">
+
+
+        <!--   Icon Section   -->
+        <div class="row">
+            <div class="col s12 m3">
+                <div class="icon-block center">
+                    <br>
+
+                    {% block uiblock %}
+
+                    {% endblock %}
+
+                </div>
+            </div>
+
+            <div class="col s12 m6 btp">
+                <div class="icon-block">
+                    <div class="icon-container">
+
+                        <div class="center">
+                            <div class="center">
+                                <button class="btn-flat white black-text disabled" name="action"
+                                        style="margin-top: -22px">{{ displayname }} Information
+                                </button>
+                            </div>
+                            <br>
+
+                            <form action="/{{ routename }}" method="post">
+                                {% if mode==1 %}
+
+                                    {% block create_mode %}
+
+                                    {% endblock %}
+
+                                {% endif %}
+
+                                {% if mode==2 %}
+
+                                    {% block read_mode %}
+
+                                    {% endblock %}
+
+                                {% endif %}
+
+                                {% if mode==3 %}
+
+                                    {% block update_mode %}
+
+                                    {% endblock %}
+
+                                {% endif %}
+
+                                {% if mode==4 %}
+
+                                    {% block delete_mode %}
+
+                                    {% endblock %}
+
+                                {% endif %}
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="icon-block">
+                    <br>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
