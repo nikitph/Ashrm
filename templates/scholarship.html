@@ -1,21 +1,21 @@
 {% extends "crudtemplate.html" %}
 
-{% macro add_row(nam1, nam2) %}
+{% block script %}
+<script>
+function copyTextValue() {
+    var text1 = document.getElementById("student_id").value;
+    var url1 = '/student?m=r';
+    document.getElementById("backlink").href=url1 + '&id=' + text1;
+}
+$(document).ready(function () {
+            $('select').material_select();
+    copyTextValue();
+        });
 
-    <div class="row">
-        <div class="col s12 m6">
+</script>
 
-            {{ add_standard(nam1) }}
 
-        </div>
-
-        <div class="col s12 m6">
-
-            {{ add_standard(nam1) }}
-        </div>
-    </div>
-
-{% endmacro %}
+{% endblock %}
 
 {% block uiblock %}
 
@@ -54,6 +54,11 @@
                 {{ displayname }} </a>
         </div>
         <div class="line-linkage"></div>
+
+        <div class="vertical-line"></div>
+        <div class="chip white">
+            <a id="backlink" href=""> < Back to Student </a>
+        </div>
 
 
     {% endif %}
@@ -97,50 +102,24 @@
 
 {% endblock %}
 
-{% block subrecord %}
-
-    <div class="center">
-        <div class="fixed-action-btn click-to-toggle">
-            <a class="btn-floating btn-large blue darken-1">
-                <i class="large material-icons white-text">add</i>
-            </a>
-            <ul>
-                <li><a class="btn-floating red" href="{{ url_for('.parent', sid=request.args['id']) }}"><i class="material-icons">perm_identity</i></a></li>
-                <li><a class="btn-floating red" href="{{ url_for('.scholarship', sid=request.args['id']) }}"><i class="material-icons">book</i></a></li>
-                <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-            </ul>
-        </div>
-    </div>
-
-{% endblock %}
-
-{% block submenu %}
-<div class="center">
-Related Info
-</div>
-    <br>
-    {% for t in form['related'].data%}
-        <div class="chip green lighten-3" style="margin-bottom: 5px">
-        <a href="{{ url_for('.' + form['related'].data[t],m='r', id=t) }}">{{ form['related'].data[t] }}</a>
-    </div>
-    {% endfor %}
-{% endblock %}
-
 
 {% block create_mode %}
 
     <div class="row">
         {% for h in form %}
-            {% if h.label.text =='School' %}
-                {{ h(type='hidden',value=scid) }}
 
-            {% elif h.label.text == 'Street Address' %}
+            {% if h.label.text == 'Street Address' %}
                 <div class="col s12 m6">
 
                     {{ h(class='materialize-textarea',placeholder=h.label.text) }}
 
                 </div>
+
+                {% elif h.label.text == 'Student Id'%}
+
+                {{ h(value=request.args['sid']) }}
+
+
             {% else %}
                 <div class="col s12 m6">
                     {{ h(placeholder=h.label.text) }}
@@ -165,19 +144,18 @@ Related Info
 
     <div class="row">
         {% for h in form %}
-            {% if h.label.text =='School' %}
-                {{ h(type='hidden',value=scid) }}
+            {% if h.label.text =='Student Id' %}
+
+                {{ h(type='hidden') }}
+
 
             {% elif h.label.text =='Csrf Token' %}
                 {{ h(type='hidden') }}
 
-            {% elif h.label.text =='Related' %}
-
-
             {% elif h.label.text == 'Street Address' %}
                 <div class="col s12 m6">
 
-                    {{ h(class='materialize-textarea', disabled='') }}
+                   {{ h.label }} {{ h(class='materialize-textarea', disabled='') }}
 
                 </div>
             {% else %}

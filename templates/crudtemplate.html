@@ -36,8 +36,8 @@
                 </div>
             </div>
 
-            <div class="col s12 m6 btp">
-                <div class="icon-block">
+            <div class="col s12 m6">
+                <div class="icon-block btp">
                     <div class="icon-container">
 
                         <div class="center">
@@ -85,10 +85,17 @@
 
                     </div>
                 </div>
+
+            {% block subrecord %}
+
+            {% endblock %}
             </div>
             <div class="col s12 m3">
-                <div class="icon-block">
+                <div class="icon-block center">
                     <br>
+                    {% block submenu %}
+
+                    {% endblock %}
                 </div>
             </div>
 

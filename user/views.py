@@ -2,7 +2,7 @@ from flask import Blueprint, request, session, redirect, url_for, flash, g
 from flask.ext.security import login_required, logout_user, login_user, current_user
 from flask.templating import render_template
 import wtforms
-from public.models import Institute, School, Student, Standard
+from public.models import Institute, School, Student, Standard, Parent, Scholarship
 from flask.ext.mongoengine.wtf import model_form
 from user.models import User
 from user.utility import cruder
@@ -39,7 +39,8 @@ def institute():
 def school():
     if request.method == 'GET':
         # fields to be hidden come here
-        field_args = {'user': {'widget': wtforms.widgets.HiddenInput()}, 'city': {'widget': wtforms.widgets.HiddenInput()}}
+        field_args = {'user': {'widget': wtforms.widgets.HiddenInput()},
+                      'city': {'widget': wtforms.widgets.HiddenInput()}}
         return cruder(request, School, 'school.html', 'school', 'School', field_args)
 
     else:
@@ -73,12 +74,39 @@ def standard():
 @bp_user.route('/student', methods=['GET', 'POST'])
 def student():
     if request.method == 'GET':
-        return cruder(request, Student, 'student.html', 'student', 'Student')
+        field_args = {'related': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Student, 'student.html', 'student', 'Student', field_args)
 
     else:
         obj_form = model_form(Student)
         form = obj_form(request.form)
         return redirect(url_for('.student', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/parent', methods=['GET', 'POST'])
+def parent():
+    if request.method == 'GET':
+        field_args = {'student_id': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Parent, 'parent.html', 'parent', 'Parent', field_args)
+
+    else:
+        obj_form = model_form(Parent)
+        form = obj_form(request.form)
+        return redirect(url_for('.parent', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/scholarship', methods=['GET', 'POST'])
+def scholarship():
+    if request.method == 'GET':
+        field_args = {'student_id': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Scholarship, 'scholarship.html', 'scholarship', 'Scholarship', field_args)
+
+    else:
+        obj_form = model_form(Scholarship)
+        form = obj_form(request.form)
+        return redirect(url_for('.scholarship', m='r', id=str(form.save().id)))
 
 
 @login_required

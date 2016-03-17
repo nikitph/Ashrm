@@ -15,7 +15,7 @@
 }
 
 .line-linkage {
-  width: calc(50% + 0.75rem);
+  width: calc(50% + 1.5rem);
   height: 0px;
   background-color: green;
   position: relative;
@@ -26,7 +26,7 @@
   //  border-top: 1px solid green;
 }
 
-.active {
+.activelink {
 height: 1px
 }
 

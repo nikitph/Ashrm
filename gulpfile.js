@@ -20,7 +20,7 @@ gulp.task('css', function () {
 gulp.task('js', function () {
     //define scripts as array so we can prioritize them
     return gulp.src([
-            'static/_js/main.js'
+            'static/_js/*.js'
         ]
     )
         .pipe(concat('app.js'))
