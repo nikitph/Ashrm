@@ -95,3 +95,17 @@ class Scholarship(db.Document):
         set_new = dict((("set__related__%s" % k, v) for k, v in keys.iteritems()))
         stu.update(**set_new)
 
+
+class Award(db.Document):
+    awarding_body = db.StringField(required=True, max_length=20)
+    year = db.StringField(required=True, max_length=20)
+    student_id = db.StringField(required=True, max_length=50)
+    title_of_award = db.StringField(required=True)
+
+    def save(self, *args, **kwargs):
+        super(Award, self).save(*args, **kwargs)
+        stu = Student.objects(id=self.student_id).first()
+        keys = {str(self.id): 'award'}
+        set_new = dict((("set__related__%s" % k, v) for k, v in keys.iteritems()))
+        stu.update(**set_new)
+

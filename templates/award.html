@@ -108,7 +108,7 @@ $(document).ready(function () {
     <div class="row">
         {% for h in form %}
 
-            {% if h.type == 'TextAreaField' %}
+            {% if h.label.text == 'Title Of Award' %}
                 <div class="col s12 m6">
 
                     {{ h(class='materialize-textarea',placeholder=h.label.text) }}
@@ -148,10 +148,11 @@ $(document).ready(function () {
 
                 {{ h(type='hidden') }}
 
+
             {% elif h.label.text =='Csrf Token' %}
                 {{ h(type='hidden') }}
 
-            {% elif h.type == 'TextAreaField' %}
+            {% elif h.label.text == 'Title Of Award' %}
                 <div class="col s12 m6">
 
                    {{ h.label }} {{ h(class='materialize-textarea', disabled='') }}
@@ -182,7 +183,7 @@ $(document).ready(function () {
             {% elif h.label.text =='Csrf Token' %}
                 {{ h(type='hidden') }}
 
-            {% elif h.type == 'TextAreaField' %}
+            {% elif h.label.text == 'Title Of Award' %}
                 <div class="col s12 m6">
 
                     {{ h(class='materialize-textarea') }}

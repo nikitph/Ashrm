@@ -2,7 +2,7 @@ from flask import Blueprint, request, session, redirect, url_for, flash, g
 from flask.ext.security import login_required, logout_user, login_user, current_user
 from flask.templating import render_template
 import wtforms
-from public.models import Institute, School, Student, Standard, Parent, Scholarship
+from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award
 from flask.ext.mongoengine.wtf import model_form
 from user.models import User
 from user.utility import cruder
@@ -107,6 +107,19 @@ def scholarship():
         obj_form = model_form(Scholarship)
         form = obj_form(request.form)
         return redirect(url_for('.scholarship', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/award', methods=['GET', 'POST'])
+def award():
+    if request.method == 'GET':
+        field_args = {'student_id': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Award, 'award.html', 'award', 'Award', field_args)
+
+    else:
+        obj_form = model_form(Award)
+        form = obj_form(request.form)
+        return redirect(url_for('.award', m='r', id=str(form.save().id)))
 
 
 @login_required
