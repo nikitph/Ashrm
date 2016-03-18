@@ -1,18 +1,18 @@
 {% extends "crudtemplate.html" %}
 
 {% block script %}
-<script>
-function copyTextValue() {
-    var text1 = document.getElementById("student_id").value;
-    var url1 = '/student?m=r';
-    document.getElementById("backlink").href=url1 + '&id=' + text1;
-}
-$(document).ready(function () {
+    <script>
+        function copyTextValue() {
+            var text1 = document.getElementById("student_id").value;
+            var url1 = '/student?m=r';
+            document.getElementById("backlink").href = url1 + '&id=' + text1;
+        }
+        $(document).ready(function () {
             $('select').material_select();
-    copyTextValue();
+            copyTextValue();
         });
 
-</script>
+    </script>
 
 
 {% endblock %}
@@ -88,6 +88,11 @@ $(document).ready(function () {
         </div>
         <div class="line-linkage"></div>
 
+        <div class="vertical-line"></div>
+        <div class="chip white">
+            <a id="backlink" href=""> < Back to Student </a>
+        </div>
+
     {% endif %}
 
     {% if mode==4 %}
@@ -97,6 +102,11 @@ $(document).ready(function () {
             Delete {{ displayname }}
         </div>
         <div class="line-linkage activelink"></div>
+
+        <div class="vertical-line"></div>
+        <div class="chip white">
+            <a id="backlink" href=""> < Back to Student </a>
+        </div>
 
     {% endif %}
 
@@ -115,7 +125,7 @@ $(document).ready(function () {
 
                 </div>
 
-                {% elif h.label.text == 'Student Id'%}
+            {% elif h.label.text == 'Student Id' %}
 
                 {{ h(value=request.args['sid']) }}
 
@@ -154,7 +164,7 @@ $(document).ready(function () {
             {% elif h.type == 'TextAreaField' %}
                 <div class="col s12 m6">
 
-                   {{ h.label }} {{ h(class='materialize-textarea', disabled='') }}
+                    {{ h.label }} {{ h(class='materialize-textarea', disabled='') }}
 
                 </div>
             {% else %}
@@ -176,8 +186,8 @@ $(document).ready(function () {
         <input id="id" name="id" type="hidden" value={{ request.args.get('id') }}>
 
         {% for h in form %}
-            {% if h.label.text =='School' %}
-                {{ h(type='hidden',value=scid) }}
+            {% if h.label.text =='Student Id' %}
+                {{ h(type='hidden') }}
 
             {% elif h.label.text =='Csrf Token' %}
                 {{ h(type='hidden') }}
