@@ -10423,6 +10423,10 @@ a.waves-effect .waves-ripple {
   padding-left: 8px;
 }
 
+.submenu-chip {
+  margin-bottom: 5px;
+}
+
 .materialboxed {
   display: block;
   cursor: zoom-in;

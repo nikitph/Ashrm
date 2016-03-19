@@ -1,0 +1,103 @@
+{% extends "template.html" %}
+
+{% block script %}
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            var msg = {{ msg|safe }};
+            drawTable(msg)
+            ;
+            for (var i = 0; i < msg.length; i++) {
+                var b = msg[i];
+                $('#stlist').append('<a class="collection-item">' + b.student_name + '<span> - </span>' + '</a>');
+            }
+        });
+
+        function drawTable(data) {
+            for (var i = 0; i < data.length; i++) {
+                drawRow(data[i]);
+            }
+        }
+
+        function drawRow(rowData) {
+            var row = $("<tr />");
+            var url1 = '/student?m=r&id=' + rowData._id.$oid;
+            var nam = Object.getOwnPropertyNames(rowData);
+
+            $("#personDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
+            {#    row.append($("<td><a href=" + url1 + '>' + rowData.student_name + "</a></td>"));#}
+            {#    row.append($("<div class='chip white-text blue submenu-chip'>test</div>"));#}
+            {% for x in form %}
+                {% if not x.widget.input_type == 'hidden' %}
+
+
+                    var b = rowData.{{ x.name }};
+                    row.append($("<td>" + b + "</td>"));
+                {% endif %}
+            {% endfor %}
+
+        }
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="section">
+
+
+        <!--   Icon Section   -->
+        <div class="row">
+
+            <div class="col s12 m12">
+                <div class="icon-block">
+                    <div class="icon-container">
+
+                        <div class="center">
+
+                            {#                             <div id="stlist" class="collection">#}
+                            {#                        </div>#}
+
+                            <table id="personDataTable" class="striped responsive-table">
+                            <thead>
+                                <tr>
+                                    {% for x in form %}
+                                        {% if not x.widget.input_type == 'hidden' %}
+                                            <th>{{ x.label.text }}</th>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row center">
+        <div class="col s12 m4">
+
+            <a href="sass.html"><i class="material-icons medium">assignment_ind</i></a>
+
+        </div>
+
+        <div class="col s12 m4">
+
+            <a href="badges.html"><i class="material-icons medium">list</i></a>
+
+        </div>
+
+        <div class="col s12 m4">
+
+        </div>
+
+
+    </div>
+
+{% endblock %}

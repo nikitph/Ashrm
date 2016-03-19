@@ -1,3 +1,4 @@
+import json
 from flask import Blueprint, request, session, redirect, url_for, flash, g
 from flask.ext.security import login_required, logout_user, login_user, current_user
 from flask.templating import render_template
@@ -81,6 +82,17 @@ def student():
         obj_form = model_form(Student)
         form = obj_form(request.form)
         return redirect(url_for('.student', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/studentlist', methods=['GET'])
+def studentlist():
+    field_args = {'related': {'widget': wtforms.widgets.HiddenInput()},
+                  'school': {'widget': wtforms.widgets.HiddenInput()},
+                  'standard': {'widget': wtforms.widgets.HiddenInput()}}
+    usr_obj_form = model_form(Student, field_args=field_args)
+    form = usr_obj_form(request.form)
+    return render_template('studentlist.html', msg=Student.objects().to_json(), form=form)
 
 
 @login_required

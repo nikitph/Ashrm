@@ -105,9 +105,12 @@
                 <i class="large material-icons white-text">add</i>
             </a>
             <ul>
-                <li><a class="btn-floating red" href="{{ url_for('.parent', sid=request.args['id']) }}"><i class="material-icons">perm_identity</i></a></li>
-                <li><a class="btn-floating red" href="{{ url_for('.scholarship', sid=request.args['id']) }}"><i class="material-icons">book</i></a></li>
-                <li><a class="btn-floating red" href="{{ url_for('.award', sid=request.args['id']) }}"><i class="material-icons">grade</i></a></li>
+                <li><a class="btn-floating red" href="{{ url_for('.parent', sid=request.args['id']) }}"><i
+                        class="material-icons">perm_identity</i></a></li>
+                <li><a class="btn-floating red" href="{{ url_for('.scholarship', sid=request.args['id']) }}"><i
+                        class="material-icons">book</i></a></li>
+                <li><a class="btn-floating red" href="{{ url_for('.award', sid=request.args['id']) }}"><i
+                        class="material-icons">grade</i></a></li>
                 <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
             </ul>
         </div>
@@ -116,14 +119,14 @@
 {% endblock %}
 
 {% block submenu %}
-<div class="center">
-Related Info
-</div>
-    <br>
-    {% for t in form['related'].data%}
-        <div class="chip green lighten-3" style="margin-bottom: 5px">
-        <a href="{{ url_for('.' + form['related'].data[t],m='r', id=t) }}">{{ form['related'].data[t] }}</a>
+    <div class="center submenu-title">
+        Related Records
     </div>
+    <br>
+    {% for t in form['related'].data %}
+        <div class="chip white-text blue submenu-chip">
+            <a href="{{ url_for('.' + form['related'].data[t],m='r', id=t) }}" class="white-text">{{ form['related'].data[t] }}</a>
+        </div>
     {% endfor %}
 {% endblock %}
 

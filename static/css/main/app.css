@@ -2279,7 +2279,7 @@
 }
 
 .vertical-line {
-  height: 90px;
+  height: 50px;
   width: 0px;
   left: 50%;
   position: relative;
