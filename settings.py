@@ -12,8 +12,8 @@ class Config(object):
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
     BROKER_URL = 'redis://localhost:6379/10'
-    ENFERNO_ENV = 'prod'
-    MONGODB_SETTINGS = { 'db' :'ashrm'
+    ENFERNO_ENV = 'dev'
+    MONGODB_SETTINGS = { 'db' :'ashrm1'
     }
 
     #security
@@ -24,16 +24,16 @@ class Config(object):
     SECURITY_PASSWORD_HASH = 'bcrypt'
     SECURITY_PASSWORD_SALT = '3nF3Rn0'
 
-    SECURITY_POST_LOGIN_VIEW = '/record'
-    SECURITY_POST_CONFIRM_VIEW = '/account'
-    SECURITY_POST_REGISTER_VIEW = '/record'
+    SECURITY_POST_LOGIN_VIEW = '/dashboard'
+    SECURITY_POST_CONFIRM_VIEW = '/dashboard'
+    SECURITY_POST_REGISTER_VIEW = '/institute'
 
     #flask mail settings - Mailgun
     MAIL_SERVER = 'smtp.mailgun.com'
     MAIL_PORT = 465
     MAIL_USE_SSL = True
     MAIL_USERNAME = 'postmaster@sandbox915ad276f504436e85698563f521a724.mailgun.org'
-    MAIL_PASSWORD = 'mg pwd'
+    MAIL_PASSWORD = '82c13eb2fc037241f55e00921b1fb30f'
     SECURITY_EMAIL_SENDER = 'info@nikitph.com'
 
 
