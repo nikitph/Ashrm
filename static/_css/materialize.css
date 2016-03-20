@@ -10425,6 +10425,16 @@ a.waves-effect .waves-ripple {
 
 .submenu-chip {
   margin-bottom: 5px;
+  margin-right: 4px;
+}
+
+.search-chip {
+  margin-bottom: 5px;
+  margin-right: 4px;
+  height: 25px;
+  line-height: 25px;
+  padding: 0 6px;
+  font-size: 12px;
 }
 
 .materialboxed {

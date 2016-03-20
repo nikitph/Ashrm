@@ -87,7 +87,7 @@ def student():
 @login_required
 @bp_user.route('/studentlist', methods=['GET'])
 def studentlist():
-    field_args = {'related': {'widget': wtforms.widgets.HiddenInput()},
+    field_args = {'street_address': {'widget': wtforms.widgets.HiddenInput()},
                   'school': {'widget': wtforms.widgets.HiddenInput()},
                   'standard': {'widget': wtforms.widgets.HiddenInput()}}
     usr_obj_form = model_form(Student, field_args=field_args)

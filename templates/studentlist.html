@@ -1,15 +1,19 @@
 {% extends "template.html" %}
 
 {% block script %}
+    <script src="http://listjs.com/no-cdn/list.js"></script>
+    <script src="/static/js/list.pagination.min.js"></script>
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function () {
             var msg = {{ msg|safe }};
-            drawTable(msg)
-            ;
-            for (var i = 0; i < msg.length; i++) {
-                var b = msg[i];
-                $('#stlist').append('<a class="collection-item">' + b.student_name + '<span> - </span>' + '</a>');
-            }
+            var options = {
+                valueNames: ['student_name', 'city', 'email'],
+                page: 7,
+                plugins: [ListPagination({})]
+            };
+
+            drawTable(msg);
+            var userList = new List('students', options);
         });
 
         function drawTable(data) {
@@ -21,19 +25,38 @@
         function drawRow(rowData) {
             var row = $("<tr />");
             var url1 = '/student?m=r&id=' + rowData._id.$oid;
-            var nam = Object.getOwnPropertyNames(rowData);
+        var nam = null;
+            if (rowData.related != null)
+                nam = Object.getOwnPropertyNames(rowData.related);
 
             $("#personDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
             {#    row.append($("<td><a href=" + url1 + '>' + rowData.student_name + "</a></td>"));#}
             {#    row.append($("<div class='chip white-text blue submenu-chip'>test</div>"));#}
+
             {% for x in form %}
                 {% if not x.widget.input_type == 'hidden' %}
-
-
                     var b = rowData.{{ x.name }};
-                    row.append($("<td>" + b + "</td>"));
+
+                    {% if x.label.text =='Student Name' %}
+                        row.append($("<td class='{{ x.name }}'><a href=" + url1 + '>' + b + "</a></td>"));
+
+                                            {% elif x.label.text =='Related' %}
+
+
+                    {% else %}
+                        row.append($("<td class='{{ x.name }}'>" + b + "</td>"));
+                    {% endif %}
                 {% endif %}
             {% endfor %}
+
+        var z = "";
+            if (nam != null) {
+                for (var ter in nam) {
+                    var url2 = '/' + rowData.related[nam[ter]] + '?m=r&id=' + nam[ter];
+                    z = z + "<div class='chip white-text blue search-chip'> <a href='" + url2 + "' class='white-text'>" + rowData.related[nam[ter]] + "</a></div>";
+                }
+            }
+            row.append($("<td class='related'>" + z + "</td>"));
 
         }
 
@@ -43,60 +66,57 @@
 
 {% block content %}
 
-    <div class="section">
+    <!--   Icon Section   -->
+    <div class="row">
 
+        <div class="col s12 m12">
+            <div class="icon-block">
+                <div class="icon-container">
 
-        <!--   Icon Section   -->
-        <div class="row">
+                    <div class="center" id="students">
+                        <div class="row">
+                            <div class="col s6 m4">
+                                <input class="search" placeholder="Search"/>
+                            </div>
+                            <div class="col s6 m6">
 
-            <div class="col s12 m12">
-                <div class="icon-block">
-                    <div class="icon-container">
-
-                        <div class="center">
-
-                            {#                             <div id="stlist" class="collection">#}
-                            {#                        </div>#}
-
-                            <table id="personDataTable" class="striped responsive-table">
-                            <thead>
-                                <tr>
-                                    {% for x in form %}
-                                        {% if not x.widget.input_type == 'hidden' %}
-                                            <th>{{ x.label.text }}</th>
-                                        {% endif %}
-                                    {% endfor %}
-                                </tr>
-                            </thead>
-
-                            </table>
-
+                                Sort by :
+                                <button class="sort btn-flat grey lighten-3 btp" data-sort="student_name">
+                                    Name
+                                </button>
+                                <button class="sort btn-flat grey lighten-3 btp" data-sort="email">
+                                    Email
+                                </button>
+                                <button class="sort btn-flat grey lighten-3 btp" data-sort="city">
+                                    City
+                                </button>
+                            </div>
                         </div>
+                        <table id="personDataTable" class="striped responsive-table">
+                            <thead>
+                            <tr>
+                                {% for x in form %}
+                                    {% if not x.widget.input_type == 'hidden' %}
+                                        <th>{{ x.label.text }}</th>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                            </thead>
+                            <tbody class="list">
+                            <tr></tr>
+
+                            </tbody>
+
+                        </table>
+
+                        <ul class="pagination"></ul>
+
 
                     </div>
+
                 </div>
             </div>
-
         </div>
-    </div>
-
-    <div class="row center">
-        <div class="col s12 m4">
-
-            <a href="sass.html"><i class="material-icons medium">assignment_ind</i></a>
-
-        </div>
-
-        <div class="col s12 m4">
-
-            <a href="badges.html"><i class="material-icons medium">list</i></a>
-
-        </div>
-
-        <div class="col s12 m4">
-
-        </div>
-
 
     </div>
 
