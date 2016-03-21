@@ -1,0 +1,226 @@
+{% extends "crudtemplate.html" %}
+
+{% block script %}
+<script>
+function copyTextValue() {
+    var text1 = document.getElementById("student_id").value;
+    var url1 = '/student?m=r';
+    document.getElementById("backlink").href=url1 + '&id=' + text1;
+}
+$(document).ready(function () {
+            $('select').material_select();
+    copyTextValue();
+        });
+
+</script>
+
+
+{% endblock %}
+
+{% block uiblock %}
+
+    {% if mode==1 %}
+
+        <div class="chip amber lighten-3">
+            <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
+            Create {{ displayname }}
+        </div>
+        <div class="line-linkage activelink"></div>
+
+
+    {% endif %}
+
+    {% if mode==2 %}
+
+        <div class="chip green lighten-3">
+            <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
+            View {{ displayname }}
+        </div>
+        <div class="line-linkage activelink"></div>
+
+        <div class="vertical-line"></div>
+        <div class="chip green lighten-3">
+            <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
+            <a href="{{ url_for('.' + routename,m='u', id=request.args.get('id')) }}">Update {{ displayname }}</a>
+        </div>
+
+        <div class="line-linkage"></div>
+
+
+        <div class="vertical-line"></div>
+        <div class="chip red lighten-2">
+            <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
+            <a href="{{ url_for('.' + routename,m='d', id=request.args.get('id')) }}">Delete
+                {{ displayname }} </a>
+        </div>
+        <div class="line-linkage"></div>
+
+        <div class="vertical-line"></div>
+        <div class="chip white">
+            <a id="backlink" href=""> < Back to Student </a>
+        </div>
+
+
+    {% endif %}
+
+    {% if mode==3 %}
+
+        <div class="chip green lighten-3">
+            <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
+            <a href="{{ url_for('.' + routename,m='r', id=request.args.get('id')) }}">View {{ displayname }}</a>
+        </div>
+        <div class="line-linkage"></div>
+
+        <div class="vertical-line"></div>
+        <div class="chip green lighten-3">
+            <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
+            <a href="{{ url_for('.' + routename,m='u', id=request.args.get('id')) }}">Update {{ displayname }}</a>
+        </div>
+
+        <div class="line-linkage activelink"></div>
+
+
+        <div class="vertical-line"></div>
+        <div class="chip red lighten-2">
+            <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
+            <a href="{{ url_for('.' + routename,m='d', id=request.args.get('id')) }}"> Delete
+                {{ displayname }} </a>
+        </div>
+        <div class="line-linkage"></div>
+
+    {% endif %}
+
+    {% if mode==4 %}
+
+        <div class="chip amber lighten-3">
+            <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
+            Delete {{ displayname }}
+        </div>
+        <div class="line-linkage activelink"></div>
+
+    {% endif %}
+
+{% endblock %}
+
+
+{% block create_mode %}
+
+    <div class="row">
+        {% for h in form %}
+
+            {% if h.label.text == 'Description' %}
+                <div class="col s12 m6">
+
+                    {{ h(class='materialize-textarea',placeholder=h.label.text) }}
+
+                </div>
+
+                {% elif h.label.text == 'School'%}
+
+                {{ h(value=request.args['sid']) }}
+
+
+            {% else %}
+                <div class="col s12 m6">
+                    {{ h(placeholder=h.label.text) }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+    <div class="row center">
+        <button class="btn white black-text btp"
+                type="submit" style="margin-bottom: -55px"
+                >Submit
+            <i class="material-icons right blue-text">send</i>
+        </button>
+
+    </div>
+
+{% endblock %}
+
+{% block read_mode %}
+
+    <div class="row">
+        {% for h in form %}
+            {% if h.label.text =='School' %}
+
+                {{ h(type='hidden') }}
+
+
+            {% elif h.label.text =='Csrf Token' %}
+                {{ h(type='hidden') }}
+
+            {% elif h.label.text == 'Description' %}
+                <div class="col s12 m6">
+
+                   {{ h.label }} {{ h(class='materialize-textarea', disabled='') }}
+
+                </div>
+            {% else %}
+                <div class="col s12 m6">
+                    {{ h.label }}
+                    {{ h(disabled='') }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
+
+{% block update_mode %}
+
+    <div class="row">
+
+        <input id="id" name="id" type="hidden" value={{ request.args.get('id') }}>
+
+        {% for h in form %}
+            {% if h.label.text =='School' %}
+                {{ h(type='hidden',value=scid) }}
+
+            {% elif h.label.text =='Csrf Token' %}
+                {{ h(type='hidden') }}
+
+            {% elif h.label.text == 'Description' %}
+                <div class="col s12 m6">
+
+                    {{ h(class='materialize-textarea') }}
+
+                </div>
+            {% else %}
+                <div class="col s12 m6">
+                    {{ h.label }}
+                    {{ h }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="row center">
+        <button class="btn white black-text btp"
+                type="submit" style="margin-bottom: -55px"
+                >Submit
+            <i class="material-icons right blue-text">send</i>
+        </button>
+
+    </div>
+
+
+{% endblock %}
+
+{% block delete_mode %}
+    <div class="center">
+
+        <div>
+            <div class="completed"><br>
+                <br><br><br><br> {{ displayname }} Successfully Deleted <br>
+                <i class="material-icons large green-text">done</i>
+                <br><br><br><br>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

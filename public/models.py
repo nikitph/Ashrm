@@ -109,3 +109,18 @@ class Award(db.Document):
         set_new = dict((("set__related__%s" % k, v) for k, v in keys.iteritems()))
         stu.update(**set_new)
 
+
+class Subject(db.Document):
+    code = db.StringField(required=True, max_length=50)
+    subject_name = db.StringField(required=True, max_length=50)
+    books = db.StringField(required=True, max_length=50)
+    syllabus = db.StringField(required=True, max_length=50)
+    total_theory_hours = db.IntField(required=True)
+    class_duration = db.IntField(required=True)
+    description = db.StringField(required=True)
+    school = db.StringField(required=True)
+
+    def __str__(self):
+        return self.subject_name
+
+    __rpr__ = __str__

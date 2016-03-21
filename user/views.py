@@ -3,7 +3,7 @@ from flask import Blueprint, request, session, redirect, url_for, flash, g
 from flask.ext.security import login_required, logout_user, login_user, current_user
 from flask.templating import render_template
 import wtforms
-from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award
+from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject
 from flask.ext.mongoengine.wtf import model_form
 from user.models import User
 from user.utility import cruder
@@ -76,23 +76,15 @@ def standard():
 def student():
     if request.method == 'GET':
         field_args = {'related': {'widget': wtforms.widgets.HiddenInput()}}
-        return cruder(request, Student, 'student.html', 'student', 'Student', field_args)
+        list_args = {'street_address': {'widget': wtforms.widgets.HiddenInput()},
+                     'school': {'widget': wtforms.widgets.HiddenInput()},
+                     'standard': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Student, 'student.html', 'student', 'Student', field_args, list_args)
 
     else:
         obj_form = model_form(Student)
         form = obj_form(request.form)
         return redirect(url_for('.student', m='r', id=str(form.save().id)))
-
-
-@login_required
-@bp_user.route('/studentlist', methods=['GET'])
-def studentlist():
-    field_args = {'street_address': {'widget': wtforms.widgets.HiddenInput()},
-                  'school': {'widget': wtforms.widgets.HiddenInput()},
-                  'standard': {'widget': wtforms.widgets.HiddenInput()}}
-    usr_obj_form = model_form(Student, field_args=field_args)
-    form = usr_obj_form(request.form)
-    return render_template('studentlist.html', msg=Student.objects().to_json(), form=form)
 
 
 @login_required
@@ -132,6 +124,29 @@ def award():
         obj_form = model_form(Award)
         form = obj_form(request.form)
         return redirect(url_for('.award', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/subject', methods=['GET', 'POST'])
+def subject():
+    if request.method == 'GET':
+        field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Subject, 'subject.html', 'subject', 'Subject', field_args)
+
+    else:
+        obj_form = model_form(Subject)
+        form = obj_form(request.form)
+        return redirect(url_for('.subject', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/subjectlist', methods=['GET'])
+def subjectlist():
+    field_args = {
+        'school': {'widget': wtforms.widgets.HiddenInput()}}
+    usr_obj_form = model_form(Subject, field_args=field_args)
+    form = usr_obj_form(request.form)
+    return render_template('subjectlist.html', msg=Subject.objects().to_json(), form=form)
 
 
 @login_required

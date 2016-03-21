@@ -7,7 +7,7 @@
         $(document).ready(function () {
             var msg = {{ msg|safe }};
             var options = {
-                valueNames: ['student_name', 'city', 'email'],
+                valueNames: ['subject_name', 'code', 'description'],
                 page: 7,
                 plugins: [ListPagination({})]
             };
@@ -24,8 +24,8 @@
 
         function drawRow(rowData) {
             var row = $("<tr />");
-            var url1 = '/student?m=r&id=' + rowData._id.$oid;
-            var nam = null;
+            var url1 = '/subject?m=r&id=' + rowData._id.$oid;
+        var nam = null;
             if (rowData.related != null)
                 nam = Object.getOwnPropertyNames(rowData.related);
 
@@ -37,10 +37,10 @@
                 {% if not x.widget.input_type == 'hidden' %}
                     var b = rowData.{{ x.name }};
 
-                    {% if x.label.text =='Student Name' %}
+                    {% if x.label.text =='Subject Name' %}
                         row.append($("<td class='{{ x.name }}'><a href=" + url1 + '>' + b + "</a></td>"));
 
-                    {% elif x.label.text =='Related' %}
+                                            {% elif x.label.text =='Related' %}
 
 
                     {% else %}
@@ -49,7 +49,7 @@
                 {% endif %}
             {% endfor %}
 
-            var z = "";
+        var z = "";
             if (nam != null) {
                 for (var ter in nam) {
                     var url2 = '/' + rowData.related[nam[ter]] + '?m=r&id=' + nam[ter];
@@ -81,20 +81,14 @@
                             <div class="col s6 m6">
 
                                 Sort by :
-                                <button class="sort btn-flat grey lighten-3 btp" data-sort="student_name">
+                                <button class="sort btn-flat grey lighten-3 btp" data-sort="subject_name">
                                     Name
                                 </button>
-                                <button class="sort btn-flat grey lighten-3 btp" data-sort="email">
+                                <button class="sort btn-flat grey lighten-3 btp" data-sort="code">
                                     Email
                                 </button>
-                                <button class="sort btn-flat grey lighten-3 btp" data-sort="city">
+                                <button class="sort btn-flat grey lighten-3 btp" data-sort="description">
                                     City
-                                </button>
-                            </div>
-                            <div class="col s6 m2">
-                                <button class="btn-flat blue white-text">
-                                    <a class="white-text" href={{ url_for('.student',m='c') }}>
-                                        Create New</a>
                                 </button>
                             </div>
                         </div>

@@ -4,9 +4,9 @@ from flask.ext.mongoengine.wtf import model_form
 __author__ = 'Omkareshwar'
 
 
-def cruder(req, usr_model_class, template, route_name, display_name, field_args=None):
+def cruder(req, usr_model_class, template, route_name, display_name, field_args=None, list_args=None):
     mode = get_mode(req)
-    # 1 = c, 2= r, 3=u, 4=d
+    # 1 = c, 2= r, 3=u, 4=d, 5=l
 
     if mode == 1:
         usr_obj_form = model_form(usr_model_class, field_args=field_args)
@@ -30,6 +30,11 @@ def cruder(req, usr_model_class, template, route_name, display_name, field_args=
         mod_obj.delete()
         return render_template(template, mode=4, routename=route_name, displayname=display_name)
 
+    elif mode == 5:
+        mod_obj = model_form(usr_model_class, field_args=list_args)
+        form = mod_obj(req.form)
+        return render_template(route_name + 'list.html', msg=usr_model_class.objects().to_json(), form=form)
+
     else:
         usr_obj_form = model_form(usr_model_class, field_args=field_args)
         form = usr_obj_form(req.form)
@@ -46,3 +51,5 @@ def get_mode(req):
         return 3
     elif mode == 'd':
         return 4
+    elif mode == 'l':
+        return 5
