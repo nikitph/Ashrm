@@ -131,22 +131,13 @@ def award():
 def subject():
     if request.method == 'GET':
         field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
-        return cruder(request, Subject, 'subject.html', 'subject', 'Subject', field_args)
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Subject, 'subject.html', 'subject', 'Subject', field_args, list_args)
 
     else:
         obj_form = model_form(Subject)
         form = obj_form(request.form)
         return redirect(url_for('.subject', m='r', id=str(form.save().id)))
-
-
-@login_required
-@bp_user.route('/subjectlist', methods=['GET'])
-def subjectlist():
-    field_args = {
-        'school': {'widget': wtforms.widgets.HiddenInput()}}
-    usr_obj_form = model_form(Subject, field_args=field_args)
-    form = usr_obj_form(request.form)
-    return render_template('subjectlist.html', msg=Subject.objects().to_json(), form=form)
 
 
 @login_required
