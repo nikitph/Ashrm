@@ -1,22 +1,5 @@
 {% extends "crudtemplate.html" %}
 
-{% macro add_row(nam1, nam2) %}
-
-    <div class="row">
-        <div class="col s12 m6">
-
-            {{ add_standard(nam1) }}
-
-        </div>
-
-        <div class="col s12 m6">
-
-            {{ add_standard(nam1) }}
-        </div>
-    </div>
-
-{% endmacro %}
-
 {% block uiblock %}
 
    {% include 'uiblock.html' %}
