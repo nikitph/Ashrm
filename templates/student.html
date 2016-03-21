@@ -2,28 +2,30 @@
 
 {% block uiblock %}
 
-   {% include 'uiblock.html' %}
+    {% include 'uiblock.html' %}
 
 {% endblock %}
 
 {% block subrecord %}
+    {% if  mode==2 %}
 
-    <div class="center">
-        <div class="fixed-action-btn click-to-toggle">
-            <a class="btn-floating btn-large blue darken-1">
-                <i class="large material-icons white-text">add</i>
-            </a>
-            <ul>
-                <li><a class="btn-floating red" href="{{ url_for('.parent', sid=request.args['id']) }}"><i
-                        class="material-icons">perm_identity</i></a></li>
-                <li><a class="btn-floating red" href="{{ url_for('.scholarship', sid=request.args['id']) }}"><i
-                        class="material-icons">book</i></a></li>
-                <li><a class="btn-floating red" href="{{ url_for('.award', sid=request.args['id']) }}"><i
-                        class="material-icons">grade</i></a></li>
-                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-            </ul>
+        <div class="center">
+            <div class="fixed-action-btn click-to-toggle">
+                <a class="btn-floating btn-large blue darken-1">
+                    <i class="large material-icons white-text">add</i>
+                </a>
+                <ul>
+                    <li><a class="btn-floating red" href="{{ url_for('.parent', sid=request.args['id']) }}"><i
+                            class="material-icons">perm_identity</i></a></li>
+                    <li><a class="btn-floating red" href="{{ url_for('.scholarship', sid=request.args['id']) }}"><i
+                            class="material-icons">book</i></a></li>
+                    <li><a class="btn-floating red" href="{{ url_for('.award', sid=request.args['id']) }}"><i
+                            class="material-icons">grade</i></a></li>
+                    <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                </ul>
+            </div>
         </div>
-    </div>
+    {% endif %}
 
 {% endblock %}
 
@@ -31,12 +33,15 @@
     <div class="center submenu-title">
         Related Records
     </div>
-    <br>
-    {% for t in form['related'].data %}
-        <div class="chip white-text blue submenu-chip">
-            <a href="{{ url_for('.' + form['related'].data[t],m='r', id=t) }}" class="white-text">{{ form['related'].data[t] }}</a>
-        </div>
-    {% endfor %}
+    {% if not mode==4 %}
+        <br>
+        {% for t in form['related'].data %}
+            <div class="chip white-text blue submenu-chip">
+                <a href="{{ url_for('.' + form['related'].data[t],m='r', id=t) }}"
+                   class="white-text">{{ form['related'].data[t] }}</a>
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
 
 
@@ -141,20 +146,5 @@
 
     </div>
 
-
-{% endblock %}
-
-{% block delete_mode %}
-    <div class="center">
-
-        <div>
-            <div class="completed"><br>
-                <br><br><br><br> {{ displayname }} Successfully Deleted <br>
-                <i class="material-icons large green-text">done</i>
-                <br><br><br><br>
-            </div>
-        </div>
-
-    </div>
 
 {% endblock %}

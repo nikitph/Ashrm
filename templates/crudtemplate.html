@@ -77,6 +77,18 @@
 
                                     {% block delete_mode %}
 
+                                        <div class="center">
+
+                                            <div>
+                                                <div class="completed"><br>
+                                                    <br><br><br><br> {{ displayname }} Successfully Deleted <br>
+                                                    <i class="material-icons large green-text">done</i>
+                                                    <br><br><br><br>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
                                     {% endblock %}
 
                                 {% endif %}
@@ -86,9 +98,9 @@
                     </div>
                 </div>
 
-            {% block subrecord %}
+                {% block subrecord %}
 
-            {% endblock %}
+                {% endblock %}
             </div>
             <div class="col s12 m3">
                 <div class="icon-block center">
