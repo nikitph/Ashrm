@@ -1,12 +1,14 @@
-import json
-from flask import Blueprint, request, session, redirect, url_for, flash, g
-from flask.ext.security import login_required, logout_user, login_user, current_user
+from flask import Blueprint, request, redirect, url_for, g
+
+from flask.ext.security import login_required, current_user
 from flask.templating import render_template
 import wtforms
-from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject
 from flask.ext.mongoengine.wtf import model_form
+
+from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject
 from user.models import User
 from user.utility import cruder
+
 
 bp_user = Blueprint('users', __name__, static_folder='../static')
 
