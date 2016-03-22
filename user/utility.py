@@ -33,7 +33,8 @@ def cruder(req, usr_model_class, template, route_name, display_name, field_args=
     elif mode == 5:
         mod_obj = model_form(usr_model_class, field_args=list_args)
         form = mod_obj(req.form)
-        return render_template(route_name + 'list.html', msg=usr_model_class.objects().to_json(), form=form)
+        return render_template(route_name + 'list.html', msg=usr_model_class.objects().to_json(), form=form,
+                               routename=route_name, displayname=display_name)
 
     else:
         usr_obj_form = model_form(usr_model_class, field_args=field_args)

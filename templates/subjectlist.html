@@ -1,4 +1,4 @@
-{% extends "template.html" %}
+{% extends "listtemplate.html" %}
 
 {% block script %}
     <script src="http://listjs.com/no-cdn/list.js"></script>
@@ -13,7 +13,7 @@
             };
 
             drawTable(msg);
-            var userList = new List('students', options);
+            var userList = new List('listelements', options);
         });
 
         function drawTable(data) {
@@ -25,13 +25,11 @@
         function drawRow(rowData) {
             var row = $("<tr />");
             var url1 = '/subject?m=r&id=' + rowData._id.$oid;
-        var nam = null;
+            var nam = null;
             if (rowData.related != null)
                 nam = Object.getOwnPropertyNames(rowData.related);
 
-            $("#personDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
-            {#    row.append($("<td><a href=" + url1 + '>' + rowData.student_name + "</a></td>"));#}
-            {#    row.append($("<div class='chip white-text blue submenu-chip'>test</div>"));#}
+            $("#listDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
 
             {% for x in form %}
                 {% if not x.widget.input_type == 'hidden' %}
@@ -40,7 +38,7 @@
                     {% if x.label.text =='Subject Name' %}
                         row.append($("<td class='{{ x.name }}'><a href=" + url1 + '>' + b + "</a></td>"));
 
-                                            {% elif x.label.text =='Related' %}
+                    {% elif x.label.text =='Related' %}
 
 
                     {% else %}
@@ -49,7 +47,7 @@
                 {% endif %}
             {% endfor %}
 
-        var z = "";
+            var z = "";
             if (nam != null) {
                 for (var ter in nam) {
                     var url2 = '/' + rowData.related[nam[ter]] + '?m=r&id=' + nam[ter];
@@ -61,63 +59,5 @@
         }
 
     </script>
-
-{% endblock %}
-
-{% block content %}
-
-    <!--   Icon Section   -->
-    <div class="row">
-
-        <div class="col s12 m12">
-            <div class="icon-block">
-                <div class="icon-container">
-
-                    <div class="center" id="students">
-                        <div class="row">
-                            <div class="col s6 m4">
-                                <input class="search" placeholder="Search"/>
-                            </div>
-                            <div class="col s6 m6">
-
-                                Sort by :
-                                <button class="sort btn-flat grey lighten-3 btp" data-sort="subject_name">
-                                    Name
-                                </button>
-                                <button class="sort btn-flat grey lighten-3 btp" data-sort="code">
-                                    Email
-                                </button>
-                                <button class="sort btn-flat grey lighten-3 btp" data-sort="description">
-                                    City
-                                </button>
-                            </div>
-                        </div>
-                        <table id="personDataTable" class="striped responsive-table">
-                            <thead>
-                            <tr>
-                                {% for x in form %}
-                                    {% if not x.widget.input_type == 'hidden' %}
-                                        <th>{{ x.label.text }}</th>
-                                    {% endif %}
-                                {% endfor %}
-                            </tr>
-                            </thead>
-                            <tbody class="list">
-                            <tr></tr>
-
-                            </tbody>
-
-                        </table>
-
-                        <ul class="pagination"></ul>
-
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-    </div>
 
 {% endblock %}
