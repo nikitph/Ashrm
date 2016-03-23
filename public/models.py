@@ -53,6 +53,7 @@ class Student(db.Document):
     pincode = db.StringField(required=True, max_length=20)
     phone = db.StringField(required=True, max_length=20)
     email = db.StringField(required=True, max_length=20)
+    date_of_birth = db.StringField(required=True, max_length=20)
     related = db.DictField(required=False)
 
     def __str__(self):
@@ -122,5 +123,20 @@ class Subject(db.Document):
 
     def __str__(self):
         return self.subject_name
+
+    __rpr__ = __str__
+
+
+class Teacher(db.Document):
+    teacher_name = db.StringField(required=True, max_length=50)
+    gender = db.BooleanField(required=True)
+    street_address = db.StringField(required=True)
+    city = db.StringField(required=True, max_length=20)
+    state = db.StringField(required=True, max_length=20)
+    pincode = db.StringField(required=True, max_length=20)
+    school = db.StringField(required=True)
+
+    def __str__(self):
+        return self.teacher_name
 
     __rpr__ = __str__

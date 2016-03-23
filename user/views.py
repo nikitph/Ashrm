@@ -5,7 +5,7 @@ from flask.templating import render_template
 import wtforms
 from flask.ext.mongoengine.wtf import model_form
 
-from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject
+from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher
 from user.models import User
 from user.utility import cruder
 
@@ -66,10 +66,10 @@ def standard():
     else:
         obj_form = model_form(Standard)
         form = obj_form(request.form)
-        if request.args['s'] == 't':
-            return redirect(url_for('.standard', m='c', id=str(form.save().id), sid=request.args['sid']))
-        if request.args['s'] == 'c':
-            return render_template('complete.html', id=str(form.save().id))
+        # if request.args['s'] == 't':
+        #     return redirect(url_for('.standard', m='c', id=str(form.save().id), sid=request.args['sid']))
+        # if request.args['s'] == 'c':
+        #     return render_template('complete.html', id=str(form.save().id))
         return redirect(url_for('.standard', m='r', id=str(form.save().id)))
 
 
@@ -140,6 +140,20 @@ def subject():
         obj_form = model_form(Subject)
         form = obj_form(request.form)
         return redirect(url_for('.subject', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/teacher', methods=['GET', 'POST'])
+def teacher():
+    if request.method == 'GET':
+        field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Teacher, 'teacher.html', 'teacher', 'Teacher', field_args, list_args)
+
+    else:
+        obj_form = model_form(Teacher)
+        form = obj_form(request.form)
+        return redirect(url_for('.teacher', m='r', id=str(form.save().id)))
 
 
 @login_required

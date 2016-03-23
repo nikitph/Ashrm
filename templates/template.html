@@ -15,6 +15,10 @@
     <script>
         $(document).ready(function () {
             $('select').material_select();
+            $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
         });
     </script>
     {% block script %}
@@ -120,6 +124,8 @@
 
                 <li><a href={{ url_for('.student',m='l') }}><i class="material-icons">assignment_ind</i></a></li>
                 <li><a href={{ url_for('.subject',m='l') }}><i class="material-icons">subject</i></a></li>
+                <li><a href={{ url_for('.teacher',m='l') }}><i class="material-icons">supervisor_account</i></a></li>
+
             </ul>
         </nav>
 
