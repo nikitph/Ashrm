@@ -119,7 +119,7 @@ class Subject(db.Document):
     total_theory_hours = db.IntField(required=True)
     class_duration = db.IntField(required=True)
     description = db.StringField(required=True)
-    school = db.StringField(required=True)
+    school = db.StringField(required=True, max_length=50)
 
     def __str__(self):
         return self.subject_name
