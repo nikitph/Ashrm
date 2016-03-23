@@ -7,7 +7,7 @@
         $(document).ready(function () {
             var msg = {{ msg|safe }};
             var options = {
-                valueNames: ['subject_name', 'code', 'description'],
+                valueNames: Object.getOwnPropertyNames(msg[0]),
                 page: 7,
                 plugins: [ListPagination({})]
             };
