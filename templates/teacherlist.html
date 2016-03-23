@@ -14,6 +14,13 @@
 
             drawTable(msg);
             var userList = new List('listelements', options);
+
+            $('#sortlist').change(function () {
+                var selection = this.value;
+
+                // filter items in the list
+                userList.sort(selection);
+            });
         });
 
         function drawTable(data) {
