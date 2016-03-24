@@ -99,7 +99,7 @@
             {% elif h.label.text =='Related' %}
 
 
-            {% elif h.label.text == 'Street Address' %}
+            {% elif h.type == 'TextAreaField' %}
                 <div class="col s12 m6">
 
                     {{ h(class='materialize-textarea', disabled='') }}
@@ -130,7 +130,7 @@
             {% elif h.label.text =='Csrf Token' %}
                 {{ h(type='hidden') }}
 
-            {% elif h.label.text == 'Street Address' %}
+            {% elif h.type == 'TextAreaField' %}
                 <div class="col s12 m6">
 
                     {{ h(class='materialize-textarea') }}
