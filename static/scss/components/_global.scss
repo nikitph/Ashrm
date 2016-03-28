@@ -397,14 +397,16 @@ table {
 
 thead {
   border-bottom: 1px solid $table-border-color;
+  background-color: rgba(33, 150, 243,0.8);
+  color: #ffffff;
 }
 
 td, th{
-  padding: 15px 5px;
+  padding: 10px 5px;
   display: table-cell;
   text-align: left;
   vertical-align: middle;
-  border-radius: 2px;
+  border-radius: 0px;
 }
 
 // Responsive Table

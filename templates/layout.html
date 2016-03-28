@@ -5,8 +5,6 @@
     <link rel="stylesheet" type="text/css" href="static/scss/main/_main.scss"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <!--Import materialize.css-->
-    {#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">#}
     <link href="/static/css/materialize.css" rel="stylesheet">
     <link href="/static/css/main/app.css" rel="stylesheet">
 
@@ -78,20 +76,22 @@
 <div class="topbar">
     <div class="top-logo">
         <div class="logo-container center">
-            T
-        </div>
+            <a href="/dashboard" class="center brand-logo black-text"><img class="anm"
+                                                                           src="/static/img/ashrm.svg" height="40px"
+                                                                           style="margin-top: 4px"></a></div>
     </div>
     <div class="action-menu">
         <div class="institute-name center">
 
-            SICA school
 
         </div>
         <div class="name-menu center">
+
+
         </div>
 
         <div class="signoff center">
-                    <a href="/logout"><i class="material-icons">exit_to_app</i></a>
+            <a href="/logout"><i class="material-icons">exit_to_app</i></a>
         </div>
     </div>
 </div>
@@ -102,8 +102,10 @@
             <ul class="hide-on-med-and-down">
 
 
-                <li><a href="sass.html"><i class="material-icons">assignment_ind</i></a></li>
-                <li><a href="badges.html"><i class="material-icons">list</i></a></li>
+{#                <li><a href={{ url_for('.student',m='l') }}><i class="material-icons">assignment_ind</i></a></li>#}
+{#                <li><a href={{ url_for('.subject',m='l') }}><i class="material-icons">subject</i></a></li>#}
+{#                <li><a href={{ url_for('.teacher',m='l') }}><i class="material-icons">supervisor_account</i></a></li>#}
+
             </ul>
         </nav>
 
@@ -115,7 +117,7 @@
 
     </div>
 
-    <div class="content-side">
+    <div class="content-side animated fadeIn">
 
         {% block content %}
 

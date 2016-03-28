@@ -4822,7 +4822,7 @@ ul li {
 blockquote {
   margin: 20px 0;
   padding-left: 1.5rem;
-  border-left: 5px solid #A49988;
+  border-left: 5px solid #64B5F6;
 }
 
 i {
@@ -4870,7 +4870,7 @@ video.responsive-video {
   color: #fff;
 }
 .pagination li.active {
-  background-color: #A49988;
+  background-color: #64B5F6;
 }
 .pagination li.disabled a {
   cursor: default;
@@ -5047,7 +5047,7 @@ ul.staggered-list li {
 footer.page-footer {
   margin-top: 20px;
   padding-top: 20px;
-  background-color: #A49988;
+  background-color: #64B5F6;
 }
 footer.page-footer .footer-copyright {
   overflow: hidden;
@@ -5086,14 +5086,16 @@ table.centered thead tr th, table.centered tbody tr td {
 
 thead {
   border-bottom: 1px solid #d0d0d0;
+  background-color: rgba(33, 150, 243, 0.8);
+  color: #ffffff;
 }
 
 td, th {
-  padding: 15px 5px;
+  padding: 10px 5px;
   display: table-cell;
   text-align: left;
   vertical-align: middle;
-  border-radius: 2px;
+  border-radius: 0px;
 }
 
 @media only screen and (max-width: 992px) {
@@ -9307,7 +9309,7 @@ nav ul a span.badge {
 
 nav {
   color: #fff;
-  background-color: #A49988;
+  background-color: #64B5F6;
   width: 100%;
   height: 10%;
   line-height: 56px;
@@ -9905,7 +9907,7 @@ small {
   min-width: 80px;
 }
 .tabs .tab a {
-  color: #A49988;
+  color: #64B5F6;
   display: block;
   width: 100%;
   height: 100%;
@@ -9914,17 +9916,17 @@ small {
   transition: color .28s ease;
 }
 .tabs .tab a:hover {
-  color: #d0cbc2;
+  color: #c4e3fc;
 }
 .tabs .tab.disabled a {
-  color: #d0cbc2;
+  color: #c4e3fc;
   cursor: default;
 }
 .tabs .indicator {
   position: absolute;
   bottom: 0;
   height: 2px;
-  background-color: #c5beb3;
+  background-color: #acd8fa;
   will-change: left, right;
 }
 
@@ -10275,20 +10277,6 @@ a.waves-effect .waves-ripple {
   margin: 6px 0;
 }
 
-.lean-overlay {
-  position: fixed;
-  z-index: 999;
-  top: -100px;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 125%;
-  width: 100%;
-  background: #000;
-  display: none;
-  will-change: opacity;
-}
-
 .modal.modal-fixed-footer {
   padding: 0;
   height: 70%;
@@ -10400,7 +10388,7 @@ a.waves-effect .waves-ripple {
   line-height: 32px;
   padding: 0 12px;
   border-radius: 16px;
-  background-color: #e4e4e4;
+  background-color: #acd8fa;
 }
 .chip .img2 {
   float: left;
@@ -10410,6 +10398,13 @@ a.waves-effect .waves-ripple {
   border-radius: 50%;
   border: 1px solid darkgreen;
   background-color: white;
+}
+.chip img {
+  float: left;
+  margin: 0 8px 0 -12px;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
 }
 .chip .active2 {
   border: 1px solid darkred;
@@ -10532,10 +10527,10 @@ textarea.materialize-textarea {
   border-bottom: 1px solid #9e9e9e;
   border-radius: 0;
   outline: none;
-  height: 3rem;
+  height: 2.2rem;
   width: 100%;
   font-size: 1rem;
-  margin: 0 0 15px 0;
+  margin: 0 0 10px 0;
   padding: 0;
   box-shadow: none;
   box-sizing: content-box;
@@ -11220,8 +11215,8 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
   border: none;
   border-bottom: 1px solid #9e9e9e;
   outline: none;
-  height: 3rem;
-  line-height: 3rem;
+  height: 2.2rem;
+  line-height: 2.2rem;
   width: 100%;
   font-size: 1rem;
   margin: 0 0 15px 0;
@@ -11491,7 +11486,7 @@ select {
   padding: 5px;
   border: 1px solid #f2f2f2;
   border-radius: 2px;
-  height: 3rem;
+  height: 2.2rem;
 }
 
 /***************
@@ -11598,7 +11593,7 @@ select {
 }
 .side-nav .collapsible-body li.active,
 .side-nav.fixed .collapsible-body li.active {
-  background-color: #A49988;
+  background-color: #64B5F6;
 }
 .side-nav .collapsible-body li.active a,
 .side-nav.fixed .collapsible-body li.active a {

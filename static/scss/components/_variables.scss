@@ -1,7 +1,7 @@
 @import "color";
 
 /*** Colors ***/
-$primary-color: #A49988 !default;
+$primary-color: color("blue","lighten-2") !default;
 $primary-color-light: lighten($primary-color, 15%) !default;
 $primary-color-dark: darken($primary-color, 15%) !default;
 
@@ -38,7 +38,8 @@ $collapsible-header-color: #fff !default;
 $collapsible-border-color: #ddd !default;
 
 /*** Chips ***/
-$chip-bg-color: #e4e4e4 !default;
+//$chip-bg-color: #e4e4e4 !default;
+$chip-bg-color: $primary-color-light !default;
 
 /*** Date Picker ***/
 $datepicker-weekday-bg: darken($secondary_color, 7%) !default;

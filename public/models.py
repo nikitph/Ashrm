@@ -55,6 +55,7 @@ class Student(db.Document):
     email = db.StringField(required=True, max_length=20)
     date_of_birth = db.StringField(required=True, max_length=20)
     related = db.DictField(required=False)
+    image = db.StringField(required=False, max_length=200, default='static/img/256px-Weiser_State_Forest_Walking_Path.jpg')
 
     def __str__(self):
         return self.student_name

@@ -33,6 +33,7 @@
                 var row = $("<tr />");
                 var url1 = '/student?m=r&id=' + rowData._id.$oid;
                 var nam = null;
+                var img = rowData.image;
                 if (rowData.related != null)
                     nam = Object.getOwnPropertyNames(rowData.related);
 
@@ -45,7 +46,7 @@
                         var b = rowData.{{ x.name }};
 
                         {% if x.label.text =='Student Name' %}
-                            row.append($("<td class='{{ x.name }}'><a href=" + url1 + '>' + b + "</a></td>"));
+                            row.append($("<td class='{{ x.name }}'><div class='chip'><img src=" + img + "><a href=" + url1 + '>' + b + "</a></div></td>"));
 
                         {% elif x.label.text =='Related' %}
 

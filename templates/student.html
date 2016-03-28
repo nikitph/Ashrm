@@ -1,9 +1,76 @@
 {% extends "crudtemplate.html" %}
 
 {% block uiblock %}
+    <br>
 
     {% include 'uiblock.html' %}
 
+{% endblock %}
+
+{% block style %}
+    <style>
+        #dropbox {
+            border-top: 1px solid grey;
+            border-bottom: 1px solid grey;
+            margin-top: 20px;
+            background-color: rgba(0, 0, 0, 0.02);
+
+            position: relative;
+            min-height: 100px;
+            overflow: hidden;
+            padding-bottom: 10px;
+        }
+
+        #dropbox:before {
+            border-radius: 3px 3px 0 0;
+        }
+
+        #dropbox .preview {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            left: calc(50% - 25px);
+            text-align: center;
+        }
+
+        #dropbox .preview img {
+            max-width: 40px;
+            max-height: 40px;
+            border: 3px solid #fff;
+            display: block;
+            box-shadow: 0 0 2px #000;
+        }
+
+        #dropbox .imageHolder {
+            display: inline-block;
+            position: relative;
+        }
+
+        #dropbox .progressHolder {
+            position: absolute;
+            height: 4px;
+            width: 100%;
+            left: 0;
+            bottom: 0;
+        }
+
+        #dropbox .progress {
+            background-color: #2586d0;
+            position: absolute;
+            height: 100%;
+            left: 0;
+            width: 0;
+            box-shadow: 0 0 1px rgba(255, 255, 255, 0.4) inset;
+            -moz-transition: 0.25s;
+            -webkit-transition: 0.25s;
+            -o-transition: 0.25s;
+            transition: 0.25s;
+        }
+
+        #dropbox .preview.done .progress {
+            width: 100% !important;
+        }
+    </style>
 {% endblock %}
 
 {% block subrecord %}
@@ -46,6 +113,12 @@
 
 
 {% block create_mode %}
+    <div class="white"
+         style="width: 75px; height: 75px; margin-top: -75px; margin-left: -38px; border-radius: 50%; border: 1px solid #8b0000">
+
+    </div>
+    <!-- Modal Structure -->
+
 
     <div class="row">
         {% for h in form %}
@@ -53,7 +126,7 @@
                 {{ h(type='hidden',value=scid) }}
 
             {% elif h.type == 'TextAreaField' %}
-                <div class="col s12 m6">
+                <div class="input-field col s12 m6">
                     {{ h.label }}
                     {{ h(class='materialize-textarea') }}
 
@@ -65,14 +138,27 @@
                     {{ h( type='date') }}
 
                 </div>
-            {% elif not h.widget.input_type == 'hidden' %}
-                <div class="col s12 m6">
+
+
+            {% elif not (h.widget.input_type == 'hidden' or h.type == 'ModelSelectField') %}
+                <div class="input-field col s12 m6">
                     {{ h.label }}
+                    {{ h }}
+                </div>
+
+            {% else %}
+                <div class="col s12 m6">
                     {{ h }}
                 </div>
             {% endif %}
         {% endfor %}
+
+        <div id="dropbox" class="col s12 m12">Drag and drop Student Image here
+
+        </div>
     </div>
+
+
 
 
     <div class="row center">
@@ -88,6 +174,11 @@
 
 {% block read_mode %}
 
+    <div class="white"
+         style="width: 75px; height: 75px; margin-top: -75px; margin-left: -38px; border-radius: 50%; border: 1px solid #8b0000">
+        <img src='{{ form['image'].data }}' width=75px height=75px style="border-radius: 50%">
+    </div>
+
     <div class="row">
         {% for h in form %}
             {% if h.label.text =='School' %}
@@ -96,17 +187,17 @@
             {% elif h.label.text =='Csrf Token' %}
                 {{ h(type='hidden') }}
 
-            {% elif h.label.text =='Related' %}
-
+            {% elif h.label.text =='Image' %}
+                {{ h }}
 
             {% elif h.type == 'TextAreaField' %}
-                <div class="col s12 m6">
+                <div class="input-field col s12 m6">
 
                     {{ h(class='materialize-textarea', disabled='') }}
 
                 </div>
             {% else %}
-                <div class="col s12 m6">
+                <div class="input-field col s12 m6">
                     {{ h.label }}
                     {{ h(disabled='') }}
                 </div>
@@ -131,13 +222,13 @@
                 {{ h(type='hidden') }}
 
             {% elif h.type == 'TextAreaField' %}
-                <div class="col s12 m6">
+                <div class="input-field col s12 m6">
 
                     {{ h(class='materialize-textarea') }}
 
                 </div>
-            {% else %}
-                <div class="col s12 m6">
+            {% elif not h.widget.input_type == 'hidden' %}
+                <div class="input-field col s12 m6">
                     {{ h.label }}
                     {{ h }}
                 </div>

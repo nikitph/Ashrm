@@ -2,15 +2,6 @@
 
 {% block script %}
     <script>
-        function copyTextValue() {
-            var text1 = document.getElementById("student_id").value;
-            var url1 = '/student?m=r';
-            document.getElementById("backlink").href = url1 + '&id=' + text1;
-        }
-        $(document).ready(function () {
-            $('select').material_select();
-            copyTextValue();
-        });
 
     </script>
 
@@ -30,7 +21,7 @@
         {% for h in form %}
 
             {% if h.type == 'TextAreaField' %}
-                <div class="col s12 m6">
+                <div class="input-field col s12 m6">
                     {{ h.label }}
                     {{ h(class='materialize-textarea') }}
 
@@ -42,7 +33,7 @@
 
 
             {% elif not h.widget.input_type == 'hidden' %}
-                <div class="col s12 m6">
+                <div class="input-field col s12 m6">
                     {{ h.label }} {{ h }}
                 </div>
             {% endif %}
@@ -105,13 +96,13 @@
                 {{ h(type='hidden') }}
 
             {% elif h.label.text == 'Description' %}
-                <div class="col s12 m6">
+                <div class="input-field col s12 m6">
 
                     {{ h(class='materialize-textarea') }}
 
                 </div>
             {% else %}
-                <div class="col s12 m6">
+                <div class="input-field col s12 m6">
                     {{ h.label }}
                     {{ h }}
                 </div>

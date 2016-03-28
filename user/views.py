@@ -1,7 +1,10 @@
-from flask import Blueprint, request, redirect, url_for, g
+import datetime
+import os
+from flask import Blueprint, request, redirect, url_for, g, jsonify
 
 from flask.ext.security import login_required, current_user
 from flask.templating import render_template
+from werkzeug.utils import secure_filename
 import wtforms
 from flask.ext.mongoengine.wtf import model_form
 
@@ -67,7 +70,7 @@ def standard():
         obj_form = model_form(Standard)
         form = obj_form(request.form)
         # if request.args['s'] == 't':
-        #     return redirect(url_for('.standard', m='c', id=str(form.save().id), sid=request.args['sid']))
+        # return redirect(url_for('.standard', m='c', id=str(form.save().id), sid=request.args['sid']))
         # if request.args['s'] == 'c':
         #     return render_template('complete.html', id=str(form.save().id))
         return redirect(url_for('.standard', m='r', id=str(form.save().id)))
@@ -77,10 +80,12 @@ def standard():
 @bp_user.route('/student', methods=['GET', 'POST'])
 def student():
     if request.method == 'GET':
-        field_args = {'related': {'widget': wtforms.widgets.HiddenInput()}}
+        field_args = {'related': {'widget': wtforms.widgets.HiddenInput()},
+                      'image': {'widget': wtforms.widgets.HiddenInput()}}
         list_args = {'street_address': {'widget': wtforms.widgets.HiddenInput()},
                      'school': {'widget': wtforms.widgets.HiddenInput()},
-                     'standard': {'widget': wtforms.widgets.HiddenInput()}}
+                     'standard': {'widget': wtforms.widgets.HiddenInput()},
+                     'image': {'widget': wtforms.widgets.HiddenInput()}}
         return cruder(request, Student, 'student.html', 'student', 'Student', field_args, list_args)
 
     else:
@@ -157,6 +162,23 @@ def teacher():
 
 
 @login_required
+@bp_user.route('/upload', methods=['POST'])
+def upload():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            now = datetime.datetime.now()
+            filename = secure_filename(file.filename)
+            # filename = os.path.join('/img', "%s.%s" % (now.strftime("%Y-%m-%d-%H-%M-%S-%f"), file.filename.rsplit('.', 1)[1]))
+            file.save('static/img/' + filename)
+            return jsonify({"filepath": 'static/img/' + filename })
+
+
+@login_required
 @bp_user.route('/dashboard/', methods=['GET'])
 def dashboard_get():
     return render_template('dashboard.html')
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1] in ['jpg', 'jpeg']

@@ -20,6 +20,7 @@ class User(UserMixin, db.Document):
     active = db.BooleanField(default=False)
     first_name = db.StringField()
     last_name = db.StringField()
+    image = db.StringField(required=False, max_length=200, default='static/img/256px-Weiser_State_Forest_Walking_Path.jpg')
     phone = db.StringField()
     school = db.StringField(max_length=255, required=False, default='')
     roles = db.ListField(db.ReferenceField(Role),default=[])
