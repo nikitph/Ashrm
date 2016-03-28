@@ -113,10 +113,6 @@
 
 
 {% block create_mode %}
-    <div class="white"
-         style="width: 75px; height: 75px; margin-top: -75px; margin-left: -38px; border-radius: 50%; border: 1px solid #8b0000">
-
-    </div>
     <!-- Modal Structure -->
 
 
@@ -210,6 +206,11 @@
 
 {% block update_mode %}
 
+    <div class="white"
+         style="width: 75px; height: 75px; margin-top: -75px; margin-left: -38px; border-radius: 50%; border: 1px solid #8b0000">
+        <img src='{{ form['image'].data }}' width=75px height=75px style="border-radius: 50%">
+    </div>
+
     <div class="row">
 
         <input id="id" name="id" type="hidden" value={{ request.args.get('id') }}>
@@ -220,6 +221,9 @@
 
             {% elif h.label.text =='Csrf Token' %}
                 {{ h(type='hidden') }}
+
+            {% elif h.label.text =='Image' %}
+                {{ h }}
 
             {% elif h.type == 'TextAreaField' %}
                 <div class="input-field col s12 m6">
@@ -234,6 +238,10 @@
                 </div>
             {% endif %}
         {% endfor %}
+    </div>
+
+    <div id="dropbox" class="col s12 m12">Drag and drop Student Image here
+
     </div>
 
     <div class="row center">

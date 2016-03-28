@@ -2213,7 +2213,7 @@
 }
 .topbar .action-menu .institute-name {
   color: #002240;
-  width: 80%;
+  flex-basis: 80%;
   margin: auto;
   font-family: 'Ubuntu', "Avenir", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -2222,7 +2222,9 @@
   color: rgba(0, 0, 0, 0.7);
 }
 .topbar .action-menu .name-menu {
-  width: 10%;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: 10%;
   margin: auto;
   margin-right: 5px;
   border-right: 2px solid lightgray;
@@ -2240,7 +2242,7 @@
   padding: 0;
 }
 .topbar .action-menu .signoff {
-  width: 10%;
+  flex-basis: 10%;
   margin: auto;
   padding: 8px;
 }

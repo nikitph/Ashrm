@@ -38,7 +38,8 @@
 
     & .institute-name {
       color: #002240;
-      width: 80%;
+
+      flex-basis: 80%;
       margin: auto;
       font-family: 'Ubuntu', "Avenir", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
       font-size: 16px;
@@ -48,20 +49,21 @@
     }
 
     & .name-menu {
-      width: 10%;
+      flex-shrink: 0;
+      flex-grow: 0;
+      flex-basis: 10%;
       margin: auto;
       margin-right: 5px;
-//      border-left: 2px solid lightgray;
+      //      border-left: 2px solid lightgray;
       border-right: 2px solid lightgray;
 
-        font-family: 'Ubuntu', "Avenir", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
-        font-size: 16px;
-        letter-spacing: 2px;
-        font-weight: 300;
-        color: rgba(0, 0, 0, 0.7);
+      font-family: 'Ubuntu', "Avenir", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      letter-spacing: 2px;
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.7);
       display: flex;
       padding: 5px;
-
 
       i {
         margin-left: -20px;
@@ -71,7 +73,8 @@
     }
 
     & .signoff {
-      width: 10%;
+
+      flex-basis: 10%;
       margin: auto;
       padding: 8px;
 
