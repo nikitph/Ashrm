@@ -68,10 +68,6 @@ def standard():
     else:
         obj_form = model_form(Standard)
         form = obj_form(request.form)
-        # if request.args['s'] == 't':
-        # return redirect(url_for('.standard', m='c', id=str(form.save().id), sid=request.args['sid']))
-        # if request.args['s'] == 'c':
-        #     return render_template('complete.html', id=str(form.save().id))
         return redirect(url_for('.standard', m='r', id=str(form.save().id)))
 
 
