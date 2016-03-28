@@ -45,8 +45,7 @@ def institute():
 def school():
     if request.method == 'GET':
         # fields to be hidden come here
-        field_args = {'user': {'widget': wtforms.widgets.HiddenInput()},
-                      'city': {'widget': wtforms.widgets.HiddenInput()}}
+        field_args = {'user': {'widget': wtforms.widgets.HiddenInput()}}
         return cruder(request, School, 'school.html', 'school', 'School', field_args)
 
     else:
