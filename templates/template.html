@@ -120,7 +120,7 @@
                     <li>
                         <a href="#!">{{ g.user.first_name.capitalize() }} {{ g.user.last_name.capitalize() }}</a></li>
                     <li class="divider"></li>
-                    <li class="center"><a href="#!" class="center">Edit Profile</a></li>
+                    <li class="center"><a href="{{ url_for('.profile') }}" class="center">Edit Profile</a></li>
                 </ul>
 
             </div>

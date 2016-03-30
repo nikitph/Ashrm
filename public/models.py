@@ -141,3 +141,11 @@ class Teacher(db.Document):
         return self.teacher_name
 
     __rpr__ = __str__
+
+
+class Profile(db.Document):
+    user = db.StringField(required=True, max_length=50)
+    phone = db.StringField(required=True, max_length=50)
+    address = db.StringField(required=True, max_length=50)
+    email = db.StringField(required=True, max_length=50)
+    photo = db.StringField(required=True, max_length=50)

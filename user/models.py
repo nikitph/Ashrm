@@ -22,8 +22,9 @@ class User(UserMixin, db.Document):
     last_name = db.StringField()
     image = db.StringField(required=False, max_length=200, default='static/img/256px-Weiser_State_Forest_Walking_Path.jpg')
     phone = db.StringField()
+    address = db.StringField(max_length=255, required=False, default='')
     school = db.StringField(max_length=255, required=False, default='')
-    roles = db.ListField(db.ReferenceField(Role),default=[])
+    roles = db.ListField(db.ReferenceField(Role), default=[])
     #email confirmation
     confirmed_at = db.DateTimeField()
     #tracking

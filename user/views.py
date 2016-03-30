@@ -170,9 +170,22 @@ def upload():
 
 
 @login_required
-@bp_user.route('/dashboard/', methods=['GET'])
-def dashboard_get():
+@bp_user.route('/dashboard', methods=['GET'])
+def dashboard():
     return render_template('dashboard.html')
+
+
+@login_required
+@bp_user.route('/profile', methods=['GET', 'POST'])
+def profile():
+    if request.method == 'GET':
+        return render_template('profile.html')
+
+    else:
+        User.objects(id=g.user.get_id()).update_one(set__phone=request.form['phone'])
+        User.objects(id=g.user.get_id()).update_one(set__address=request.form['address'])
+        User.objects(id=g.user.get_id()).update_one(set__image=request.form['image'])
+    return redirect(url_for('.dashboard'))
 
 
 def allowed_file(filename):
