@@ -55,7 +55,7 @@ def school():
         User.objects(id=g.user.get_id()).update_one(set__school=request.form['school_name'])
         g.user.reload()
         if request.args['s'] == 't':
-            return redirect(url_for('.standard', m='c', s='t', sid=str(sid)))
+            return render_template('complete.html')
         return redirect(url_for('.school', m='r', id=str(sid)))
 
 

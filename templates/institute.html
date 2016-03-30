@@ -1,22 +1,5 @@
 {% extends "crudtemplate.html" %}
 
-{% macro add_row(nam1, pholder1, nam2, pholder2) %}
-
-    <div class="row">
-        <div class="input-field col s12 m6">
-
-            {{ add_field(nam1,pholder1) }}
-
-        </div>
-
-        <div class="input-field col s12 m6">
-
-            {{ add_field(nam2,pholder2) }}
-        </div>
-    </div>
-
-{% endmacro %}
-
 
 {% block content %}
 
@@ -32,7 +15,7 @@
                         <div class="img2 center">1</div>
                         Institute Setup
                     </div>
-                    <div class="line-linkage active"></div>
+                    <div class="line-linkage activelink"></div>
 
                     <div class="vertical-line"></div>
                     <div class="chip">
@@ -41,22 +24,15 @@
                     </div>
                     <div class="line-linkage"></div>
 
-                    <div class="vertical-line"></div>
-                    <div class="chip">
-                        <div class="img2 center">3</div>
-                        Class Setup
-                    </div>
-                    <div class="line-linkage"></div>
-
                 </div>
             </div>
 
 
-            <div class="col s12 m6 btp">
+            <div class="col s12 m6">
                 <div class="icon-block">
                     <div class="icon-container">
 
-                        <div class="center">
+                        <div class="center btp">
                             <div class="center">
                                 <button class="btn-flat white black-text disabled" name="action"
                                         style="margin-top: -22px">Institute Information

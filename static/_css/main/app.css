@@ -2237,8 +2237,6 @@
   padding: 5px;
 }
 .topbar .action-menu .name-menu i {
-  margin-left: -20px;
-  margin-right: 15px;
   padding: 0;
 }
 .topbar .action-menu .signoff {
@@ -2250,6 +2248,95 @@
   font-size: 2.5rem;
   font-weight: 200;
   color: rgba(0, 0, 0, 0.4);
+}
+
+.dropdown-content-topbar {
+  background-color: #fff;
+  margin: 0;
+  display: none;
+  min-width: 150px;
+  max-height: 650px;
+  overflow-y: visible;
+  opacity: 0;
+  border: 1px solid #eeeeee;
+  border-radius: 6px;
+  position: absolute;
+  margin-top: 40px;
+  margin-left: 20px;
+  z-index: 999;
+  will-change: width, height;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+.dropdown-content-topbar li {
+  clear: both;
+  color: rgba(0, 0, 0, 0.87);
+  cursor: pointer;
+  min-height: 50px;
+  line-height: 1.5rem;
+  width: 100%;
+  text-align: left;
+  text-transform: none;
+}
+.dropdown-content-topbar li:hover, .dropdown-content-topbar li.active, .dropdown-content-topbar li.selected {
+  background-color: #eee;
+}
+.dropdown-content-topbar li:first-child :hover {
+  background-color: white;
+}
+.dropdown-content-topbar li:first-child > a, .dropdown-content-topbar li > span {
+  font-size: 16px;
+  color: #000000;
+  display: block;
+  line-height: 22px;
+  padding: 14px 16px;
+}
+.dropdown-content-topbar li.active.selected {
+  background-color: #e1e1e1;
+}
+.dropdown-content-topbar li.divider {
+  min-height: 0;
+  height: 1px;
+}
+.dropdown-content-topbar li > a, .dropdown-content-topbar li > span {
+  font-size: 13px;
+  color: #26a69a;
+  display: block;
+  line-height: 22px;
+  padding: 14px 16px;
+}
+.dropdown-content-topbar li > span > label {
+  top: 1px;
+  left: 3px;
+  height: 18px;
+}
+.dropdown-content-topbar li > a > i {
+  height: inherit;
+  line-height: inherit;
+}
+.dropdown-content-topbar::after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 15px 15px;
+  border-color: white transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  bottom: 100%;
+  right: 17px;
+  margin-bottom: -4px;
+}
+.dropdown-content-topbar:before {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 15px 15px;
+  border-color: #eeeeee transparent;
+  display: block;
+  width: 0;
+  z-index: 0;
+  bottom: 100%;
+  right: 17px;
 }
 
 .main {
@@ -2337,4 +2424,14 @@
 
 .listheaderbtn {
   border-radius: 15px;
+}
+
+.toparrow {
+  display: block;
+  height: 0;
+  width: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid #000;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
 }

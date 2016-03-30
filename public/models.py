@@ -20,7 +20,7 @@ class Institute(db.Document):
 
 
 class School(db.Document):
-    institute = db.ReferenceField(Institute, required=True)
+    institute = db.StringField(required=True, max_length=100)
     user = db.StringField(required=True, max_length=50)
     school_name = db.StringField(required=True, max_length=50)
     street_address = db.StringField(required=True)
