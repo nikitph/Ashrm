@@ -1,57 +1,51 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <style type="text/css">
-        .hdr {
-            width: 50%;
-            height: 64px;
-            margin-top: -32px;
-        }
-    </style>
-    <br>
     <div class="row">
 
-        <div class="col s12 m2">
-            <div class="white-text">
+        <div class="col s12 m3">
+            <div class="black-text">
                 <br>
             </div>
         </div>
 
-        <div class="col s12 m8 btp">
+        <div class="col s12 m6 btp z-depth-1"
+             style="margin-top: -150px; z-index: 50; background-color: rgb(249, 249, 249)">
             <div class="center">
                 {% from "security/_macros.html" import render_field_with_errors, render_field %}
                 <div class="center">
-                    <button class="btn-flat white black-text disabled" name="action" style="margin-top: -22px">Register
+                    <button class="btn-flat white blue-text btp disabled" name="action" style="margin-top: -22px">
+                        Register
                     </button>
                 </div>
                 <br>
 
                 <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
                     <div class="row">
-                        <div class="col s12 m6">
+                        <div class="input-field col s12 m6">
                             {{ register_user_form.hidden_tag() }}
                             {{ render_field_with_errors(register_user_form.first_name) }}
 
                         </div>
-                        <div class="col s12 m6">
+                        <div class="input-field col s12 m6">
 
                             {{ render_field_with_errors(register_user_form.last_name) }}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s12 m6">
+                        <div class="input-field col s12 m6">
                             {{ render_field_with_errors(register_user_form.email) }}
                         </div>
-                        <div class="col s12 m6">
+                        <div class="input-field col s12 m6">
                             {{ render_field_with_errors(register_user_form.phone) }}
                         </div>
 
                     </div>
 
                     <div class="row">
-                        <div class="col s12 m6">
+                        <div class="input-field col s12 m6">
                             {{ render_field_with_errors(register_user_form.password) }}
                         </div>
-                        <div class="col s12 m6">
+                        <div class="input-field col s12 m6">
                             {% if register_user_form.password_confirm %}
                                 {{ render_field_with_errors(register_user_form.password_confirm) }}
                             {% endif %}
@@ -70,7 +64,7 @@
         </div>
 
 
-        <div class="col s12 m2">
+        <div class="col s12 m3">
             <div class="white-text">
                 <br>
             </div>

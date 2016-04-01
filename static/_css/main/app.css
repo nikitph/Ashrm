@@ -2191,12 +2191,14 @@
   flex-grow: 0;
   flex-basis: 64px;
   height: 100%;
-  background-color: #64B5F6;
+  background-color: white;
   padding: 10px;
+  border-bottom: 1px solid #bdbdbd;
 }
 .topbar .top-logo .logo-container {
   border-radius: 50%;
-  background: #cacaca;
+  border: 1px solid #8b0000;
+  background: white;
   width: 100%;
   height: 100%;
   margin: auto;
@@ -2213,7 +2215,7 @@
 }
 .topbar .action-menu .institute-name {
   color: #002240;
-  flex-basis: 80%;
+  flex-basis: 85%;
   margin: auto;
   font-family: 'Ubuntu', "Avenir", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -2227,7 +2229,6 @@
   flex-basis: 10%;
   margin: auto;
   margin-right: 5px;
-  border-right: 2px solid lightgray;
   font-family: 'Ubuntu', "Avenir", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
   font-size: 16px;
   letter-spacing: 2px;
@@ -2240,7 +2241,7 @@
   padding: 0;
 }
 .topbar .action-menu .signoff {
-  flex-basis: 10%;
+  flex-basis: 5%;
   margin: auto;
   padding: 8px;
 }
@@ -2299,7 +2300,7 @@
 }
 .dropdown-content-topbar li > a, .dropdown-content-topbar li > span {
   font-size: 13px;
-  color: #26a69a;
+  color: #8b0000;
   display: block;
   line-height: 22px;
   padding: 14px 16px;
@@ -2347,6 +2348,7 @@
 .main .nav-side {
   height: 100%;
   width: 64px;
+  border-right: 1px solid #bdbdbd;
 }
 .main .nav-side .bottom-links {
   position: relative;

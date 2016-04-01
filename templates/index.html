@@ -1,6 +1,94 @@
-{% extends "template.html" %}
+{% extends 'layout.html' %}
 {% block content %}
+    <div class="row">
+
+        <div class="col s12 m1">
+            <div class="black-text">
+                <br>
+            </div>
+        </div>
+
+        <div class="col s12 m10 btp z-depth-1"
+             style="margin-top: -150px; z-index: 50; background-color: rgb(249, 249, 249)">
+            <div class="center">
+                {% from "security/_macros.html" import render_field_with_errors, render_field %}
 
 
+                <div class="center">
+                    <button class="btn-flat red darken-4 white-text disabled" name="action" style="margin-top: -22px">
+                        Ashram
+                    </button>
+                </div>
+                <h5>Lets redefine student management</h5>
 
+                <div class="row">
+                    <div class="col s12 m6">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="/static/img/uiview.gif">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator blue-text text-darken-3">Feature Rich<i
+                                        class="material-icons right">more_vert</i></span>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">Features<i
+                                        class="material-icons right">close</i></span>
+
+                                <p>Complete student info management via one central record : you wont have to jump
+                                    around in app</p>
+
+                                <p>Simple teacher and subject management</p>
+
+                                <p>SMS and email notification embedded</p>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col s12 m6">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="/static/img/ui1.png">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator blue-text text-darken-3">Spectacular UI<i
+                                        class="material-icons right">more_vert</i></span>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">User Interface<i
+                                        class="material-icons right">close</i></span>
+                                We pride ourselves on our user design. With Ashram you will only get the very best UI
+                                and ease of use. Give us a try today.
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="center">
+                    <a href="/register" class="btn white black-text btp"
+                       style="margin-bottom: -22px;">Register
+                    </a>
+
+                    <a href="/login" class="btn white black-text btp"
+                       style="margin-bottom: -22px;">Login
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="col s12 m1">
+            <div class="white-text">
+                <br>
+            </div>
+        </div>
+
+    </div>
 {% endblock %}

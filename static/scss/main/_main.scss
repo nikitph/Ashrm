@@ -6,6 +6,7 @@
   & .nav-side {
     height: 100%;
     width: $navbar-height;
+    border-right: 1px solid $border-color;
 
     & .bottom-links {
       position: relative;

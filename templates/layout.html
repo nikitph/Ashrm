@@ -11,7 +11,20 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.0.2/css/hover-min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script type="text/javascript" src="static/js/jquery.filedrop.js"></script>
+    <script type="text/javascript" src="static/js/upload.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('select').material_select();
+            $('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 15 // Creates a dropdown of 15 years to control year
+            });
+            $('.modal-trigger').leanModal();
+
+        });
+    </script>
     {% block script %}
 
 
@@ -73,17 +86,19 @@
 
 
 <body>
-<div class="topbar">
-    <div class="top-logo">
-        <div class="logo-container center">
-            <a href="/dashboard" class="center brand-logo black-text"><img class="anm"
-                                                                           src="/static/img/ashrm.svg" height="40px"
-                                                                           style="margin-top: 4px"></a></div>
-    </div>
-    <div class="action-menu">
-        <div class="institute-name center">
+<div class="topbar" style="border-bottom: none">
+    <div class="top-logo" style="width: 0; border-bottom: none">
 
+        </div>
+        <div class="action-menu" style="border-bottom: none">
+            <div class="institute-name center" style="border-bottom: none">
 
+                <div>
+                    <a href="/" class="center brand-logo black-text"><img class="anm"
+                                                                          src="/static/img/ashrm.svg" height="49px" width="49px"
+                            style="margin-top: 4px;border: 1px solid #8b0000;border-radius: 50%; margin-left: -64px; z-index: 2000"></a>
+                </div>
+            </div>
         </div>
         <div class="name-menu center">
 
@@ -91,33 +106,31 @@
         </div>
 
         <div class="signoff center">
-            <a href="/logout"><i class="material-icons">exit_to_app</i></a>
         </div>
     </div>
 </div>
 
-<div class="main ">
-    <div class="nav-side hide-on-med-and-down">
-        <nav>
-            <ul class="hide-on-med-and-down">
+<div class="container">
 
-
-{#                <li><a href={{ url_for('.student',m='l') }}><i class="material-icons">assignment_ind</i></a></li>#}
-{#                <li><a href={{ url_for('.subject',m='l') }}><i class="material-icons">subject</i></a></li>#}
-{#                <li><a href={{ url_for('.teacher',m='l') }}><i class="material-icons">supervisor_account</i></a></li>#}
-
-            </ul>
-        </nav>
-
-        <div class="bottom-links center">
-
-            <a href="mobile.html"><i class="material-icons white-text">more_vert</i></a>
-
-        </div>
-
-    </div>
 
     <div class="content-side animated fadeIn">
+
+    <div class="row" style="z-index: -100; margin-top: -10px">
+        <div class="col s12 m2">
+            <div class="white-text">
+                <br>
+            </div>
+        </div>
+        <div class="col s12 m8">
+            <br>
+            <img src="/static/img/edu1.png" class="responsive-img">
+        </div>
+        <div class="col s12 m2">
+            <div class="white-text">
+                <br>
+            </div>
+        </div>
+    </div>
 
         {% block content %}
 
