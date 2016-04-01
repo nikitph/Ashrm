@@ -185,7 +185,7 @@ def profile():
         User.objects(id=g.user.get_id()).update_one(set__phone=request.form['phone'])
         User.objects(id=g.user.get_id()).update_one(set__address=request.form['address'])
         User.objects(id=g.user.get_id()).update_one(set__image=request.form['image'])
-    return redirect(url_for('.dashboard'))
+    return redirect(url_for('.student', m='l'))
 
 
 def allowed_file(filename):

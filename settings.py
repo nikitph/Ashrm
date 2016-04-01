@@ -25,8 +25,8 @@ class Config(object):
     SECURITY_PASSWORD_HASH = 'bcrypt'
     SECURITY_PASSWORD_SALT = '3nF3Rn0'
 
-    SECURITY_POST_LOGIN_VIEW = '/dashboard'
-    SECURITY_POST_CONFIRM_VIEW = '/dashboard'
+    SECURITY_POST_LOGIN_VIEW = '/student?m=l'
+    SECURITY_POST_CONFIRM_VIEW = '/student?m=l'
     SECURITY_POST_REGISTER_VIEW = '/institute'
 
     #flask mail settings - Mailgun

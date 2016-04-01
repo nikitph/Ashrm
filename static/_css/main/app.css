@@ -2214,14 +2214,13 @@
   border-bottom: 1px solid #bdbdbd;
 }
 .topbar .action-menu .institute-name {
-  color: #002240;
   flex-basis: 85%;
   margin: auto;
   font-family: 'Ubuntu', "Avenir", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
   font-size: 16px;
   letter-spacing: 2px;
   font-weight: 300;
-  color: rgba(0, 0, 0, 0.7);
+  color: #8b0000;
 }
 .topbar .action-menu .name-menu {
   flex-shrink: 0;
