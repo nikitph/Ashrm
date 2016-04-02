@@ -42,10 +42,19 @@
                 {% if not x.widget.input_type == 'hidden' %}
                     var b = rowData.{{ x.name }};
 
-                    {% if x.label.text =='Subject Name' %}
+                    {% if x.label.text =='Event Name' %}
                         row.append($("<td class='{{ x.name }}'><a href=" + url1 + '>' + b + "</a></td>"));
 
-                    {% elif x.label.text =='Related' %}
+                    {% elif x.label.text =='Event is for' %}
+                        var c = 'Everyone';
+                        if (b == '2')
+                            c = 'Students';
+                        if (b == '3')
+                        c='Faculty';
+                        if(b == '4')
+                        c='Parents';
+
+                        row.append($("<td class='{{ x.name }}'>" + c + "</td>"));
 
 
                     {% else %}

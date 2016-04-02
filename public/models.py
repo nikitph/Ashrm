@@ -55,7 +55,8 @@ class Student(db.Document):
     email = db.StringField(required=True, max_length=20)
     date_of_birth = db.StringField(required=True, max_length=20)
     related = db.DictField(required=False)
-    image = db.StringField(required=False, max_length=200, default='static/img/256px-Weiser_State_Forest_Walking_Path.jpg')
+    image = db.StringField(required=False, max_length=200,
+                           default='static/img/256px-Weiser_State_Forest_Walking_Path.jpg')
 
     def __str__(self):
         return self.student_name
@@ -149,3 +150,16 @@ class Profile(db.Document):
     address = db.StringField(required=True, max_length=50)
     email = db.StringField(required=True, max_length=50)
     photo = db.StringField(required=True, max_length=50)
+
+
+class Event(db.Document):
+    school = db.StringField(required=True, max_length=50)
+    event_name = db.StringField(required=True, max_length=50)
+    from_date = db.StringField(required=True, max_length=50)
+    to_date = db.StringField(required=True, max_length=50)
+    start_time = db.StringField(required=True, max_length=50)
+    end_time = db.StringField(required=True, max_length=50)
+    location = db.StringField(required=True, max_length=50)
+    event_for = db.StringField(required=True, verbose_name='Event is for',
+                               choices=(('1', "Everyone"), ('2', "Students"), ('3', "Faculty"), ('4', "Parents")))
+    description = db.StringField(required=True)

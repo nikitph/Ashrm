@@ -24,6 +24,7 @@ class User(UserMixin, db.Document):
     phone = db.StringField()
     address = db.StringField(max_length=255, required=False, default='')
     school = db.StringField(max_length=255, required=False, default='')
+    schoolid = db.StringField(max_length=255, required=False, default='')
     roles = db.ListField(db.ReferenceField(Role), default=[])
     #email confirmation
     confirmed_at = db.DateTimeField()

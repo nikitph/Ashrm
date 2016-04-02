@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 import wtforms
 from flask.ext.mongoengine.wtf import model_form
 
-from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher
+from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher, Event
 from user.models import User
 from user.utility import cruder
 
@@ -53,6 +53,7 @@ def school():
         form = obj_form(request.form)
         sid = form.save().id
         User.objects(id=g.user.get_id()).update_one(set__school=request.form['school_name'])
+        User.objects(id=g.user.get_id()).update_one(set__schoolid=str(sid))
         g.user.reload()
         if request.args['s'] == 't':
             return render_template('complete.html')
@@ -134,7 +135,7 @@ def subject():
     if request.method == 'GET':
         field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
         list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
-        return cruder(request, Subject, 'subject.html', 'subject', 'Subject', field_args, list_args)
+        return cruder(request, Subject, 'subject.html', 'subject', 'Subject', field_args, list_args, g.user.schoolid)
 
     else:
         obj_form = model_form(Subject)
@@ -186,6 +187,21 @@ def profile():
         User.objects(id=g.user.get_id()).update_one(set__address=request.form['address'])
         User.objects(id=g.user.get_id()).update_one(set__image=request.form['image'])
     return redirect(url_for('.student', m='l'))
+
+
+
+@login_required
+@bp_user.route('/event', methods=['GET', 'POST'])
+def event():
+    if request.method == 'GET':
+        field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}, 'event_for': {'radio': True}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Event, 'event.html', 'event', 'Event', field_args, list_args, g.user.schoolid)
+
+    else:
+        obj_form = model_form(Event)
+        form = obj_form(request.form)
+        return redirect(url_for('.event', m='r', id=str(form.save().id)))
 
 
 def allowed_file(filename):
