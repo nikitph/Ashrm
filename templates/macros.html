@@ -51,7 +51,7 @@
 
         {% if h.type == 'TextAreaField' %}
             <div class="input-field col s12 m6">
-                {{ h.label }}
+                {{ h.label(class='active') }}
                 {{ h(class='materialize-textarea', disabled='') }}
             </div>
 
@@ -67,12 +67,7 @@
 
         {% elif not (h.widget.input_type == 'hidden' or h.type == 'ModelSelectField') %}
             <div class="input-field col s12 m6">
-                {{ h.label }}
-                {{ h(disabled='') }}
-            </div>
-
-        {% else %}
-            <div class="col s12 m6">
+                {{ h.label(class='active') }}
                 {{ h(disabled='') }}
             </div>
         {% endif %}

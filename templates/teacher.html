@@ -71,7 +71,22 @@
 
     <div class="row">
         {% for h in form %}
-            {{ renderer(h, mode) }}
+            {% if h.label.text == 'Gender' %}
+                <div class="switch col s12 m6">
+                    <label>
+                        Male
+                        {{ h(disabled='') }} <span class="lever"></span>
+                        Female
+                    </label>
+                </div>
+                <br>
+                <br>
+            {% else %}
+
+
+                {{ renderer(h, mode) }}
+
+            {% endif %}
         {% endfor %}
     </div>
 
@@ -85,7 +100,22 @@
         <input id="id" name="id" type="hidden" value={{ request.args.get('id') }}>
 
         {% for h in form %}
-            {{ renderer(h, mode) }}
+            {% if h.label.text == 'Gender' %}
+                <div class="switch col s12 m6">
+                    <label>
+                        Male
+                        {{ h }} <span class="lever"></span>
+                        Female
+                    </label>
+                </div>
+                <br>
+                <br>
+            {% else %}
+
+
+                {{ renderer(h, mode) }}
+
+            {% endif %}
         {% endfor %}
     </div>
 

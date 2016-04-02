@@ -136,7 +136,7 @@ class Teacher(db.Document):
     city = db.StringField(required=True, max_length=20)
     state = db.StringField(required=True, max_length=20)
     pincode = db.StringField(required=True, max_length=20)
-    school = db.StringField(required=True)
+    school = db.StringField(required=True, max_length=100)
 
     def __str__(self):
         return self.teacher_name
