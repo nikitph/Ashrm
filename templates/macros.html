@@ -82,7 +82,7 @@
 
         {% if h.type == 'TextAreaField' %}
             <div class="input-field col s12 m6">
-                {{ h.label }}
+                {{ h.label(class='active') }}
                 {{ h(class='materialize-textarea') }}
             </div>
 
@@ -101,14 +101,14 @@
 
         {% elif 'Date' in h.label.text %}
             <div class="input-field col s12 m6">
-                {{ h.label }}
+                {{ h.label(class='active') }}
                 {{ h(type='date', class='datepicker') }}
 
             </div>
 
         {% elif 'Time' in h.label.text %}
             <div class="input-field col s12 m6">
-                {{ h.label }}
+                {{ h.label(class='active') }}
                 {{ h( class='timepicker') }}
 
             </div>
@@ -116,12 +116,7 @@
 
         {% elif not (h.widget.input_type == 'hidden' or h.type == 'ModelSelectField') %}
             <div class="input-field col s12 m6">
-                {{ h.label }}
-                {{ h }}
-            </div>
-
-        {% else %}
-            <div class="col s12 m6">
+                {{ h.label(class='active') }}
                 {{ h }}
             </div>
         {% endif %}

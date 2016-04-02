@@ -1,18 +1,20 @@
 {% extends "crudtemplate.html" %}
+{% from 'macros.html' import renderer %}
+
 
 {% block script %}
-<script>
-function copyTextValue() {
-    var text1 = document.getElementById("student_id").value;
-    var url1 = '/student?m=r';
-    document.getElementById("backlink").href=url1 + '&id=' + text1;
-}
-$(document).ready(function () {
+    <script>
+        function copyTextValue() {
+            var text1 = document.getElementById("student_id").value;
+            var url1 = '/student?m=r';
+            document.getElementById("backlink").href = url1 + '&id=' + text1;
+        }
+        $(document).ready(function () {
             $('select').material_select();
-    copyTextValue();
+            copyTextValue();
         });
 
-</script>
+    </script>
 
 
 {% endblock %}
@@ -108,22 +110,16 @@ $(document).ready(function () {
     <div class="row">
         {% for h in form %}
 
-            {% if h.label.text == 'Street Address' %}
-                <div class="col s12 m6">
-
-                    {{ h(class='materialize-textarea',placeholder=h.label.text) }}
-
-                </div>
-
-                {% elif h.label.text == 'Student Id'%}
+            {% if h.label.text == 'Student Id' %}
 
                 {{ h(value=request.args['sid']) }}
 
 
             {% else %}
-                <div class="col s12 m6">
-                    {{ h.label }} {{ h }}
-                </div>
+
+                {{ renderer(h, mode) }}
+
+
             {% endif %}
         {% endfor %}
     </div>
@@ -144,26 +140,8 @@ $(document).ready(function () {
 
     <div class="row">
         {% for h in form %}
-            {% if h.label.text =='Student Id' %}
+            {{ renderer(h, mode) }}
 
-                {{ h(type='hidden') }}
-
-
-            {% elif h.label.text =='Csrf Token' %}
-                {{ h(type='hidden') }}
-
-            {% elif h.label.text == 'Street Address' %}
-                <div class="col s12 m6">
-
-                   {{ h.label }} {{ h(class='materialize-textarea', disabled='') }}
-
-                </div>
-            {% else %}
-                <div class="col s12 m6">
-                    {{ h.label }}
-                    {{ h(disabled='') }}
-                </div>
-            {% endif %}
         {% endfor %}
     </div>
 
@@ -177,24 +155,9 @@ $(document).ready(function () {
         <input id="id" name="id" type="hidden" value={{ request.args.get('id') }}>
 
         {% for h in form %}
-            {% if h.label.text =='School' %}
-                {{ h(type='hidden',value=scid) }}
 
-            {% elif h.label.text =='Csrf Token' %}
-                {{ h(type='hidden') }}
+            {{ renderer(h, mode) }}
 
-            {% elif h.label.text == 'Street Address' %}
-                <div class="col s12 m6">
-
-                    {{ h(class='materialize-textarea') }}
-
-                </div>
-            {% else %}
-                <div class="col s12 m6">
-                    {{ h.label }}
-                    {{ h }}
-                </div>
-            {% endif %}
         {% endfor %}
     </div>
 
