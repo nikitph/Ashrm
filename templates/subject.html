@@ -1,4 +1,5 @@
 {% extends "crudtemplate.html" %}
+{% from 'macros.html' import renderer %}
 
 {% block script %}
     <script>
@@ -20,23 +21,16 @@
     <div class="row">
         {% for h in form %}
 
-            {% if h.type == 'TextAreaField' %}
-                <div class="input-field col s12 m6">
-                    {{ h.label }}
-                    {{ h(class='materialize-textarea') }}
-
-                </div>
-
-            {% elif h.label.text == 'School' %}
+            {% if h.label.text == 'School' %}
 
                 {{ h(value=key_id) }}
 
+            {% else %}
 
-            {% elif not h.widget.input_type == 'hidden' %}
-                <div class="input-field col s12 m6">
-                    {{ h.label }} {{ h }}
-                </div>
+                {{ renderer(h, mode) }}
+
             {% endif %}
+
         {% endfor %}
     </div>
 
@@ -56,26 +50,9 @@
 
     <div class="row">
         {% for h in form %}
-            {% if h.label.text =='School' %}
 
-                {{ h(type='hidden') }}
+            {{ renderer(h, mode) }}
 
-
-            {% elif h.label.text =='Csrf Token' %}
-                {{ h(type='hidden') }}
-
-            {% elif h.label.text == 'Description' %}
-                <div class="col s12 m6">
-
-                    {{ h.label }} {{ h(class='materialize-textarea', disabled='') }}
-
-                </div>
-            {% else %}
-                <div class="col s12 m6">
-                    {{ h.label }}
-                    {{ h(disabled='') }}
-                </div>
-            {% endif %}
         {% endfor %}
     </div>
 
@@ -90,22 +67,13 @@
 
         {% for h in form %}
             {% if h.label.text =='School' %}
-                {{ h(type='hidden',value=scid) }}
 
-            {% elif h.label.text =='Csrf Token' %}
-                {{ h(type='hidden') }}
+                {{ h(type='hidden',value=key_id) }}
 
-            {% elif h.label.text == 'Description' %}
-                <div class="input-field col s12 m6">
-
-                    {{ h(class='materialize-textarea') }}
-
-                </div>
             {% else %}
-                <div class="input-field col s12 m6">
-                    {{ h.label }}
-                    {{ h }}
-                </div>
+
+                {{ renderer(h, mode) }}
+
             {% endif %}
         {% endfor %}
     </div>
