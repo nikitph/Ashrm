@@ -1,6 +1,10 @@
 from celery import Celery
 from celery.task import task, periodic_task
-from settings import Config
+from flask import Flask
+from extensions import mail
+from settings import Config, ProdConfig
+
+
 def make_celery(app):
     celery = Celery(app.import_name, broker=Config.BROKER_URL)
     celery.conf.update(app.config)
@@ -13,11 +17,25 @@ def make_celery(app):
     celery.Task = ContextTask
     return celery
 
-from app import create_app
-app = create_app(Config())
+
+def create_app2(config_object=ProdConfig):
+    app = Flask(__name__)
+    app.config.from_object(config_object)
+    register_extensions(app)
+    # register_blueprints(app) !imp == otherwise tasks cant be imported in blueprint
+
+    return app
+
+
+def register_extensions(app):
+    mail.init_app(app)
+
+
+app = create_app2(Config())
 celery = make_celery(app)
 
 
 @task
-def test():
-    print session
+def test2(msg):
+    with app.app_context():
+        mail.send(msg)
