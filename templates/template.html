@@ -19,6 +19,8 @@
     <script>
         $(document).ready(function () {
             $('select').material_select();
+            $('.tooltipped').tooltip({delay: 20});
+
             $('.datepicker').pickadate({
                 selectMonths: true, // Creates a dropdown to control month
                 selectYears: 15 // Creates a dropdown of 15 years to control year
@@ -161,14 +163,19 @@
             <ul class="hide-on-med-and-down">
 
 
-                <li><a href={{ url_for('.student',m='l') }}><i class="material-icons blue-text">assignment_ind</i></a>
+                <li class="tooltipped" data-position="right" data-delay="50" data-tooltip="Student dashboard "><a
+                        href={{ url_for('.student',m='l') }}><i class="material-icons blue-text">assignment_ind</i></a>
                 </li>
-                <li><a href={{ url_for('.subject',m='l') }}><i class="material-icons blue-text">subject</i></a></li>
-                <li><a href={{ url_for('.teacher',m='l') }}><i
+                <li class="tooltipped" data-position="right" data-delay="50" data-tooltip="Subjects"><a
+                        href={{ url_for('.subject',m='l') }}><i class="material-icons blue-text">subject</i></a></li>
+                <li class="tooltipped" data-position="right" data-delay="50" data-tooltip="Teacher Management"><a
+                        href={{ url_for('.teacher',m='l') }}><i
                         class="material-icons blue-text">supervisor_account</i></a></li>
-                <li><a href={{ url_for('.event',m='l') }}><i
+                <li class="tooltipped" data-position="right" data-delay="50" data-tooltip="Event dashboard "><a
+                        href={{ url_for('.event',m='l') }}><i
                         class="material-icons blue-text">event</i></a></li>
-                <li><a href={{ url_for('.bulknotify',m='l') }}><i
+                <li class="tooltipped" data-position="right" data-delay="50" data-tooltip="Bulk Notifications"><a
+                        href={{ url_for('.bulknotify',m='l') }}><i
                         class="material-icons blue-text">sms</i></a></li>
 
             </ul>
