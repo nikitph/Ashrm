@@ -1,7 +1,6 @@
 {% if mode==1 %}
 
     <div class="chip white-text">
-        <div class="img2 center"><i class="material-icons white-text">keyboard_arrow_right</i></div>
         Create {{ displayname }}
     </div>
     <div class="line-linkage activelink"></div>
@@ -12,14 +11,12 @@
 {% if mode==2 %}
 
     <div class="chip green lighten-3">
-        <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
         View {{ displayname }}
     </div>
     <div class="line-linkage activelink"></div>
 
     <div class="vertical-line"></div>
     <div class="chip green lighten-3">
-        <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
         <a href="{{ url_for('.' + routename,m='u', id=request.args.get('id')) }}">Update {{ displayname }}</a>
     </div>
 
@@ -28,7 +25,6 @@
 
     <div class="vertical-line"></div>
     <div class="chip red lighten-2">
-        <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
         <a href="{{ url_for('.' + routename,m='d', id=request.args.get('id')) }}">Delete
             {{ displayname }} </a>
     </div>
@@ -40,15 +36,13 @@
 {% if mode==3 %}
 
     <div class="chip green lighten-3">
-        <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
         <a href="{{ url_for('.' + routename,m='r', id=request.args.get('id')) }}">View {{ displayname }}</a>
     </div>
     <div class="line-linkage"></div>
 
     <div class="vertical-line"></div>
     <div class="chip green lighten-3">
-        <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
-        <a href="{{ url_for('.' + routename,m='u', id=request.args.get('id')) }}">Update {{ displayname }}</a>
+        Update {{ displayname }}
     </div>
 
     <div class="line-linkage activelink"></div>
@@ -56,7 +50,6 @@
 
     <div class="vertical-line"></div>
     <div class="chip red lighten-2">
-        <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
         <a href="{{ url_for('.' + routename,m='d', id=request.args.get('id')) }}"> Delete
             {{ displayname }} </a>
     </div>
@@ -67,7 +60,6 @@
 {% if mode==4 %}
 
     <div class="chip amber lighten-3">
-        <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
         Delete {{ displayname }}
     </div>
     <div class="line-linkage activelink"></div>

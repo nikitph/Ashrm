@@ -9,7 +9,8 @@ import wtforms
 from flask.ext.mongoengine.wtf import model_form
 from tasks import email
 
-from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher, Event
+from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher, Event, \
+    BulkNotification
 from user.models import User
 from user.utility import cruder
 
@@ -203,11 +204,31 @@ def event():
         return redirect(url_for('.event', m='r', id=str(form.save().id)))
 
 
+@login_required
+@bp_user.route('/bulknotify', methods=['GET', 'POST'])
+def bulknotify():
+    if request.method == 'GET':
+        field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, BulkNotification, 'bulknotify.html', 'bulknotify', 'Bulk Notification', field_args,
+                      list_args, g.user.schoolid)
+
+    else:
+        obj_form = model_form(BulkNotification)
+        form = obj_form(request.form)
+        id = str(form.save().id)
+        x = Student.objects.only('email')
+        for s in x:
+            notify(form['subject'].data, form['body'].data, s.email)
+
+        return redirect(url_for('.bulknotify', m='r', id=id))
+
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ['jpg', 'jpeg']
 
 
 def notify(subj, body, recipient):
-    msg = Message(subj, recipients=[recipient])
-    msg.body = body
+    msg = Message(str(subj), recipients=[str(recipient)])
+    msg.body = str(body)
     email.delay(msg)

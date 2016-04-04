@@ -163,3 +163,9 @@ class Event(db.Document):
     event_for = db.StringField(required=True, verbose_name='Event is for',
                                choices=(('1', "Everyone"), ('2', "Students"), ('3', "Faculty"), ('4', "Parents")))
     description = db.StringField(required=True)
+
+
+class BulkNotification(db.Document):
+    school = db.StringField(required=True, max_length=50)
+    subject = db.StringField(required=True, max_length=200)
+    body = db.StringField(required=True, verbose_name='Notification Message')
