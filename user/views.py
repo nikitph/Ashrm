@@ -1,6 +1,5 @@
 import datetime
 from flask import Blueprint, request, redirect, url_for, g, jsonify
-from flask.ext.mail import Message
 
 from flask.ext.security import login_required, current_user
 from flask.templating import render_template
@@ -218,9 +217,12 @@ def bulknotify():
         form = obj_form(request.form)
         id = str(form.save().id)
         x = Student.objects.only('email')
-        for s in x:
-            notify(form['subject'].data, form['body'].data, s.email)
+        rcp = []
 
+        for s in x:
+            rcp.append(str(s.email))
+
+        task = email.apply_async(args=[form['subject'].data, form['body'].data, rcp])
         return redirect(url_for('.bulknotify', m='r', id=id))
 
 
@@ -228,7 +230,32 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ['jpg', 'jpeg']
 
 
-def notify(subj, body, recipient):
-    msg = Message(str(subj), recipients=[str(recipient)])
-    msg.body = str(body)
-    email.delay(msg)
+@bp_user.route('/status/<task_id>')
+def taskstatus(task_id):
+    task = email.AsyncResult(task_id)
+    if task.state == 'PENDING':
+        # job did not start yet
+        response = {
+            'state': task.state,
+            'current': 0,
+            'total': 1,
+            'status': 'Pending...'
+        }
+    elif task.state != 'FAILURE':
+        response = {
+            'state': task.state,
+            'current': task.info.get('current', 0),
+            'total': task.info.get('total', 1),
+            'status': task.info.get('status', '')
+        }
+        if 'result' in task.info:
+            response['result'] = task.info['result']
+    else:
+        # something went wrong in the background job
+        response = {
+            'state': task.state,
+            'current': 1,
+            'total': 1,
+            'status': str(task.info),  # this is the exception raised
+        }
+    return jsonify(response)

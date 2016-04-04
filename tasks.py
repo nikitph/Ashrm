@@ -1,6 +1,7 @@
 from celery import Celery
 from celery.task import task, periodic_task
 from flask import Flask
+from flask.ext.mail import Message
 from extensions import mail
 from settings import Config, ProdConfig
 
@@ -35,7 +36,18 @@ app = create_app2(Config())
 celery = make_celery(app)
 
 
-@task
-def email(msg):
+@task(bind=True)
+def email(self, subj, body, rlist):
     with app.app_context():
-        mail.send(msg)
+        print(rlist)
+        total = len(rlist)
+        for i, s in enumerate(rlist):
+            print(s)
+            msg = Message(str(subj), recipients=[s])
+            msg.body = str(body)
+            mail.send(msg)
+            self.update_state(state='PROGRESS',
+                          meta={'current': i, 'total': total,
+                                'status': 'Email sent to ' + s})
+        return {'current': 100, 'total': 100, 'status': 'Task completed!',
+            'result': 42}

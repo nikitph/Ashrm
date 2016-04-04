@@ -13,6 +13,7 @@ class Config(object):
     UPLOAD_FOLDER = '/static/img/uploads'
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
     BROKER_URL = 'redis://localhost:6379/10'
+    CELERY_RESULT_BACKEND = 'redis://localhost:6379/10'
     ENFERNO_ENV = 'dev'
     MONGODB_SETTINGS = { 'db' :'ashrm1'
     }
