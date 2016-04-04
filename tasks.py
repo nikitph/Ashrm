@@ -36,6 +36,6 @@ celery = make_celery(app)
 
 
 @task
-def test2(msg):
+def email(msg):
     with app.app_context():
         mail.send(msg)

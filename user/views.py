@@ -1,12 +1,13 @@
 import datetime
-import os
 from flask import Blueprint, request, redirect, url_for, g, jsonify
+from flask.ext.mail import Message
 
 from flask.ext.security import login_required, current_user
 from flask.templating import render_template
 from werkzeug.utils import secure_filename
 import wtforms
 from flask.ext.mongoengine.wtf import model_form
+from tasks import email
 
 from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher, Event
 from user.models import User
@@ -165,9 +166,8 @@ def upload():
         if file and allowed_file(file.filename):
             now = datetime.datetime.now()
             filename = secure_filename(file.filename)
-            # filename = os.path.join('/img', "%s.%s" % (now.strftime("%Y-%m-%d-%H-%M-%S-%f"), file.filename.rsplit('.', 1)[1]))
             file.save('static/img/' + filename)
-            return jsonify({"filepath": 'static/img/' + filename })
+            return jsonify({"filepath": 'static/img/' + filename})
 
 
 @login_required
@@ -189,7 +189,6 @@ def profile():
     return redirect(url_for('.student', m='l'))
 
 
-
 @login_required
 @bp_user.route('/event', methods=['GET', 'POST'])
 def event():
@@ -206,3 +205,9 @@ def event():
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ['jpg', 'jpeg']
+
+
+def notify(subj, body, recipient):
+    msg = Message(subj, recipients=[recipient])
+    msg.body = body
+    email.delay(msg)

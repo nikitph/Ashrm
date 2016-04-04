@@ -10389,7 +10389,7 @@ a.waves-effect .waves-ripple {
   line-height: 32px;
   padding: 0 12px;
   border-radius: 16px;
-  background-color: #acd8fa;
+  background-color: #64B5F6;
 }
 .chip .img2 {
   float: left;
@@ -10399,6 +10399,9 @@ a.waves-effect .waves-ripple {
   border-radius: 50%;
   border: 1px solid darkgreen;
   background-color: white;
+}
+.chip a {
+  color: white;
 }
 .chip img {
   float: left;

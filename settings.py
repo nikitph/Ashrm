@@ -35,7 +35,7 @@ class Config(object):
     MAIL_USE_SSL = True
     MAIL_USERNAME = 'postmaster@sandbox915ad276f504436e85698563f521a724.mailgun.org'
     MAIL_PASSWORD = '82c13eb2fc037241f55e00921b1fb30f'
-    MAIL_DEFAULT_SENDER = 'info@nikitph.com'
+    MAIL_DEFAULT_SENDER = 'info@ashrm.com'
     SECURITY_EMAIL_SENDER = 'info@nikitph.com'
 
 
