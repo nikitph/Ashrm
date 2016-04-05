@@ -18,7 +18,7 @@ class Config(object):
     MONGODB_SETTINGS = {
 
         'db': 'heroku_r6gzx0bj',
-        'host': 'mongodb://heroku_r6gzx0bj:lphijj48j811hr8hd10qkaffic@ds049925.mongolab.com:49925/heroku_r6gzx0bj'
+        'host': 'mongodb://heroku_r6gzx0bj:52u7db1p5vasmg68iqpuk42niu@ds015730.mlab.com:15730/heroku_r6gzx0bj'
 
     }
 
