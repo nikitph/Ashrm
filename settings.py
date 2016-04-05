@@ -40,7 +40,7 @@ class Config(object):
     MAIL_PORT = 465
     MAIL_USE_SSL = True
     MAIL_USERNAME = 'postmaster@sandbox915ad276f504436e85698563f521a724.mailgun.org'
-    MAIL_PASSWORD = '82c13eb2fc037241f55e00921b1fb30f'
+    MAIL_PASSWORD = 'davajvmasd12345'
     MAIL_DEFAULT_SENDER = 'info@nikitph.com'
     SECURITY_EMAIL_SENDER = 'info@nikitph.com'
 
@@ -60,5 +60,10 @@ class DevConfig(Config):
     DEBUG_TB_ENABLED = True
     ASSETS_DEBUG = True  # Don't bundle/minify static assets
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
+    BROKER_URL = 'redis://localhost:6379/10'
+    CELERY_RESULT_BACKEND = 'redis://localhost:6379/10'
+    MONGODB_SETTINGS = {
+        'db': 'ashrm1'
+    }
 
 
