@@ -15,7 +15,9 @@ class Config(object):
     BROKER_URL = 'redis://localhost:6379/10'
     CELERY_RESULT_BACKEND = 'redis://localhost:6379/10'
     ENFERNO_ENV = 'dev'
-    MONGODB_SETTINGS = { 'db' :'ashrm1'
+    MONGODB_SETTINGS = {
+
+        'db' :'ashrm1'
     }
 
     #security
