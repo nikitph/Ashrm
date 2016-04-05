@@ -12,10 +12,14 @@ class Config(object):
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     UPLOAD_FOLDER = '/static/img/uploads'
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
-    BROKER_URL = 'redis://localhost:6379/10'
-    CELERY_RESULT_BACKEND = 'redis://localhost:6379/10'
+    BROKER_URL = 'redis://redistogo:926e2ebd7e411547ded094aeb1939e0a@lab.redistogo.com:9464/'
+    CELERY_RESULT_BACKEND = 'redis://redistogo:926e2ebd7e411547ded094aeb1939e0a@lab.redistogo.com:9464/'
     ENFERNO_ENV = 'dev'
-    MONGODB_SETTINGS = { 'db' :'ashrm1'
+    MONGODB_SETTINGS = {
+
+        'db': 'heroku_r6gzx0bj',
+        'host': 'mongodb://heroku_r6gzx0bj:lphijj48j811hr8hd10qkaffic@ds049925.mongolab.com:49925/heroku_r6gzx0bj'
+
     }
 
     #security
@@ -36,7 +40,7 @@ class Config(object):
     MAIL_USE_SSL = True
     MAIL_USERNAME = 'postmaster@sandbox915ad276f504436e85698563f521a724.mailgun.org'
     MAIL_PASSWORD = '82c13eb2fc037241f55e00921b1fb30f'
-    MAIL_DEFAULT_SENDER = 'info@ashrm.com'
+    MAIL_DEFAULT_SENDER = 'info@nikitph.com'
     SECURITY_EMAIL_SENDER = 'info@nikitph.com'
 
 
