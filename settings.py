@@ -17,6 +17,7 @@ class Config(object):
     ENFERNO_ENV = 'prod'
     MONGODB_SETTINGS = {
 
+
         'db': 'heroku_r6gzx0bj',
         'host': 'mongodb://heroku_r6gzx0bj:52u7db1p5vasmg68iqpuk42niu@ds015730.mlab.com:15730/heroku_r6gzx0bj'
 
