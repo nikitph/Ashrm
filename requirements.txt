@@ -31,7 +31,7 @@ mongoengine==0.8.7
 passlib==1.6.2
 Pillow==2.5.1
 py-bcrypt==0.4
-pymongo==2.8.0
+pymongo==2.8.1
 pytz==2014.4
 redis==2.10.1
 SQLAlchemy==0.9.4

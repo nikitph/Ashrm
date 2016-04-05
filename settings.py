@@ -14,7 +14,7 @@ class Config(object):
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
     BROKER_URL = 'redis://redistogo:926e2ebd7e411547ded094aeb1939e0a@lab.redistogo.com:9464/'
     CELERY_RESULT_BACKEND = 'redis://redistogo:926e2ebd7e411547ded094aeb1939e0a@lab.redistogo.com:9464/'
-    ENFERNO_ENV = 'dev'
+    ENFERNO_ENV = 'prod'
     MONGODB_SETTINGS = {
 
         'db': 'heroku_r6gzx0bj',
