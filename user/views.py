@@ -195,6 +195,7 @@ def event():
     if request.method == 'GET':
         field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}, 'event_for': {'radio': True}}
         list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        print(g.user.schoolid)
         return cruder(request, Event, 'event.html', 'event', 'Event', field_args, list_args, g.user.schoolid)
 
     else:
