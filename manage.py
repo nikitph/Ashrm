@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 import os
 from flask.ext.script import Manager, Shell, Server
-from flask.ext.security.script import CreateUserCommand, AddRoleCommand, RemoveRoleCommand,ActivateUserCommand, DeactivateUserCommand
+from flask.ext.security.script import CreateUserCommand, AddRoleCommand, RemoveRoleCommand, ActivateUserCommand, \
+    DeactivateUserCommand
 from script import InstallCommand, ResetUserCommand
 from app import create_app
 
@@ -14,13 +15,12 @@ try:
 except ImportError:
     LocalConfig = None
 
-
-# if os.environ.get("ENFERNO_ENV") == 'prod':
-app = create_app(ProdConfig)
-# elif LocalConfig :
-#     app = create_app(LocalConfig)
-# else:
-#     app = create_app(DevConfig)
+if os.environ.get("ENFERNO_ENV") == 'prod':
+    app = create_app(ProdConfig)
+elif LocalConfig:
+    app = create_app(LocalConfig)
+else:
+    app = create_app(DevConfig)
 
 manager = Manager(app)
 
