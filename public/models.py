@@ -4,14 +4,14 @@ from extensions import db
 
 
 class Institute(db.Document):
-    name = db.StringField(required=True, max_length=50)
-    address = db.StringField(required=True)
-    city = db.StringField(required=True, max_length=50)
-    state = db.StringField(required=True, max_length=50)
+    name = db.StringField(required=True, max_length=50, help_text='perm_identity')
+    address = db.StringField(required=True, help_text='location_on')
+    city = db.StringField(required=True, max_length=50, help_text='location_city')
+    state = db.StringField(required=True, max_length=50, help_text='location_searching')
     pincode = db.IntField(required=True)
-    phone = db.StringField(required=True, max_length=50)
-    website = db.StringField(required=True, max_length=50)
-    email = db.StringField(required=True, max_length=50)
+    phone = db.StringField(required=True, max_length=50, help_text='phone')
+    website = db.StringField(required=True, max_length=50, help_text='web')
+    email = db.StringField(required=True, max_length=50, help_text='email')
 
     def __str__(self):
         return self.name
@@ -20,22 +20,22 @@ class Institute(db.Document):
 
 
 class School(db.Document):
-    institute = db.StringField(required=True, max_length=100)
-    user = db.StringField(required=True, max_length=50)
-    school_name = db.StringField(required=True, max_length=50)
+    institute = db.StringField(required=True, max_length=100, help_text='')
+    user = db.StringField(required=True, max_length=50, help_text='')
+    school_name = db.StringField(required=True, max_length=50, help_text='')
     street_address = db.StringField(required=True)
-    city = db.StringField(required=True, max_length=50)
-    state = db.StringField(required=True, max_length=50)
+    city = db.StringField(required=True, max_length=50, help_text='')
+    state = db.StringField(required=True, max_length=50, help_text='')
     pincode = db.IntField(required=True)
-    phone = db.StringField(required=True, max_length=50)
-    website = db.StringField(required=True, max_length=50)
-    email = db.StringField(required=True, max_length=50)
+    phone = db.StringField(required=True, max_length=50, help_text='')
+    website = db.StringField(required=True, max_length=50, help_text='')
+    email = db.StringField(required=True, max_length=50, help_text='')
 
 
 class Standard(db.Document):
-    standard = db.StringField(required=True, max_length=20)
+    standard = db.StringField(required=True, max_length=20, help_text='')
     sections = db.IntField(required=True)
-    school = db.StringField(required=True, max_length=50)
+    school = db.StringField(required=True, max_length=50, help_text='')
 
     def __str__(self):
         return self.standard
@@ -44,16 +44,16 @@ class Standard(db.Document):
 
 
 class Student(db.Document):
-    school = db.StringField(required=True, max_length=20)
-    student_name = db.StringField(required=True, max_length=20)
+    school = db.StringField(required=True, max_length=20, help_text='')
+    student_name = db.StringField(required=True, max_length=20, help_text='')
     standard = db.ReferenceField(Standard, required=True)
     street_address = db.StringField(required=True)
-    city = db.StringField(required=True, max_length=20)
-    state = db.StringField(required=True, max_length=20)
-    pincode = db.StringField(required=True, max_length=20)
-    phone = db.StringField(required=True, max_length=20)
-    email = db.StringField(required=True, max_length=20)
-    date_of_birth = db.StringField(required=True, max_length=20)
+    city = db.StringField(required=True, max_length=20, help_text='')
+    state = db.StringField(required=True, max_length=20, help_text='')
+    pincode = db.StringField(required=True, max_length=20, help_text='')
+    phone = db.StringField(required=True, max_length=20, help_text='')
+    email = db.StringField(required=True, max_length=20, help_text='')
+    date_of_birth = db.StringField(required=True, max_length=20, help_text='')
     related = db.DictField(required=False)
     image = db.StringField(required=False, max_length=200,
                            default='static/img/256px-Weiser_State_Forest_Walking_Path.jpg')
@@ -65,17 +65,17 @@ class Student(db.Document):
 
 
 class Parent(db.Document):
-    relationship = db.StringField(required=True, max_length=20)
-    parent_name = db.StringField(required=True, max_length=20)
-    student_id = db.StringField(required=True, max_length=50)
-    street_address = db.StringField(required=True)
-    city = db.StringField(required=True, max_length=20)
-    state = db.StringField(required=True, max_length=20)
-    pincode = db.StringField(required=True, max_length=20)
-    annual_income = db.StringField(required=True, max_length=50)
-    occupation = db.StringField(required=True, max_length=50)
-    phone = db.StringField(required=True, max_length=20)
-    email = db.StringField(required=True, max_length=20)
+    relationship = db.StringField(required=True, max_length=20, help_text='')
+    parent_name = db.StringField(required=True, max_length=20, help_text='perm_identity')
+    student_id = db.StringField(required=True, max_length=50, help_text='')
+    street_address = db.StringField(required=True, help_text='location_on')
+    city = db.StringField(required=True, max_length=20, help_text='')
+    state = db.StringField(required=True, max_length=20, help_text='')
+    pincode = db.StringField(required=True, max_length=20, help_text='')
+    annual_income = db.StringField(required=True, max_length=50, help_text='')
+    occupation = db.StringField(required=True, max_length=50, help_text='')
+    phone = db.StringField(required=True, max_length=20, help_text='')
+    email = db.StringField(required=True, max_length=20, help_text='email')
 
     def save(self, *args, **kwargs):
         super(Parent, self).save(*args, **kwargs)
@@ -86,9 +86,9 @@ class Parent(db.Document):
 
 
 class Scholarship(db.Document):
-    awarding_body = db.StringField(required=True, max_length=20)
-    year = db.StringField(required=True, max_length=20)
-    student_id = db.StringField(required=True, max_length=50)
+    awarding_body = db.StringField(required=True, max_length=20, help_text='')
+    year = db.StringField(required=True, max_length=20, help_text='')
+    student_id = db.StringField(required=True, max_length=50, help_text='')
     title_of_scholarship = db.StringField(required=True)
 
     def save(self, *args, **kwargs):
@@ -100,9 +100,9 @@ class Scholarship(db.Document):
 
 
 class Award(db.Document):
-    awarding_body = db.StringField(required=True, max_length=20)
-    year = db.StringField(required=True, max_length=20)
-    student_id = db.StringField(required=True, max_length=50)
+    awarding_body = db.StringField(required=True, max_length=20, help_text='')
+    year = db.StringField(required=True, max_length=20, help_text='')
+    student_id = db.StringField(required=True, max_length=50, help_text='')
     title_of_award = db.StringField(required=True)
 
     def save(self, *args, **kwargs):
@@ -114,14 +114,14 @@ class Award(db.Document):
 
 
 class Subject(db.Document):
-    code = db.StringField(required=True, max_length=50)
-    subject_name = db.StringField(required=True, max_length=50)
-    books = db.StringField(required=True, max_length=50)
-    syllabus = db.StringField(required=True, max_length=50)
+    code = db.StringField(required=True, max_length=50, help_text='')
+    subject_name = db.StringField(required=True, max_length=50, help_text='')
+    books = db.StringField(required=True, max_length=50, help_text='')
+    syllabus = db.StringField(required=True, max_length=50, help_text='')
     total_theory_hours = db.IntField(required=True)
     class_duration = db.IntField(required=True)
     description = db.StringField(required=True)
-    school = db.StringField(required=True, max_length=50)
+    school = db.StringField(required=True, max_length=50, help_text='')
 
     def __str__(self):
         return self.subject_name
@@ -130,13 +130,13 @@ class Subject(db.Document):
 
 
 class Teacher(db.Document):
-    teacher_name = db.StringField(required=True, max_length=50)
+    teacher_name = db.StringField(required=True, max_length=50, help_text='')
     gender = db.BooleanField(required=True)
     street_address = db.StringField(required=True)
-    city = db.StringField(required=True, max_length=20)
-    state = db.StringField(required=True, max_length=20)
-    pincode = db.StringField(required=True, max_length=20)
-    school = db.StringField(required=True, max_length=100)
+    city = db.StringField(required=True, max_length=20, help_text='')
+    state = db.StringField(required=True, max_length=20, help_text='')
+    pincode = db.StringField(required=True, max_length=20, help_text='')
+    school = db.StringField(required=True, max_length=100, help_text='')
 
     def __str__(self):
         return self.teacher_name
@@ -145,27 +145,27 @@ class Teacher(db.Document):
 
 
 class Profile(db.Document):
-    user = db.StringField(required=True, max_length=50)
-    phone = db.StringField(required=True, max_length=50)
-    address = db.StringField(required=True, max_length=50)
-    email = db.StringField(required=True, max_length=50)
-    photo = db.StringField(required=True, max_length=50)
+    user = db.StringField(required=True, max_length=50, help_text='')
+    phone = db.StringField(required=True, max_length=50, help_text='')
+    address = db.StringField(required=True, max_length=50, help_text='')
+    email = db.StringField(required=True, max_length=50, help_text='')
+    photo = db.StringField(required=True, max_length=50, help_text='')
 
 
 class Event(db.Document):
-    school = db.StringField(required=True, max_length=50)
-    event_name = db.StringField(required=True, max_length=50)
-    from_date = db.StringField(required=True, max_length=50)
-    to_date = db.StringField(required=True, max_length=50)
-    start_time = db.StringField(required=True, max_length=50)
-    end_time = db.StringField(required=True, max_length=50)
-    location = db.StringField(required=True, max_length=50)
+    school = db.StringField(required=True, max_length=50, help_text='')
+    event_name = db.StringField(required=True, max_length=50, help_text='')
+    from_date = db.StringField(required=True, max_length=50, help_text='')
+    to_date = db.StringField(required=True, max_length=50, help_text='')
+    start_time = db.StringField(required=True, max_length=50, help_text='')
+    end_time = db.StringField(required=True, max_length=50, help_text='')
+    location = db.StringField(required=True, max_length=50, help_text='')
     event_for = db.StringField(required=True, verbose_name='Event is for',
                                choices=(('1', "Everyone"), ('2', "Students"), ('3', "Faculty"), ('4', "Parents")))
     description = db.StringField(required=True)
 
 
 class BulkNotification(db.Document):
-    school = db.StringField(required=True, max_length=50)
-    subject = db.StringField(required=True, max_length=200)
+    school = db.StringField(required=True, max_length=50, help_text='')
+    subject = db.StringField(required=True, max_length=200, help_text='')
     body = db.StringField(required=True, verbose_name='Notification Message')
