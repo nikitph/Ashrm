@@ -14,7 +14,7 @@ class Config(object):
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
     BROKER_URL = 'redis://redistogo:926e2ebd7e411547ded094aeb1939e0a@lab.redistogo.com:9464/'
     CELERY_RESULT_BACKEND = 'redis://redistogo:926e2ebd7e411547ded094aeb1939e0a@lab.redistogo.com:9464/'
-    ENFERNO_ENV = 'prod'
+    ENFERNO_ENV = 'dev'
     MONGODB_SETTINGS = {
 
 
@@ -63,7 +63,7 @@ class DevConfig(Config):
     BROKER_URL = 'redis://localhost:6379/10'
     CELERY_RESULT_BACKEND = 'redis://localhost:6379/10'
     MONGODB_SETTINGS = {
-        'db': 'ashrm1'
+        'db': 'ashrm2'
     }
 
 
