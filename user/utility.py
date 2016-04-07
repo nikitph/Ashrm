@@ -10,7 +10,9 @@ def cruder(req, usr_model_class, template, route_name, display_name, field_args=
     # 1 = c, 2= r, 3=u, 4=d, 5=l
 
     if mode == 1:
+        print(1)
         usr_obj_form = model_form(usr_model_class, field_args=field_args)
+        print(2)
         form = usr_obj_form(req.form)
         print(form)
         return render_template(template, form=form, mode=1, routename=route_name, displayname=display_name,
