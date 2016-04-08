@@ -2,23 +2,6 @@
 {% from 'macros.html' import renderer %}
 
 
-{% block script %}
-    <script>
-        function copyTextValue() {
-            var text1 = document.getElementById("student_id").value;
-            var url1 = '/student?m=r';
-            document.getElementById("backlink").href = url1 + '&id=' + text1;
-        }
-        $(document).ready(function () {
-            $('select').material_select();
-            copyTextValue();
-        });
-
-    </script>
-
-
-{% endblock %}
-
 {% block uiblock %}
 
     {% include 'uiblock.html' %}

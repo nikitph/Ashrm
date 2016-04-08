@@ -9433,7 +9433,6 @@ nav .input-field label {
 }
 nav .input-field label i {
   color: #0000ff;
-  border: 1px solid #8b0000;
   transition: color .3s;
 }
 nav .input-field label.active i {
@@ -10802,6 +10801,7 @@ textarea.materialize-textarea + label:after {
   position: absolute;
   width: 3rem;
   font-size: 2rem;
+  color: rgba(181, 81, 81, 0.8);
   transition: color .2s;
 }
 .input-field .prefix.active {
