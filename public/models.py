@@ -34,7 +34,7 @@ class School(db.Document):
 
 class Standard(db.Document):
     standard = db.StringField(required=True, max_length=20, help_text='')
-    sections = db.IntField(required=True)
+    sections = db.IntField(required=True, verbose_name='Number of Sections')
     school = db.StringField(required=True, max_length=50, help_text='')
 
     def __str__(self):
@@ -45,15 +45,15 @@ class Standard(db.Document):
 
 class Student(db.Document):
     school = db.StringField(required=True, max_length=20, help_text='')
-    student_name = db.StringField(required=True, max_length=20, help_text='')
+    student_name = db.StringField(required=True, max_length=20, help_text='perm_identity')
     standard = db.ReferenceField(Standard, required=True)
-    street_address = db.StringField(required=True)
-    city = db.StringField(required=True, max_length=20, help_text='')
-    state = db.StringField(required=True, max_length=20, help_text='')
-    pincode = db.StringField(required=True, max_length=20, help_text='')
-    phone = db.StringField(required=True, max_length=20, help_text='')
-    email = db.StringField(required=True, max_length=20, help_text='')
-    date_of_birth = db.StringField(required=True, max_length=20, help_text='')
+    street_address = db.StringField(required=True, help_text='location_on')
+    city = db.StringField(required=True, max_length=20, help_text='location_city')
+    state = db.StringField(required=True, max_length=20, help_text='navigation')
+    pincode = db.StringField(required=True, max_length=20, help_text='local_parking')
+    phone = db.StringField(required=True, max_length=20, help_text='phone')
+    email = db.StringField(required=True, max_length=20, help_text='email')
+    date_of_birth = db.StringField(required=True, max_length=20, help_text='today')
     related = db.DictField(required=False)
     image = db.StringField(required=False, max_length=200,
                            default='static/img/256px-Weiser_State_Forest_Walking_Path.jpg')

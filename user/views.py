@@ -65,7 +65,10 @@ def school():
 @bp_user.route('/standard', methods=['GET', 'POST'])
 def standard():
     if request.method == 'GET':
-        return cruder(request, Standard, 'standard.html', 'standard', 'Standard')
+        field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Standard, 'standard.html', 'standard', 'Standard', field_args, list_args,
+                      g.user.schoolid)
 
     else:
         obj_form = model_form(Standard)
