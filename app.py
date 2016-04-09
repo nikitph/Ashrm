@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, render_template
+from jinja2 import is_undefined
 from settings import ProdConfig
 from flask.ext.security import Security, MongoEngineUserDatastore
 from user.models import User, Role
@@ -16,12 +17,29 @@ from extensions import (
 from public.views import bp_public
 from user.views import bp_user
 
+
 def create_app(config_object=ProdConfig):
     app = Flask(__name__)
     app.config.from_object(config_object)
     register_extensions(app)
     register_blueprints(app)
     register_errorhandlers(app)
+
+    @app.template_filter('vue')
+    def vue(value):
+        """
+        A filter to tell Jinja2 that a variable is for the AngularJS template
+        engine.
+        If the variable is undefined, its name will be used in the AngularJS
+        template, otherwise, its content will be used.
+        """
+
+        if is_undefined(value):
+            return '{{{{{}}}}}'.format(value._undefined_name)
+        if type(value) is bool:
+            value = repr(value).lower()
+        return '{{{{{}}}}}'.format(value)
+
     return app
 
 
