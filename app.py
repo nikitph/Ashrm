@@ -35,7 +35,7 @@ def create_app(config_object=ProdConfig):
         """
 
         if is_undefined(value):
-            return '{{{{{}}}}}'.format(value._undefined_name)
+            return '{{ ' + value._undefined_name + ' }}'
         if type(value) is bool:
             value = repr(value).lower()
         return '{{{{{}}}}}'.format(value)
