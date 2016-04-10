@@ -46,7 +46,7 @@ class Standard(db.Document):
 class Student(db.Document):
     school = db.StringField(required=True, max_length=20, help_text='')
     student_name = db.StringField(required=True, max_length=20, help_text='perm_identity')
-    standard = db.ReferenceField(Standard, required=True)
+    standard = db.ReferenceField(Standard, required=True, help_text='activateSlave(this);')
     section = db.StringField(required=True,
                                choices=(('',"Student Section"),('1', "1"), ('2', "2"), ('3', "3"), ('4', "4")))
     street_address = db.StringField(required=True, help_text='location_on')

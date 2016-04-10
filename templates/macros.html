@@ -45,17 +45,19 @@
         {% elif h.type == 'SelectField' %}
             <div class="input-field col s12 m6">
                 {% if h.description %}
-                    <i class="material-icons prefix">{{ h.description|safe }}</i>
+                    {{ h(onChange= h.description) }}
+                {% else %}
+                    {{ h }}
                 {% endif %}
-                {{ h }}
             </div>
 
         {% elif h.type == 'ModelSelectField' %}
             <div class="input-field col s12 m6">
-                {% if h.description %}
-                    <i class="material-icons prefix">{{ h.description|safe }}</i>
+               {% if h.description %}
+                    {{ h(onChange= h.description) }}
+                {% else %}
+                    {{ h }}
                 {% endif %}
-                {{ h }}
             </div>
 
 
