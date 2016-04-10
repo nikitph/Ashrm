@@ -47,6 +47,8 @@ class Student(db.Document):
     school = db.StringField(required=True, max_length=20, help_text='')
     student_name = db.StringField(required=True, max_length=20, help_text='perm_identity')
     standard = db.ReferenceField(Standard, required=True)
+    section = db.StringField(required=True,
+                               choices=(('',"Student Section"),('1', "1"), ('2', "2"), ('3', "3"), ('4', "4")))
     street_address = db.StringField(required=True, help_text='location_on')
     city = db.StringField(required=True, max_length=20, help_text='location_city')
     state = db.StringField(required=True, max_length=20, help_text='navigation')

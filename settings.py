@@ -63,7 +63,7 @@ class DevConfig(Config):
     BROKER_URL = 'redis://localhost:6379/10'
     CELERY_RESULT_BACKEND = 'redis://localhost:6379/10'
     MONGODB_SETTINGS = {
-        'db': 'ashrm2'
+        'db': 'ashrm3'
     }
 
 

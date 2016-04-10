@@ -42,7 +42,24 @@
 
             </div>
 
-        {% elif not (h.widget.input_type == 'hidden' or h.type == 'ModelSelectField') %}
+        {% elif h.type == 'SelectField' %}
+                <div class="input-field col s12 m6">
+                    {% if h.description %}
+                        <i class="material-icons prefix">{{ h.description|safe }}</i>
+                    {% endif %}
+                    {{ h }}
+                </div>
+
+            {% elif h.type == 'ModelSelectField' %}
+                <div class="input-field col s12 m6">
+                    {% if h.description %}
+                        <i class="material-icons prefix">{{ h.description|safe }}</i>
+                    {% endif %}
+                    {{ h }}
+                </div>
+
+
+        {% elif not (h.widget.input_type == 'hidden') %}
             <div class="input-field col s12 m6">
                 {% if h.description %}
                     <i class="material-icons prefix">{{ h.description|safe }}</i>
