@@ -13,7 +13,6 @@ from public.models import Institute, School, Student, Standard, Parent, Scholars
 from user.models import User
 from user.utility import cruder
 
-
 bp_user = Blueprint('users', __name__, static_folder='../static')
 
 
@@ -86,7 +85,8 @@ def student():
                      'school': {'widget': wtforms.widgets.HiddenInput()},
                      'standard': {'widget': wtforms.widgets.HiddenInput()},
                      'image': {'widget': wtforms.widgets.HiddenInput()}}
-        return cruder(request, Student, 'student.html', 'student', 'Student', field_args, list_args)
+        return cruder(request, Student, 'student.html', 'student', 'Student', field_args, list_args,
+                      cache_class=Standard.objects().only('standard', 'sections').to_json())
 
     else:
         obj_form = model_form(Student)

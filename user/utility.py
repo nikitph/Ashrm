@@ -1,11 +1,12 @@
 from flask import render_template
 from flask.ext.mongoengine.wtf import model_form
+from public.models import Student
 
 __author__ = 'Omkareshwar'
 
 
 def cruder(req, usr_model_class, template, route_name, display_name, field_args=None, list_args=None,
-           key_id=''):
+           key_id='', cache_class=''):
     mode = get_mode(req)
     # 1 = c, 2= r, 3=u, 4=d, 5=l
 
@@ -16,7 +17,7 @@ def cruder(req, usr_model_class, template, route_name, display_name, field_args=
         form = usr_obj_form(req.form)
         print(form)
         return render_template(template, form=form, mode=1, routename=route_name, displayname=display_name,
-                               key_id=key_id)
+                               key_id=key_id, cache_class=cache_class)
 
     elif mode == 2:
         mod_obj = usr_model_class.objects(id=req.args.get('id')).first()
@@ -30,7 +31,7 @@ def cruder(req, usr_model_class, template, route_name, display_name, field_args=
         usr_obj_form = model_form(usr_model_class, field_args=field_args)
         form = usr_obj_form(req.form, mod_obj)
         return render_template(template, form=form, mode=3, routename=route_name, displayname=display_name,
-                               key_id=key_id)
+                               key_id=key_id, cache_class=cache_class.objects().to_json())
 
     elif mode == 4:
         mod_obj = usr_model_class.objects(id=req.args.get('id')).first()
