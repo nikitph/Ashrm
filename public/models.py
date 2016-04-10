@@ -170,3 +170,14 @@ class BulkNotification(db.Document):
     school = db.StringField(required=True, max_length=50, help_text='')
     subject = db.StringField(required=True, max_length=200, help_text='mail_outline')
     body = db.StringField(required=True, verbose_name='Notification Message', help_text='subject')
+
+
+class Conveyance(db.Document):
+    school = db.StringField(required=True, max_length=50)
+    registration_number = db.StringField(required=True, max_length=50, help_text='confirmation_number')
+    total_seats = db.StringField(required=True, max_length=5, help_text='event_seat')
+    maximum_capacity = db.StringField(required=True, max_length=50, help_text='arrow_upward')
+    person_for_contact = db.StringField(required=True, max_length=50, help_text='perm_identity')
+    contact_phone = db.StringField(required=True, max_length=50, help_text='phone')
+    other_details = db.StringField(required=True, help_text='description')
+

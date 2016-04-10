@@ -9,7 +9,7 @@ from flask.ext.mongoengine.wtf import model_form
 from tasks import email
 
 from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher, Event, \
-    BulkNotification
+    BulkNotification, Conveyance
 from user.models import User
 from user.utility import cruder
 
@@ -205,6 +205,20 @@ def event():
         obj_form = model_form(Event)
         form = obj_form(request.form)
         return redirect(url_for('.event', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/conveyance', methods=['GET', 'POST'])
+def conveyance():
+    if request.method == 'GET':
+        field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Conveyance, 'conveyance.html', 'conveyance', 'Conveyance', field_args, list_args, g.user.schoolid)
+
+    else:
+        obj_form = model_form(Conveyance)
+        form = obj_form(request.form)
+        return redirect(url_for('.conveyance', m='r', id=str(form.save().id)))
 
 
 @login_required
