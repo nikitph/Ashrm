@@ -46,17 +46,25 @@
             <div class="input-field col s12 m6">
                 {% if h.description %}
                     {{ h(onChange= h.description) }}
+                    <label>{{ h.label.text }}</label>
+
                 {% else %}
                     {{ h }}
+                    <label>{{ h.label.text }}</label>
                 {% endif %}
             </div>
 
         {% elif h.type == 'ModelSelectField' %}
             <div class="input-field col s12 m6">
-               {% if h.description %}
+                {% if h.description %}
                     {{ h(onChange= h.description) }}
+                    <label>{{ h.label.text }}</label>
+
                 {% else %}
+
                     {{ h }}
+                    <label>{{ h.label.text }}</label>
+
                 {% endif %}
             </div>
 
@@ -97,6 +105,23 @@
                     {% endfor %}
                 </p>
             </div>
+
+        {% elif h.type == 'SelectField' %}
+            <div class="input-field col s12 m6">
+              {{ h.label(class='active') }}
+                {{ h(disabled='') }}
+            </div>
+
+        {% elif h.type == 'ModelSelectField' %}
+            <div class="input-field col s12 m6">
+
+                {{ h.label(class='active') }}
+
+                {{ h(disabled='') }}
+
+            </div>
+
+
 
         {% elif not (h.widget.input_type == 'hidden' or h.type == 'ModelSelectField') %}
             <div class="input-field col s12 m6">
@@ -153,8 +178,34 @@
 
             </div>
 
+            {% elif h.type == 'SelectField' %}
+            <div class="input-field col s12 m6">
+                {% if h.description %}
+                    {{ h(onChange= h.description) }}
+                    <label>{{ h.label.text }}</label>
 
-        {% elif not (h.widget.input_type == 'hidden' or h.type == 'ModelSelectField') %}
+                {% else %}
+                    {{ h }}
+                    <label>{{ h.label.text }}</label>
+                {% endif %}
+            </div>
+
+        {% elif h.type == 'ModelSelectField' %}
+            <div class="input-field col s12 m6">
+                {% if h.description %}
+                    {{ h(onChange= h.description) }}
+                    <label>{{ h.label.text }}</label>
+
+                {% else %}
+
+                    {{ h }}
+                    <label>{{ h.label.text }}</label>
+
+                {% endif %}
+            </div>
+
+
+        {% elif not (h.widget.input_type == 'hidden') %}
             <div class="input-field col s12 m6">
 
                 {% if h.description %}

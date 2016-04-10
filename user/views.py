@@ -85,8 +85,8 @@ def student():
                      'school': {'widget': wtforms.widgets.HiddenInput()},
                      'standard': {'widget': wtforms.widgets.HiddenInput()},
                      'image': {'widget': wtforms.widgets.HiddenInput()}}
-        return cruder(request, Student, 'student.html', 'student', 'Student', field_args, list_args,
-                      cache_class=Standard.objects().to_json())
+        return cruder(request, Student, 'student.html', 'student', 'Student', field_args, list_args
+                      )
 
     else:
         obj_form = model_form(Student)
