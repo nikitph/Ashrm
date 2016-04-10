@@ -47,7 +47,8 @@ class Student(db.Document):
     school = db.StringField(required=True, max_length=20, help_text='')
     student_name = db.StringField(required=True, max_length=20, help_text='perm_identity')
     standard = db.ReferenceField(Standard, required=True, help_text='activateSlave(this);')
-    section = db.StringField(required=True, max_length=5, verbose_name='Student Section', help_text='airline_seat_legroom_extra')
+    section = db.StringField(required=True, max_length=5, verbose_name='Student Section',
+                             help_text='airline_seat_legroom_extra')
     street_address = db.StringField(required=True, help_text='location_on')
     city = db.StringField(required=True, max_length=20, help_text='location_city')
     state = db.StringField(required=True, max_length=20, help_text='navigation')
@@ -180,4 +181,20 @@ class Conveyance(db.Document):
     person_for_contact = db.StringField(required=True, max_length=50, help_text='perm_identity')
     contact_phone = db.StringField(required=True, max_length=50, help_text='phone')
     other_details = db.StringField(required=True, help_text='description')
+
+
+class Driver(db.Document):
+    school = db.StringField(required=True, max_length=50)
+    driver_name = db.StringField(required=True, max_length=50, help_text='perm_identity')
+    street_address = db.StringField(required=True, help_text='location_on')
+    city = db.StringField(required=True, max_length=20, help_text='location_city')
+    state = db.StringField(required=True, max_length=20, help_text='navigation')
+    pincode = db.StringField(required=True, max_length=20, help_text='local_parking')
+    date_of_birth = db.StringField(required=True, max_length=20, help_text='today')
+    contact_phone = db.StringField(required=True, max_length=50, help_text='phone')
+    license_number = db.StringField(required=True, max_length=50, help_text='vpn_key')
+    other_details = db.StringField(required=True, help_text='description')
+    image = db.StringField(required=False, max_length=200,
+                           default='static/img/256px-Weiser_State_Forest_Walking_Path.jpg')
+
 
