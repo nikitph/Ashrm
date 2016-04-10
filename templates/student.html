@@ -8,6 +8,38 @@
 
 {% endblock %}
 
+{% block script %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/1.3.20/store.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/defiant.js/1.3.8/defiant.min.js"></script>
+<script>
+
+
+function activateSlave(sel){
+    var key = sel.options[sel.value].text;
+    var stdsec = {{ cache_class|safe }};
+    search = JSON.search(stdsec, '//*[standard="X"]/sections');
+
+    alert(search);
+$('#two').removeAttr('disabled');
+
+var optionsAsString ='';
+    for(var i = 1; i <= search; i++) {
+    $('#two').append(  "<option value='" + i + "'>" + i + "</option>");
+}
+    $('select').material_select();
+
+}
+
+
+
+</script>
+
+
+
+
+{% endblock %}
+
 {% block subrecord %}
     {% if  mode==2 %}
 
@@ -70,6 +102,22 @@
         </div>
     </div>
 
+    <div class="input-field col s12">
+    <select id="one" onchange="activateSlave(this)">
+      <option value="" disabled selected>Choose your option</option>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+        {{ key_id }}
+    </select>
+    <label>Materialize Select</label>
+  </div>
+
+    <div class="input-field col s12">
+    <select id="two" disabled>
+    </select>
+    <label>Materialize Select</label>
+  </div>
 
 
 
