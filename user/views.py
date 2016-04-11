@@ -269,6 +269,16 @@ def busroute():
 
 
 @login_required
+@bp_user.route('/transportd', methods=['GET'])
+def transportd():
+    vehicle = Conveyance.objects().to_json()
+    driver = Driver.objects().to_json()
+    stop = BusStop.objects().to_json()
+    route = BusRoute.objects().to_json()
+    return render_template('transportd.html', vehicle=vehicle, driver=driver, stop=stop, route=route)
+
+
+@login_required
 @bp_user.route('/bulknotify', methods=['GET', 'POST'])
 def bulknotify():
     if request.method == 'GET':
