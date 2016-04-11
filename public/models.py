@@ -182,6 +182,11 @@ class Conveyance(db.Document):
     contact_phone = db.StringField(required=True, max_length=50, help_text='phone')
     other_details = db.StringField(required=True, help_text='description')
 
+    def __str__(self):
+        return self.registration_number
+
+    __rpr__ = __str__
+
 
 class Driver(db.Document):
     school = db.StringField(required=True, max_length=50)
@@ -197,6 +202,11 @@ class Driver(db.Document):
     image = db.StringField(required=False, max_length=200,
                            default='static/img/256px-Weiser_State_Forest_Walking_Path.jpg')
 
+    def __str__(self):
+        return self.driver_name
+
+    __rpr__ = __str__
+
 
 class BusStop(db.Document):
     school = db.StringField(required=True, max_length=50)
@@ -204,3 +214,17 @@ class BusStop(db.Document):
     stop_address = db.StringField(required=True, help_text='location_on')
     landmark = db.StringField(required=True, max_length=150, help_text='navigation')
     pick_up_time = db.StringField(required=True, max_length=50, help_text='hourglass_full')
+
+    def __str__(self):
+        return self.stop_name
+
+    __rpr__ = __str__
+
+
+class BusRoute(db.Document):
+    school = db.StringField(required=True, max_length=50)
+    route_name = db.StringField(required=True, max_length=50, help_text='perm_identity')
+    driver = db.ReferenceField(Driver, required=True)
+    vehicle = db.ReferenceField(Conveyance, required=True)
+    stops = db.ListField(ReferenceField(BusStop, required=True))
+
