@@ -9,7 +9,7 @@ from flask.ext.mongoengine.wtf import model_form
 from tasks import email
 
 from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher, Event, \
-    BulkNotification
+    BulkNotification, Conveyance, Driver, BusStop
 from user.models import User
 from user.utility import cruder
 
@@ -85,8 +85,8 @@ def student():
                      'school': {'widget': wtforms.widgets.HiddenInput()},
                      'standard': {'widget': wtforms.widgets.HiddenInput()},
                      'image': {'widget': wtforms.widgets.HiddenInput()}}
-        return cruder(request, Student, 'student.html', 'student', 'Student', field_args, list_args,
-                      cache_class=Standard.objects().to_json())
+        return cruder(request, Student, 'student.html', 'student', 'Student', field_args, list_args
+                      )
 
     else:
         obj_form = model_form(Student)
@@ -205,6 +205,52 @@ def event():
         obj_form = model_form(Event)
         form = obj_form(request.form)
         return redirect(url_for('.event', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/conveyance', methods=['GET', 'POST'])
+def conveyance():
+    if request.method == 'GET':
+        field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Conveyance, 'conveyance.html', 'conveyance', 'Conveyance', field_args, list_args,
+                      g.user.schoolid)
+
+    else:
+        obj_form = model_form(Conveyance)
+        form = obj_form(request.form)
+        return redirect(url_for('.conveyance', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/driver', methods=['GET', 'POST'])
+def driver():
+    if request.method == 'GET':
+        field_args = {'school': {'widget': wtforms.widgets.HiddenInput()},
+                      'image': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()},
+                     'image': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Driver, 'driver.html', 'driver', 'Driver', field_args, list_args, g.user.schoolid)
+
+    else:
+        obj_form = model_form(Driver)
+        form = obj_form(request.form)
+        return redirect(url_for('.driver', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/busstop', methods=['GET', 'POST'])
+def busstop():
+    if request.method == 'GET':
+        field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, BusStop, 'busstop.html', 'busstop', 'Bus Stop', field_args, list_args,
+                      g.user.schoolid)
+
+    else:
+        obj_form = model_form(BusStop)
+        form = obj_form(request.form)
+        return redirect(url_for('.busstop', m='r', id=str(form.save().id)))
 
 
 @login_required

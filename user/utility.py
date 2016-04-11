@@ -31,7 +31,7 @@ def cruder(req, usr_model_class, template, route_name, display_name, field_args=
         usr_obj_form = model_form(usr_model_class, field_args=field_args)
         form = usr_obj_form(req.form, mod_obj)
         return render_template(template, form=form, mode=3, routename=route_name, displayname=display_name,
-                               key_id=key_id, cache_class=cache_class.objects().to_json())
+                               key_id=key_id, cache_class=cache_class)
 
     elif mode == 4:
         mod_obj = usr_model_class.objects(id=req.args.get('id')).first()
