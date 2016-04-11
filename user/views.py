@@ -9,7 +9,7 @@ from flask.ext.mongoengine.wtf import model_form
 from tasks import email
 
 from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher, Event, \
-    BulkNotification, Conveyance, Driver
+    BulkNotification, Conveyance, Driver, BusStop
 from user.models import User
 from user.utility import cruder
 
@@ -236,6 +236,21 @@ def driver():
         obj_form = model_form(Driver)
         form = obj_form(request.form)
         return redirect(url_for('.driver', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/busstop', methods=['GET', 'POST'])
+def busstop():
+    if request.method == 'GET':
+        field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, BusStop, 'busstop.html', 'busstop', 'Bus Stop', field_args, list_args,
+                      g.user.schoolid)
+
+    else:
+        obj_form = model_form(BusStop)
+        form = obj_form(request.form)
+        return redirect(url_for('.busstop', m='r', id=str(form.save().id)))
 
 
 @login_required

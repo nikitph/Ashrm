@@ -198,3 +198,9 @@ class Driver(db.Document):
                            default='static/img/256px-Weiser_State_Forest_Walking_Path.jpg')
 
 
+class BusStop(db.Document):
+    school = db.StringField(required=True, max_length=50)
+    stop_name = db.StringField(required=True, max_length=50, help_text='perm_identity')
+    stop_address = db.StringField(required=True, help_text='location_on')
+    landmark = db.StringField(required=True, max_length=150, help_text='navigation')
+    pick_up_time = db.StringField(required=True, max_length=50, help_text='hourglass_full')
