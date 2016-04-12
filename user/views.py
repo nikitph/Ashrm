@@ -2,6 +2,7 @@ import datetime
 from flask import Blueprint, request, redirect, url_for, g, jsonify
 
 from flask.ext.security import login_required, current_user
+from flask.ext.security.script import CreateUserCommand, AddRoleCommand
 from flask.templating import render_template
 from werkzeug.utils import secure_filename
 import wtforms
@@ -10,7 +11,7 @@ from tasks import email
 
 from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher, Event, \
     BulkNotification, Conveyance, Driver, BusStop, BusRoute
-from user.models import User
+from user.models import User, Role
 from user.utility import cruder
 
 bp_user = Blueprint('users', __name__, static_folder='../static')
@@ -30,6 +31,10 @@ def index():
 @bp_user.route('/institute', methods=['GET', 'POST'])
 def institute():
     if request.method == 'GET':
+        Role(name='student').save()
+        Role(name='parent').save()
+        Role(name='teacher').save()
+        Role(name='staff').save()
         return cruder(request, Institute, 'institute.html', 'institute', 'Institute')
 
     else:
@@ -158,6 +163,8 @@ def teacher():
     else:
         obj_form = model_form(Teacher)
         form = obj_form(request.form)
+        CreateUserCommand().run(email=request.form['email'], password='234765', active=1)
+        AddRoleCommand().run(user_identifier=request.form['email'], role_name='teacher')
         return redirect(url_for('.teacher', m='r', id=str(form.save().id)))
 
 

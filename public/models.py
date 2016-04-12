@@ -138,6 +138,8 @@ class Teacher(db.Document):
     city = db.StringField(required=True, max_length=20, help_text='location_city')
     state = db.StringField(required=True, max_length=20, help_text='navigation')
     pincode = db.StringField(required=True, max_length=20, help_text='local_parking')
+    email = db.StringField(required=True, max_length=50, help_text='email')
+    phone = db.StringField(required=True, max_length=50, help_text='phone')
     school = db.StringField(required=True, max_length=100, help_text='')
 
     def __str__(self):
