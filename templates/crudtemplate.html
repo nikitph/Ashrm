@@ -30,7 +30,7 @@
                             </div>
                             <br>
 
-                            <form action="/{{ routename }}" method="post">
+                            <form action="/{{ routename }}{% if key_id %}?sid={{ key_id }}{% endif %}" method="post">
                                 {% if mode==1 %}
 
                                     {% block create_mode %}

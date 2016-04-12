@@ -230,3 +230,21 @@ class BusRoute(db.Document):
     vehicle = db.ReferenceField(Conveyance, required=True)
     stops = db.ListField(ReferenceField(BusStop, required=True))
 
+    def __str__(self):
+        return self.route_name
+
+    __rpr__ = __str__
+
+
+class Transportation(db.Document):
+    route = db.ReferenceField(BusRoute, required=True)
+    stop = db.ReferenceField(BusStop, required=True)
+    student_id = db.StringField(required=True, max_length=50, help_text='')
+
+    def save(self, *args, **kwargs):
+        super(Transportation, self).save(*args, **kwargs)
+        stu = Student.objects(id=self.student_id).first()
+        keys = {str(self.id): 'transportation'}
+        set_new = dict((("set__related__%s" % k, v) for k, v in keys.iteritems()))
+        stu.update(**set_new)
+

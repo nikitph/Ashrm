@@ -108,7 +108,7 @@
 
         {% elif h.type == 'SelectField' %}
             <div class="input-field col s12 m6">
-              {{ h.label(class='active') }}
+                {{ h.label(class='active') }}
                 {{ h(disabled='') }}
             </div>
 
@@ -123,13 +123,18 @@
 
 
 
-        {% elif not (h.widget.input_type == 'hidden' or h.type == 'ModelSelectField') %}
+        {% elif not (h.widget.input_type == 'hidden') %}
             <div class="input-field col s12 m6">
                 {% if h.description %}
                     <i class="material-icons prefix">{{ h.description|safe }}</i>
                 {% endif %}
                 {{ h.label(class='active') }}
                 {{ h(disabled='') }}
+            </div>
+
+        {% else %}
+            <div class="col s12 m6">
+                {{ h }}
             </div>
         {% endif %}
     {% endif %}
@@ -179,7 +184,7 @@
 
             </div>
 
-            {% elif h.type == 'SelectField' %}
+        {% elif h.type == 'SelectField' %}
             <div class="input-field col s12 m6">
                 {% if h.description %}
                     {{ h(onChange= h.description) }}

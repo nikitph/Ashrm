@@ -10,7 +10,7 @@ from flask.ext.mongoengine.wtf import model_form
 from tasks import email
 
 from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher, Event, \
-    BulkNotification, Conveyance, Driver, BusStop, BusRoute
+    BulkNotification, Conveyance, Driver, BusStop, BusRoute, Transportation
 from user.models import User, Role
 from user.utility import cruder
 
@@ -136,6 +136,22 @@ def award():
         obj_form = model_form(Award)
         form = obj_form(request.form)
         return redirect(url_for('.award', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/transportation', methods=['GET', 'POST'])
+def transportation():
+    if request.method == 'GET':
+        field_args = {'student_id': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'student_id': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Transportation, 'transportation.html', 'transportation',
+                      'Transportation', field_args,
+                      list_args, request.args['sid'])
+
+    else:
+        obj_form = model_form(Transportation)
+        form = obj_form(request.form)
+        return redirect(url_for('.transportation', m='r', id=str(form.save().id), sid=request.args['sid']))
 
 
 @login_required
