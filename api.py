@@ -11,7 +11,9 @@ MONGODB_SETTINGS = {
     #     'MONGO_USERNAME' : None,
     # 'MONGO_PASSWORD': None,
     'MONGO_DBNAME': 'ashrm3',
-    'DOMAIN': {'student': {}}
+    'X_DOMAINS': '*',
+    'ALLOW_OVERRIDE_HTTP_METHOD':'true',
+                   'DOMAIN': {'student': {}}
 }
 
 app = Eve(settings=MONGODB_SETTINGS)
@@ -20,6 +22,9 @@ ext = EveMongoengine(app)
 # register model to eve
 ext.add_model(Student)
 ext.add_model(BusRoute)
+ext.add_model(Standard)
+ext.add_model(Transportation)
+
 
 # let's roll
-app.run()
+app.run(port=5001)

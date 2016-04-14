@@ -237,7 +237,7 @@ class BusRoute(db.Document):
 
 
 class Transportation(db.Document):
-    route = db.ReferenceField(BusRoute, required=True)
+    route = db.ReferenceField(BusRoute, required=True, help_text='activateSlave(this);')
     stop = db.ReferenceField(BusStop, required=True)
     student_id = db.StringField(required=True, max_length=50, help_text='')
 

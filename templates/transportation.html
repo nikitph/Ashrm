@@ -6,13 +6,52 @@
         function copyTextValue() {
             var text1 = document.getElementById("student_id").value;
             var url1 = '/student?m=r';
-            document.getElementById("backlink").href = url1 + '&id=' + text1;
+            {% if mode==2 or mode==3 %}
+
+                document.getElementById("backlink").href = url1 + '&id=' + text1;
+
+            {% endif %}
         }
         $(document).ready(function () {
             $('select').material_select();
             copyTextValue();
         });
 
+
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+        function activateSlave(sel) {
+
+            var key = sel.value;
+            $('#stop').find('option').removeAttr('disabled');
+
+
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                accepts: "application/json; charset=utf-8",
+                url: 'http://127.0.0.1:5001/busroute?where={"_id": "' + key + '"}',
+                success: function (vehicles) {
+                    for (var i = 0; i < vehicles._items.length; i++) {
+                        var b = vehicles._items[i];
+                        var c = b.stops;
+                        var d = '';
+                        for (var e in c) {
+                            d += 'option[value!="' + c[e] + '"]';
+                        }
+                        $('#stop').removeAttr('disabled');
+                        $('select').material_select();
+                        $('#stop').find(d).attr('disabled', 'disabled');
+                        $('select').material_select();
+
+
+                    }
+
+                }
+            });
+
+        }
     </script>
 
 
@@ -42,7 +81,7 @@
         <div class="vertical-line"></div>
         <div class="chip green lighten-3">
             <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
-            <a href="{{ url_for('.' + routename,m='u', id=request.args.get('id')) }}">Update {{ displayname }}</a>
+            <a href="{{ url_for('.' + routename,m='u', id=request.args.get('id') , sid=request.args.get('sid')) }}">Update {{ displayname }}</a>
         </div>
 
         <div class="line-linkage"></div>
@@ -51,7 +90,7 @@
         <div class="vertical-line"></div>
         <div class="chip red lighten-2">
             <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
-            <a href="{{ url_for('.' + routename,m='d', id=request.args.get('id')) }}">Delete
+            <a href="{{ url_for('.' + routename,m='d', id=request.args.get('id'), sid=request.args.get('sid')) }}">Delete
                 {{ displayname }} </a>
         </div>
         <div class="line-linkage"></div>
@@ -68,14 +107,14 @@
 
         <div class="chip green lighten-3">
             <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
-            <a href="{{ url_for('.' + routename,m='r', id=request.args.get('id')) }}">View {{ displayname }}</a>
+            <a href="{{ url_for('.' + routename,m='r', id=request.args.get('id'), sid=request.args.get('sid')) }}">View {{ displayname }}</a>
         </div>
         <div class="line-linkage"></div>
 
         <div class="vertical-line"></div>
         <div class="chip green lighten-3">
             <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
-            <a href="{{ url_for('.' + routename,m='u', id=request.args.get('id')) }}">Update {{ displayname }}</a>
+            <a href="{{ url_for('.' + routename,m='u', id=request.args.get('id'), sid=request.args.get('sid')) }}">Update {{ displayname }}</a>
         </div>
 
         <div class="line-linkage activelink"></div>
@@ -84,7 +123,7 @@
         <div class="vertical-line"></div>
         <div class="chip red lighten-2">
             <div class="img2 center"><i class="material-icons black-text">keyboard_arrow_right</i></div>
-            <a href="{{ url_for('.' + routename,m='d', id=request.args.get('id')) }}"> Delete
+            <a href="{{ url_for('.' + routename,m='d', id=request.args.get('id'), sid=request.args.get('sid')) }}"> Delete
                 {{ displayname }} </a>
         </div>
         <div class="line-linkage"></div>
@@ -123,6 +162,13 @@
 
                 {{ h(value=key_id) }}
 
+            {% elif h.label.text =='Stop' %}
+                <div class="input-field col s12 m6">
+                    {{ h(disabled='') }}
+                    {{ h.label() }}
+
+                </div>
+
 
             {% else %}
 
@@ -136,7 +182,7 @@
     <div class="row center">
         <button class="btn white black-text btp"
                 type="submit" style="margin-bottom: -55px"
-                >Submit
+        >Submit
             <i class="material-icons right blue-text">send</i>
         </button>
 
@@ -172,7 +218,7 @@
     <div class="row center">
         <button class="btn white black-text btp"
                 type="submit" style="margin-bottom: -55px"
-                >Submit
+        >Submit
             <i class="material-icons right blue-text">send</i>
         </button>
 

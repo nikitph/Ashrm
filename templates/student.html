@@ -13,16 +13,41 @@
     <script>
 
 
-        function activateSlave(sel) {
-            var key = sel.options[sel.selectedIndex].text;
-            var stdsec = {{ cache_class|safe }};
-            search = JSON.search(stdsec, '//*[standard="' + key + '"]/sections');
+        {#        function activateSlav(sel) {#}
+        {#            var key = sel.options[sel.selectedIndex].text;#}
+        {#            var stdsec = {{ cache_class|safe }};#}
+        {#            search = JSON.search(stdsec, '//*[standard="' + key + '"]/sections');#}
+        {##}
+        {#            $('#section').removeAttr('disabled');#}
+        {##}
+        {#        }#}
 
-            $('#section').removeAttr('disabled');
+
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+        function activateSlave(sel) {
+
+            var key = sel.options[sel.selectedIndex].text;
+
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                accepts: "application/json; charset=utf-8",
+                url: 'http://127.0.0.1:5001/standard?where={"standard": "' + key + '"}',
+                success: function (vehicles) {
+                    for (var i = 0; i < vehicles._items.length; i++) {
+                        var b = vehicles._items[i];
+                        $('#section').removeAttr('disabled');
+                        var url1 = '/conveyance?m=r&id=' + b._id;
+                        $('#section').attr('value', '');
+                        $('#section').attr('placeholder', 'Acceptable values are 1 to ' + b.sections);
+                    }
+
+                }
+            });
 
         }
-
-
     </script>
 
 
@@ -50,7 +75,8 @@
                            data-tooltip="Add Award" href="{{ url_for('.award', sid=request.args['id']) }}"><i
                             class="material-icons">grade</i></a></li>
                     <li><a class="btn-floating red tooltipped" data-position="right" data-delay="20"
-                           data-tooltip="Add Transportation" href="{{ url_for('.transportation', sid=request.args['id']) }}"><i
+                           data-tooltip="Add Transportation"
+                           href="{{ url_for('.transportation', sid=request.args['id'],m='c') }}"><i
                             class="material-icons">directions_bus</i></a></li>
                 </ul>
             </div>
@@ -86,14 +112,14 @@
 
             {% elif h.label.text =='Student Section' %}
                 <div class="input-field col s12 m6">
-                {% if h.description %}
-                    <i class="material-icons prefix">{{ h.description|safe }}</i>
-                {% endif %}
+                    {% if h.description %}
+                        <i class="material-icons prefix">{{ h.description|safe }}</i>
+                    {% endif %}
 
-                    {{ h(disabled='') }}
-                {{ h.label(class='active') }}
+                    {{ h(disabled='', value=' ') }}
+                    {{ h.label() }}
 
-            </div>
+                </div>
 
             {% else %}
                 {{ renderer(h, mode) }}
@@ -179,7 +205,7 @@
     <div class="row center">
         <button class="btn white black-text btp"
                 type="submit" style="margin-bottom: -55px"
-                >Submit
+        >Submit
             <i class="material-icons right blue-text">send</i>
         </button>
 
