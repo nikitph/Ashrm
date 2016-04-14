@@ -253,3 +253,33 @@ class Transportation(db.Document):
         keys = {str(self.id): 'transportation'}
         set_new = dict((("set__related__%s" % k, v) for k, v in keys.iteritems()))
         stu.update(**set_new)
+
+
+class Hostel(db.Document):
+    school = db.StringField(required=True, max_length=50)
+    hostel_name = db.StringField(required=True, max_length=50, help_text='hotel')
+    street_address = db.StringField(required=True, help_text='location_on')
+    city = db.StringField(required=True, max_length=20, help_text='location_city')
+    state = db.StringField(required=True, max_length=20, help_text='navigation')
+    pincode = db.StringField(required=True, max_length=20, help_text='local_parking')
+    phone = db.StringField(required=True, max_length=50, help_text='phone', verbose_name='Hostel Phone')
+    warden_name = db.StringField(required=True, max_length=50, help_text='perm_identity')
+    warden_phone = db.StringField(required=True, max_length=50, help_text='phone', verbose_name='Warden Phone')
+
+    def __str__(self):
+        return self.hostel_name
+
+    __rpr__ = __str__
+
+
+class HostelRoom(db.Document):
+    school = db.StringField(required=True, max_length=50)
+    hostel = db.ReferenceField(Hostel, required=True)
+    room_id = db.StringField(required=True, max_length=50, help_text='perm_identity')
+    floor = db.StringField(required=True, max_length=50, help_text='view_agenda')
+    total_beds = db.StringField(required=True, max_length=50, help_text='hotel')
+
+    def __str__(self):
+        return self.room_id
+
+    __rpr__ = __str__

@@ -10,7 +10,7 @@ from flask.ext.mongoengine.wtf import model_form
 from tasks import email
 
 from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher, Event, \
-    BulkNotification, Conveyance, Driver, BusStop, BusRoute, Transportation
+    BulkNotification, Conveyance, Driver, BusStop, BusRoute, Transportation, Hostel
 from user.models import User, Role
 from user.utility import cruder
 
@@ -327,6 +327,21 @@ def bulknotify():
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ['jpg', 'jpeg']
+
+
+@login_required
+@bp_user.route('/hostel', methods=['GET', 'POST'])
+def hostel():
+    if request.method == 'GET':
+        field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, Hostel, 'hostel.html', 'hostel', 'Hostel', field_args, list_args,
+                      g.user.schoolid)
+
+    else:
+        obj_form = model_form(Hostel)
+        form = obj_form(request.form)
+        return redirect(url_for('.hostel', m='r', id=str(form.save().id)))
 
 
 @bp_user.route('/status/<task_id>')
