@@ -143,7 +143,6 @@ class Teacher(db.Document):
     school = db.StringField(required=True, max_length=100, help_text='')
     subjects = db.ListField(ReferenceField(Subject, required=True))
 
-
     def __str__(self):
         return self.teacher_name
 
@@ -169,6 +168,11 @@ class Event(db.Document):
     event_for = db.StringField(required=True, verbose_name='Event is for',
                                choices=(('1', "Everyone"), ('2', "Students"), ('3', "Faculty"), ('4', "Parents")))
     description = db.StringField(required=True, help_text='description')
+
+    def __str__(self):
+        return self.event_name
+
+    __rpr__ = __str__
 
 
 class BulkNotification(db.Document):
@@ -249,4 +253,3 @@ class Transportation(db.Document):
         keys = {str(self.id): 'transportation'}
         set_new = dict((("set__related__%s" % k, v) for k, v in keys.iteritems()))
         stu.update(**set_new)
-
