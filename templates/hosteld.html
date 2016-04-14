@@ -1,0 +1,69 @@
+{% extends "template.html" %}
+
+{% block script %}
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            var hostel = {{ hostel|safe }};
+            $('#hostels').append('<a href=' + '/hostel?m=c' + ' class="collection-item red-text">' + '<i class="material-icons red-text">add</i>Add Hostel' + '</a>');
+
+            var rooms = {{ room|safe }};
+            $('#rooms').append('<a href=' + '/hostelroom?m=c' + ' class="collection-item red-text">' + '<i class="material-icons red-text">add</i>Add Room' + '</a>');
+
+            for (var i = 0; i < hostel.length; i++) {
+                var b = hostel[i];
+                var url1 = '/hostel?m=r&id=' + b._id.$oid;
+
+                $('#hostels').append('<a href=' + url1 + ' class="collection-item">' + b.hostel_name + '</a>');
+            }
+
+            for (var i = 0; i < rooms.length; i++) {
+                var b = rooms[i];
+                var url1 = '/hostelroom?m=r&id=' + b._id.$oid;
+
+                $('#rooms').append('<a href=' + url1 + ' class="collection-item">' + b.room_id + '</a>');
+            }
+
+        });
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="section">
+
+
+        <!--   Icon Section   -->
+        <div class="row">
+            <div class="col s6 m6 center">
+                <div class="icon-block center">
+
+                    <a href="{{ url_for('.hostel', m='l')}}"><i class="material-icons large red lighten-3 white-text">location_city</i></a>
+
+                </div>
+                <div class="red-text text-lighten-1 text">Hostel Information</div>
+                <br>
+                <div id="hostels" class="collection">
+
+                </div>
+
+            </div>
+
+            <div class="col s6 m6 center">
+                <div class="icon-block center">
+
+                    <a href="{{ url_for('.hostelroom', m='l')}}"><i class="material-icons large red lighten-3 white-text">hotel</i></a>
+
+                </div>
+                <div class="red-text text-lighten-1 text">Room Information</div>
+                <br>
+                <div id="rooms" class="collection">
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+{% endblock %}

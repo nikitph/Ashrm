@@ -10,7 +10,7 @@ from flask.ext.mongoengine.wtf import model_form
 from tasks import email
 
 from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher, Event, \
-    BulkNotification, Conveyance, Driver, BusStop, BusRoute, Transportation, Hostel
+    BulkNotification, Conveyance, Driver, BusStop, BusRoute, Transportation, Hostel, HostelRoom
 from user.models import User, Role
 from user.utility import cruder
 
@@ -330,6 +330,14 @@ def allowed_file(filename):
 
 
 @login_required
+@bp_user.route('/hosteld', methods=['GET'])
+def hosteld():
+    hostels = Hostel.objects().to_json()
+    room = HostelRoom.objects().to_json()
+    return render_template('hosteld.html', hostel=hostels, room=room)
+
+
+@login_required
 @bp_user.route('/hostel', methods=['GET', 'POST'])
 def hostel():
     if request.method == 'GET':
@@ -342,6 +350,22 @@ def hostel():
         obj_form = model_form(Hostel)
         form = obj_form(request.form)
         return redirect(url_for('.hostel', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/hostelroom', methods=['GET', 'POST'])
+def hostelroom():
+    if request.method == 'GET':
+        field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()},
+                     'hostel': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, HostelRoom, 'hostelroom.html', 'hostelroom', 'Hostel Room', field_args, list_args,
+                      g.user.schoolid)
+
+    else:
+        obj_form = model_form(HostelRoom)
+        form = obj_form(request.form)
+        return redirect(url_for('.hostelroom', m='r', id=str(form.save().id)))
 
 
 @bp_user.route('/status/<task_id>')

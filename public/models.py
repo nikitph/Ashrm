@@ -1,3 +1,4 @@
+from bson import json_util
 from mongoengine import EmbeddedDocumentField, ListField, Document, DynamicDocument, ReferenceField
 from wtforms import FieldList, StringField
 from extensions import db
@@ -283,3 +284,9 @@ class HostelRoom(db.Document):
         return self.room_id
 
     __rpr__ = __str__
+
+    def to_json(self, *args, **kwargs):
+        data = self.to_mongo()
+        data["hostel"] = {"Hostel": {"hostel_name": self.hostel.hostel_name}}
+        return json_util.dumps(data, *args, **kwargs)
+
