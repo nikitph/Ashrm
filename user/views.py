@@ -173,7 +173,8 @@ def subject():
 def teacher():
     if request.method == 'GET':
         field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
-        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()},
+                     'subjects': {'widget': wtforms.widgets.HiddenInput()}}
         return cruder(request, Teacher, 'teacher.html', 'teacher', 'Teacher', field_args, list_args)
 
     else:

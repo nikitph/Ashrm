@@ -141,6 +141,8 @@ class Teacher(db.Document):
     email = db.StringField(required=True, max_length=50, help_text='email')
     phone = db.StringField(required=True, max_length=50, help_text='phone')
     school = db.StringField(required=True, max_length=100, help_text='')
+    subjects = db.ListField(ReferenceField(Subject, required=True))
+
 
     def __str__(self):
         return self.teacher_name
