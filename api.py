@@ -24,6 +24,8 @@ ext.add_model(Student)
 ext.add_model(BusRoute)
 ext.add_model(Standard)
 ext.add_model(Transportation)
+ext.add_model(HostelRoom)
+
 
 
 # let's roll

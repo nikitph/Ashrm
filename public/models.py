@@ -301,5 +301,15 @@ class HostelRoom(db.Document):
         return json_util.dumps(data, *args, **kwargs)
 
 
+class HostelAssignment(db.Document):
+    hostel = db.ReferenceField(Hostel, required=True, help_text='activateSlave(this);')
+    room = db.ReferenceField(HostelRoom, required=True)
+    student_id = db.StringField(required=True, max_length=50, help_text='')
 
+    def save(self, *args, **kwargs):
+        super(HostelAssignment, self).save(*args, **kwargs)
+        stu = Student.objects(id=self.student_id).first()
+        keys = {str(self.id): 'hostel'}
+        set_new = dict((("set__related__%s" % k, v) for k, v in keys.iteritems()))
+        stu.update(**set_new)
 
