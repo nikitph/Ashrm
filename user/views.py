@@ -357,8 +357,7 @@ def hostel():
 def hostelroom():
     if request.method == 'GET':
         field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
-        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()},
-                     'hostel': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
         return cruder(request, HostelRoom, 'hostelroom.html', 'hostelroom', 'Hostel Room', field_args, list_args,
                       g.user.schoolid)
 

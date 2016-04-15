@@ -1,7 +1,15 @@
 from bson import json_util
-from mongoengine import EmbeddedDocumentField, ListField, Document, DynamicDocument, ReferenceField
+from mongoengine import EmbeddedDocumentField, ListField, Document, DynamicDocument, ReferenceField, QuerySet
 from wtforms import FieldList, StringField
 from extensions import db
+
+
+class CustomQuerySet(QuerySet):
+    def map_reduce(self, map_f, reduce_f, output, finalize_f=None, limit=None, scope=None):
+        pass
+
+    def to_json(self):
+        return "[%s]" % (",".join([doc.to_json() for doc in self]))
 
 
 class Institute(db.Document):
@@ -285,8 +293,13 @@ class HostelRoom(db.Document):
 
     __rpr__ = __str__
 
+    meta = {'queryset_class': CustomQuerySet}
+
     def to_json(self, *args, **kwargs):
         data = self.to_mongo()
-        data["hostel"] = {"Hostel": {"hostel_name": self.hostel.hostel_name}}
+        data["hostel"] = self.hostel.hostel_name
         return json_util.dumps(data, *args, **kwargs)
+
+
+
 
