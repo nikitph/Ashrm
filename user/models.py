@@ -12,6 +12,13 @@ class Role(db.Document, RoleMixin):
         return '%s' % self.name
 
 
+class Notification(db.EmbeddedDocument):
+    subject = db.StringField(max_length=1000)
+    url = db.StringField(max_length=1500)
+    read = db.BooleanField(default=False)
+
+
+
 class User(UserMixin, db.Document):
     created_at = db.DateTimeField(default=datetime.datetime.now, required=True)
     email = db.StringField(max_length=255, required=True)
@@ -25,6 +32,7 @@ class User(UserMixin, db.Document):
     address = db.StringField(max_length=255, required=False, default='')
     school = db.StringField(max_length=255, required=False, default='')
     schoolid = db.StringField(max_length=255, required=False, default='')
+    notif = db.ListField(db.EmbeddedDocumentField(Notification))
     roles = db.ListField(db.ReferenceField(Role), default=[])
     #email confirmation
     confirmed_at = db.DateTimeField()
@@ -53,6 +61,8 @@ class User(UserMixin, db.Document):
         'indexes': ['-created_at', 'email', 'username'],
         'ordering': ['-created_at']
     }
+
+
 
 
 

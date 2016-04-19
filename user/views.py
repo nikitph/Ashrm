@@ -12,7 +12,7 @@ from tasks import email
 
 from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher, Event, \
     BulkNotification, Conveyance, Driver, BusStop, BusRoute, Transportation, Hostel, HostelRoom, HostelAssignment
-from user.models import User, Role
+from user.models import User, Role, Notification
 from user.utility import cruder
 
 bp_user = Blueprint('users', __name__, static_folder='../static')
@@ -29,8 +29,8 @@ def index():
 
 
 @bp_user.route('/send')
-def send_message(sub, idt):
-    sse.publish({"subject": sub, "id": idt}, type='greeting')
+def send_message():
+    sse.publish({"subject": '1', "id": '2'}, type='greeting')
     return "Message sent!"
 
 
@@ -341,6 +341,10 @@ def bulknotify():
         x = Student.objects.only('email')
         rcp = []
         sse.publish({"subject": form['subject'].data, "id" : id}, type='greeting')
+        notif = Notification(subject=form['subject'].data, url=id)
+        User.objects(id=g.user.get_id()).update_one(add_to_set__notif=notif)
+        g.user.reload()
+
 
         for s in x:
             rcp.append(str(s.email))

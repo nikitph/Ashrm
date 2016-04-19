@@ -3,6 +3,7 @@ from eve_mongoengine import EveMongoengine
 
 # init application
 from public.models import *
+from user.models import User
 
 MONGODB_SETTINGS = {
 
@@ -13,6 +14,7 @@ MONGODB_SETTINGS = {
     'MONGO_DBNAME': 'ashrm3',
     'X_DOMAINS': '*',
     'ALLOW_OVERRIDE_HTTP_METHOD':'true',
+    'JSON_SORT_KEYS	':'true',
                    'DOMAIN': {'student': {}}
 }
 
@@ -25,8 +27,9 @@ ext.add_model(BusRoute)
 ext.add_model(Standard)
 ext.add_model(Transportation)
 ext.add_model(HostelRoom)
+ext.add_model(User)
 
 
 
 # let's roll
-app.run(port=5001)
+app.run(host='0.0.0.0', port=5001)
