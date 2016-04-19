@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, render_template
+from flask_sse import sse
 from jinja2 import is_undefined
 from settings import ProdConfig
 from flask.ext.security import Security, MongoEngineUserDatastore
@@ -68,6 +69,7 @@ def register_extensions(app):
 def register_blueprints(app):
     app.register_blueprint(bp_public)
     app.register_blueprint(bp_user)
+    app.register_blueprint(sse, url_prefix='/stream')
     print(app.url_map)
     return None
 

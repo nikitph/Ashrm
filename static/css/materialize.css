@@ -5262,7 +5262,7 @@ span.badge {
   font-size: 1rem;
   line-height: inherit;
   color: #757575;
-  position: absolute;
+  position: relative;
   right: 15px;
   box-sizing: border-box;
 }
@@ -5270,11 +5270,11 @@ span.badge.new {
   font-weight: 300;
   font-size: 0.8rem;
   color: #fff;
-  background-color: #26a69a;
+  background-color: #2196f3;
   border-radius: 2px;
 }
 span.badge.new:after {
-  content: " new";
+  content: "";
 }
 
 nav ul a span.badge {

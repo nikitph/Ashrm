@@ -2214,13 +2214,41 @@
   border-bottom: 1px solid #bdbdbd;
 }
 .topbar .action-menu .institute-name {
-  flex-basis: 85%;
+  flex-basis: 80%;
   margin: auto;
   font-family: 'Ubuntu', "Avenir", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
   font-size: 16px;
   letter-spacing: 2px;
   font-weight: 300;
   color: #8b0000;
+}
+.topbar .action-menu .notifier {
+  flex-basis: 8%;
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin-left: -30px;
+  padding: 8px;
+}
+.topbar .action-menu .notifier i {
+  font-size: 2.0rem;
+  font-weight: 200;
+  color: rgba(0, 0, 0, 0.4);
+}
+.topbar .action-menu .notifier #dropdown3 > li.collection-item {
+  background-color: #fff;
+  line-height: 1rem;
+  padding: 4px 4px;
+  margin: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+.topbar .action-menu .notifier #dropdown3 > li {
+  clear: both;
+  color: rgba(0, 0, 0, 0.87);
+  cursor: pointer;
+  line-height: 1.0rem;
+  width: 100%;
+  text-align: left;
+  text-transform: none;
 }
 .topbar .action-menu .name-menu {
   flex-shrink: 0;
@@ -2240,7 +2268,7 @@
   padding: 0;
 }
 .topbar .action-menu .signoff {
-  flex-basis: 5%;
+  flex-basis: 2%;
   margin: auto;
   padding: 8px;
 }

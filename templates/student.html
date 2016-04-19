@@ -9,22 +9,7 @@
 {% endblock %}
 
 {% block script %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/defiant.js/1.3.8/defiant.min.js"></script>
-    <script>
-
-
-        {#        function activateSlav(sel) {#}
-        {#            var key = sel.options[sel.selectedIndex].text;#}
-        {#            var stdsec = {{ cache_class|safe }};#}
-        {#            search = JSON.search(stdsec, '//*[standard="' + key + '"]/sections');#}
-        {##}
-        {#            $('#section').removeAttr('disabled');#}
-        {##}
-        {#        }#}
-
-
-    </script>
-
+    <script src="/static/js/rivets.bundled.min.js"></script>
     <script type="text/javascript" charset="utf-8">
         function activateSlave(sel) {
 
@@ -49,6 +34,21 @@
 
         }
     </script>
+
+
+{#    <script type="text/javascript">#}
+{#        $(document).ready(function () {#}
+{#            // We define a simple model, with some properties#}
+{#            model = {#}
+{#                name: "Ariel",#}
+{#                lastname: "Ortega",#}
+{#                age: 10,#}
+{#                enabled: false#}
+{#            };#}
+{#            // We indicate the DOM element where the model rivets must bindear#}
+{#            rivets.bind($("#view"), model);#}
+{#        });#}
+{#    </script>#}
 
 
 
@@ -107,6 +107,22 @@
 
 {% block create_mode %}
     <!-- Modal Structure -->
+{##}
+{#    <div id="view">#}
+{#        <! - The RV- * attributes indicate a direct relationship between the model and the HTML element ->#}
+{#        <div rv-text="name"></div>#}
+{#        <! - Rv-text indicates that the property must set rivets is text ->#}
+{#        <div rv-text="lastname"></div>#}
+{#        <! - In this case rivets placed the value of the age property of the model in the text of this element ->#}
+{#        <div rv-text="age"></div>#}
+{#        <input rv-value="name">#}
+{#        <label>#}
+{#            <input type="checkbox" rv-checked="enabled">#}
+{#        </label>#}
+{##}
+{#        <button rv-show="enabled">Remove</button>#}
+{##}
+{#    </div>#}
 
 
     <div class="row">

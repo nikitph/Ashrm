@@ -595,7 +595,7 @@ span.badge {
   font-size: 1rem;
   line-height: inherit;
   color: color('grey', 'darken-1');
-  position: absolute;
+  position: relative;
   right: 15px;
   box-sizing: border-box;
 
@@ -603,11 +603,11 @@ span.badge {
     font-weight: 300;
     font-size: 0.8rem;
     color: #fff;
-    background-color: $badge-bg-color;
+    background-color: rgb(33, 150, 243);
     border-radius: 2px;
   }
   &.new:after {
-    content: " new";
+    content: "";
   }
 }
 nav ul a span.badge {

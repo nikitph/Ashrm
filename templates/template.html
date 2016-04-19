@@ -47,6 +47,7 @@
 
         });
     </script>
+
     {% block script %}
 
 
@@ -130,6 +131,18 @@
             {{ g.user.get_school() }}
 
         </div>
+
+        <div class="notifier center" style="margin: auto">
+
+            <a href="#!"><i class="material-icons dropdown-button" data-activates='dropdown3'
+               data-alignment="right">notifications</i></a>
+            <span class="new badge" id="noti"></span>
+            <ul id='dropdown3' class='dropdown-content-topbar collection'>
+                <li class="center collection-item">
+                    <a href="#!" class="center">Notifications</a></li>
+            </ul>
+
+        </div>
         <div class="name-menu">
 
 
@@ -140,8 +153,9 @@
                 <i class="material-icons dropdown-button" data-activates='dropdown2' data-alignment="right">keyboard_arrow_down</i>
                 <ul id='dropdown2' class='dropdown-content-topbar'>
                     <li>
-                        <a href="#!">{% if g.user.first_name %} {{ g.user.first_name.capitalize() }} {% endif %} {% if g.user.last_name %}
-                            {{ g.user.last_name.capitalize() }} {% endif %}</a></li>
+                        <a href="#!">{% if g.user.first_name %} {{ g.user.first_name.capitalize() }} {% endif %}
+                            {% if g.user.last_name %}
+                                {{ g.user.last_name.capitalize() }} {% endif %}</a></li>
                     <li class="divider"></li>
                     <li class="center"><a href="{{ url_for('.profile') }}" class="center">Edit Profile</a></li>
                     <li class="center"><a href="/logout" class="center">Logout</a></li>
@@ -209,6 +223,16 @@
 </div>
 
 </body>
+<script>
+
+        var source = new EventSource("{{ url_for('sse.stream') }}");
+        source.addEventListener('greeting', function (event) {
+            var data = JSON.parse(event.data);
+            $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + data.id + ' class="collection-item">' + data.subject + ' </a>');
+            $('#noti').text('5');
+        }, false);
+
+    </script>
 </html>
 
 

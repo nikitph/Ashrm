@@ -61,6 +61,7 @@ class DevConfig(Config):
     ASSETS_DEBUG = True  # Don't bundle/minify static assets
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
     BROKER_URL = 'redis://localhost:6379/10'
+    REDIS_URL = 'redis://localhost:6379/10'
     CELERY_RESULT_BACKEND = 'redis://localhost:6379/10'
     MONGODB_SETTINGS = {
         'db': 'ashrm3'

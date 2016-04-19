@@ -3,6 +3,7 @@ from flask import Blueprint, request, redirect, url_for, g, jsonify
 
 from flask.ext.security import login_required, current_user
 from flask.ext.security.script import CreateUserCommand, AddRoleCommand
+from flask.ext.sse import sse
 from flask.templating import render_template
 from werkzeug.utils import secure_filename
 import wtforms
@@ -25,6 +26,12 @@ def before_request():
 @bp_user.route('/')
 def index():
     return render_template('index.html')
+
+
+@bp_user.route('/send')
+def send_message(sub, idt):
+    sse.publish({"subject": sub, "id": idt}, type='greeting')
+    return "Message sent!"
 
 
 @login_required
@@ -333,6 +340,7 @@ def bulknotify():
         id = str(form.save().id)
         x = Student.objects.only('email')
         rcp = []
+        sse.publish({"subject": form['subject'].data, "id" : id}, type='greeting')
 
         for s in x:
             rcp.append(str(s.email))
