@@ -1,7 +1,7 @@
 import datetime
 from flask import Blueprint, request, redirect, url_for, g, jsonify
 
-from flask.ext.security import login_required, current_user
+from flask.ext.security import login_required, current_user, roles_required
 from flask.ext.security.script import CreateUserCommand, AddRoleCommand
 from flask.ext.sse import sse
 from flask.templating import render_template
@@ -35,6 +35,7 @@ def send_message():
 
 
 @login_required
+@roles_required('admin')
 @bp_user.route('/institute', methods=['GET', 'POST'])
 def institute():
     if request.method == 'GET':
