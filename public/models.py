@@ -64,7 +64,7 @@ class Student(db.Document):
     pincode = db.StringField(required=True, max_length=20, help_text='local_parking')
     phone = db.StringField(required=True, max_length=20, help_text='phone')
     email = db.StringField(required=True, max_length=20, help_text='email')
-    date_of_birth = db.StringField(required=True, max_length=20, help_text='today')
+    date_of_birth = db.StringField(required=True, max_length=20, help_text='cake')
     related = db.DictField(required=False)
     image = db.StringField(required=False, max_length=200,
                            default='static/img/256px-Weiser_State_Forest_Walking_Path.jpg')
@@ -212,7 +212,7 @@ class Driver(db.Document):
     city = db.StringField(required=True, max_length=20, help_text='location_city')
     state = db.StringField(required=True, max_length=20, help_text='navigation')
     pincode = db.StringField(required=True, max_length=20, help_text='local_parking')
-    date_of_birth = db.StringField(required=True, max_length=20, help_text='today')
+    date_of_birth = db.StringField(required=True, max_length=20, help_text='cake')
     contact_phone = db.StringField(required=True, max_length=50, help_text='phone')
     license_number = db.StringField(required=True, max_length=50, help_text='vpn_key')
     other_details = db.StringField(required=True, help_text='description')
