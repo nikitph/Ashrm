@@ -10,8 +10,7 @@ import wtforms
 from flask.ext.mongoengine.wtf import model_form
 from tasks import email
 
-from public.models import Institute, School, Student, Standard, Parent, Scholarship, Award, Subject, Teacher, Event, \
-    BulkNotification, Conveyance, Driver, BusStop, BusRoute, Transportation, Hostel, HostelRoom, HostelAssignment
+from public.models import *
 from user.models import User, Role, Notification
 from user.utility import cruder
 
@@ -394,6 +393,23 @@ def hostelroom():
         obj_form = model_form(HostelRoom)
         form = obj_form(request.form)
         return redirect(url_for('.hostelroom', m='r', id=str(form.save().id)))
+
+
+@login_required
+@bp_user.route('/classroom', methods=['GET', 'POST'])
+def classroom():
+    if request.method == 'GET':
+        field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
+        list_args = {'school': {'widget': wtforms.widgets.HiddenInput()},
+                     'subjects': {'widget': wtforms.widgets.HiddenInput()},
+                     'students': {'widget': wtforms.widgets.HiddenInput()}}
+        return cruder(request, ClassRoom, 'classroom.html', 'classroom', 'Class Room', field_args, list_args,
+                      g.user.schoolid)
+
+    else:
+        obj_form = model_form(ClassRoom)
+        form = obj_form(request.form)
+        return redirect(url_for('.classroom', m='r', id=str(form.save().id)))
 
 
 @bp_user.route('/status/<task_id>')

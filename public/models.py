@@ -313,3 +313,22 @@ class HostelAssignment(db.Document):
         set_new = dict((("set__related__%s" % k, v) for k, v in keys.iteritems()))
         stu.update(**set_new)
 
+
+class ClassRoom(db.Document):
+    school = db.StringField(required=True, max_length=50)
+    class_name = db.StringField(required=True, max_length=50)
+    class_teacher = db.ReferenceField(Teacher, required=True)
+    subjects = ListField(ReferenceField(Subject), required=True)
+    students = ListField(ReferenceField(Student), required=True)
+
+    def __str__(self):
+        return self.class_name
+
+    __rpr__ = __str__
+
+    meta = {'queryset_class': CustomQuerySet}
+
+    def to_json(self, *args, **kwargs):
+        data = self.to_mongo()
+        data["class_teacher"] = self.class_teacher.teacher_name
+        return json_util.dumps(data, *args, **kwargs)
