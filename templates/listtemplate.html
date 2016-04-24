@@ -18,7 +18,7 @@
                             <tr>
                                 {% for x in form %}
                                     {% if not x.widget.input_type == 'hidden' %}
-                                        <th>{{ x.label.text }}</th>
+                                        <th class="sort" data-sort='{{ x.name }}'>{{ x.label.text }}</th>
                                     {% endif %}
                                 {% endfor %}
                             </tr>
