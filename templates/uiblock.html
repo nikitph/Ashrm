@@ -1,6 +1,6 @@
 {% if mode==1 %}
 
-    <div class="chip white-text">
+    <div class="chip blue white-text">
         Create {{ displayname }}
     </div>
     <div class="line-linkage activelink"></div>
@@ -10,13 +10,13 @@
 
 {% if mode==2 %}
 
-    <div class="chip green lighten-3">
+    <div class="chip blue white-text">
         View {{ displayname }}
     </div>
     <div class="line-linkage activelink"></div>
 
     <div class="vertical-line"></div>
-    <div class="chip green lighten-3">
+    <div class="chip blue white-text">
         <a href="{{ url_for('.' + routename,m='u', id=request.args.get('id')) }}">Update {{ displayname }}</a>
     </div>
 
@@ -35,13 +35,13 @@
 
 {% if mode==3 %}
 
-    <div class="chip green lighten-3">
+    <div class="chip blue white-text">
         <a href="{{ url_for('.' + routename,m='r', id=request.args.get('id')) }}">View {{ displayname }}</a>
     </div>
     <div class="line-linkage"></div>
 
     <div class="vertical-line"></div>
-    <div class="chip green lighten-3">
+    <div class="chip blue white-text">
         Update {{ displayname }}
     </div>
 
