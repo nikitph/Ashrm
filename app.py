@@ -14,6 +14,7 @@ from extensions import (
     db,
     mail,
     debug_toolbar,
+    socketio
 )
 from public.views import bp_public
 from user.views import bp_user
@@ -52,6 +53,7 @@ def register_extensions(app):
     user_datastore = MongoEngineUserDatastore(db, User, Role)
     security = Security(app, user_datastore, register_form=ExtendedRegisterForm)
     mail.init_app(app)
+    socketio.init_app(app)
     app.config['DEBUG_TB_PANELS'] = ['flask.ext.mongoengine.panels.MongoDebugPanel',
                                      'flask_debugtoolbar.panels.versions.VersionDebugPanel',
                                      'flask_debugtoolbar.panels.timer.TimerDebugPanel',

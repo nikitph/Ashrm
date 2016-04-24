@@ -45,7 +45,7 @@
             });
             $('.modal-trigger').leanModal();
 
-             var key = '{{ g.user.get_id() }}';
+            var key = '{{ g.user.get_id() }}';
 
             $.ajax({
                 type: "GET",
@@ -55,13 +55,12 @@
                 success: function (vehicles) {
                     for (var i = 0; i < vehicles._items.length; i++) {
                         var b = vehicles._items[i].notif;
-                        for (var x=0; x < b.length; x++)
-                        {
+                        for (var x = 0; x < b.length; x++) {
                             c = b[x];
                             $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + c.url + ' class="collection-item">' + c.subject + ' </a>');
 
                         }
-            $('#noti').text(b.length);
+                        $('#noti').text(b.length);
                     }
 
                 }
@@ -69,6 +68,41 @@
 
 
         });
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            namespace = '/test'; // change to an empty string to use the global namespace
+            // the socket.io documentation recommends sending an explicit package upon connection
+            // this is specially important when using the global namespace
+            var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+            socket.on('connect', function () {
+                socket.emit('join', {room: 1});
+            });
+
+            socket.on('my response', function (msg) {
+                Materialize.toast(msg.mtotal + ': ', 1000);
+            });
+
+            socket.on('notification', function (event) {
+        var data = JSON.parse(event.data);
+        $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + data.id + ' class="collection-item">' + data.subject + ' </a>');
+        var count = parseInt($('#noti').text());
+        $('#noti').text(count + 1);
+    });
+
+
+        });
+        function submitFunc(i) {
+            namespace = '/test'; // change to an empty string to use the global namespace
+            // the socket.io documentation recommends sending an explicit package upon connection
+            // this is specially important when using the global namespace
+            var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+            socket.emit('comment', i);
+            $("#message").val('');
+        }
     </script>
 
     {% block script %}
@@ -158,7 +192,7 @@
         <div class="notifier center" style="margin: auto">
 
             <a href="#!"><i class="material-icons dropdown-button" data-activates='dropdown3'
-               data-alignment="right">notifications</i></a>
+                            data-alignment="right">notifications</i></a>
             <span class="new badge" id="noti"></span>
             <ul id='dropdown3' class='dropdown-content-topbar collection'>
                 <li class="center collection-item">
@@ -249,17 +283,17 @@
 </div>
 
 </body>
-<script>
-
-        var source = new EventSource("{{ url_for('sse.stream') }}");
-        source.addEventListener('greeting', function (event) {
-            var data = JSON.parse(event.data);
-            $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + data.id + ' class="collection-item">' + data.subject + ' </a>');
-            var count = parseInt($('#noti').text());
-            $('#noti').text(count + 1);
-        }, false);
-
-    </script>
+{#<script>#}
+{##}
+{#    var source = new EventSource("{{ url_for('sse.stream') }}");#}
+{#    source.addEventListener('greeting', function (event) {#}
+{#        var data = JSON.parse(event.data);#}
+{#        $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + data.id + ' class="collection-item">' + data.subject + ' </a>');#}
+{#        var count = parseInt($('#noti').text());#}
+{#        $('#noti').text(count + 1);#}
+{#    }, false);#}
+{##}
+{#</script>#}
 </html>
 
 

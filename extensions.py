@@ -19,3 +19,6 @@ mail = Mail()
 
 from flask.ext.debugtoolbar import DebugToolbarExtension
 debug_toolbar = DebugToolbarExtension()
+
+from flask.ext.socketio import SocketIO
+socketio = SocketIO()
