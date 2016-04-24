@@ -17,7 +17,7 @@ class Institute(db.Document):
     address = db.StringField(required=True, help_text='location_on')
     city = db.StringField(required=True, max_length=50, help_text='location_city')
     state = db.StringField(required=True, max_length=50, help_text='location_searching')
-    pincode = db.IntField(required=True)
+    pincode = db.IntField(required=True, help_text='local_parking')
     phone = db.StringField(required=True, max_length=50, help_text='phone')
     website = db.StringField(required=True, max_length=50, help_text='web')
     email = db.StringField(required=True, max_length=50, help_text='email')
@@ -31,14 +31,14 @@ class Institute(db.Document):
 class School(db.Document):
     institute = db.StringField(required=True, max_length=100, help_text='')
     user = db.StringField(required=True, max_length=50, help_text='')
-    school_name = db.StringField(required=True, max_length=50, help_text='')
-    street_address = db.StringField(required=True)
-    city = db.StringField(required=True, max_length=50, help_text='')
-    state = db.StringField(required=True, max_length=50, help_text='')
-    pincode = db.IntField(required=True)
-    phone = db.StringField(required=True, max_length=50, help_text='')
-    website = db.StringField(required=True, max_length=50, help_text='')
-    email = db.StringField(required=True, max_length=50, help_text='')
+    school_name = db.StringField(required=True, max_length=50, help_text='perm_identity')
+    street_address = db.StringField(required=True, help_text='location_on')
+    city = db.StringField(required=True, max_length=50, help_text='location_city')
+    state = db.StringField(required=True, max_length=50, help_text='navigation')
+    pincode = db.IntField(required=True, help_text='local_parking')
+    phone = db.StringField(required=True, max_length=50, help_text='phone')
+    website = db.StringField(required=True, max_length=50, help_text='website')
+    email = db.StringField(required=True, max_length=50, help_text='email')
 
 
 class Standard(db.Document):

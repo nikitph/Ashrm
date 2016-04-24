@@ -1,4 +1,5 @@
 {% extends "crudtemplate.html" %}
+{% from 'macros.html' import renderer %}
 
 
 {% block content %}
@@ -12,16 +13,19 @@
                 <div class="icon-block center">
                     <br>
 
-                    <div class="chip green lighten-3">
-                        <div class="img2 center">1</div>
-                        Institute Setup
-                    </div>
-                    <div class="line-linkage"></div>
+                    {% if mode ==1 %}
+                        <div class="chip green lighten-3">
+                            <div class="img2 center">1</div>
+                            Institute Setup
+                        </div>
+                        <div class="line-linkage"></div>
 
 
-                    <div class="vertical-line"></div>
-                    <div class="chip amber lighten-3">
-                        <div class="img2 center">2</div>
+                        <div class="vertical-line"></div>
+                    {% endif %}
+
+                    <div class="chip blue white-text">
+                        <div class="img2 center blue-text">{% if mode ==1 %}2{% else %}1{% endif %}</div>
                         School Setup
                     </div>
 
@@ -43,8 +47,14 @@
                             </div>
                             <br>
 
-                            <form action="{{ url_for('.school', s='t') }}" method="post">
-                        <div class="row">
+                            {% if mode == 1 %}
+                                <form action='{{ url_for('.school',s='t') }}' method="post">
+
+                            {% else %}
+
+                                <form action='{{ url_for('.school',s='f') }}' method="post">
+                            {% endif %}
+                            <div class="row">
 
                                 {% for h in form %}
                                     {% if h.label.text =='Institute' %}
@@ -52,36 +62,21 @@
 
                                     {% elif h.label.text =='User' %}
                                         {{ h(type='hidden',value=g.user.get_id()) }}
+                                    {% else %}
 
-                                    {% elif h.label.text == 'School Name' %}
-                                        <div class="input-field col s12 m12">
+                                        {{ renderer(h, mode) }}
 
-                                            {{ h.label }} {{ h }}
-
-                                        </div>
-
-                                    {% elif h.label.text == 'Street Address' %}
-                                        <div class="input-field col s12 m6">
-                                            {{ h.label }}
-                                            {{ h(class='materialize-textarea') }}
-
-                                        </div>
-                                   {% elif not h.widget.input_type == 'hidden' %}
-                                            <div class="input-field col s12 m6">
-                                                {{ h.label }}
-                                                {{ h }}
-                                            </div>
-                                        {% endif %}
+                                    {% endif %}
                                 {% endfor %}
                             </div>
 
-                                <div class="row center">
-                                    <button class="btn white black-text btp"
-                                            type="submit" style="margin-bottom: -55px"
-                                            >Submit
-                                        <i class="material-icons right blue-text">send</i>
-                                    </button>
-                                </div>
+                            <div class="row center">
+                                <button class="btn white black-text btp"
+                                        type="submit" style="margin-bottom: -55px"
+                                >Submit
+                                    <i class="material-icons right blue-text">send</i>
+                                </button>
+                            </div>
 
 
                             </form>

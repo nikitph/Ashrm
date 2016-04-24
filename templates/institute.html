@@ -1,4 +1,5 @@
 {% extends "crudtemplate.html" %}
+{% from 'macros.html' import renderer %}
 
 
 {% block content %}
@@ -11,18 +12,20 @@
             <div class="col s12 m3">
                 <div class="icon-block center">
 
-                    <div class="chip amber lighten-3">
-                        <div class="img2 center">1</div>
+                    <div class="chip blue white-text">
+                        <div class="img2 center blue-text">1</div>
                         Institute Setup
                     </div>
                     <div class="line-linkage activelink"></div>
 
+                    {% if mode == 1 %}
                     <div class="vertical-line"></div>
-                    <div class="chip">
-                        <div class="img2 center">2</div>
+                    <div class="chip blue white-text">
+                        <div class="img2 center blue-text">2</div>
                         School Setup
                     </div>
                     <div class="line-linkage"></div>
+                    {% endif %}
 
                 </div>
             </div>
@@ -39,39 +42,32 @@
                                 </button>
                             </div>
                             <br>
+                            {% if mode == 1 %}
+                                <form action='{{ url_for('.institute',s='t') }}' method="post">
 
-                            <form action='{{ url_for('.institute',s='t') }}' method="post">
+                            {% else %}
 
-
-                                <div class="row">
-                                    {% for h in form %}
-                                        {% if h.label.text =='School' %}
-                                            {{ h(type='hidden',value=scid) }}
-
-                                        {% elif h.label.text == 'Address' %}
-                                            <div class="input-field col s12 m6">
-                                                {{ h.label }}
-                                                {{ h(class='materialize-textarea') }}
-
-                                            </div>
-                                        {% elif not h.widget.input_type == 'hidden' %}
-                                            <div class="input-field col s12 m6">
-                                                {{ h.label }}
-                                                {{ h }}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
+                                <form action='{{ url_for('.institute',s='f') }}' method="post">
+                            {% endif %}
 
 
-                                <div class="row center">
-                                    <button class="btn white black-text btp"
-                                            type="submit" style="margin-bottom: -55px"
-                                            >Submit
-                                        <i class="material-icons right blue-text">send</i>
-                                    </button>
 
-                                </div>
+
+                            <div class="row">
+                                {% for h in form %}
+                                   {{ renderer(h,mode) }}
+                                {% endfor %}
+                            </div>
+
+
+                            <div class="row center">
+                                <button class="btn white black-text btp"
+                                        type="submit" style="margin-bottom: -55px"
+                                >Submit
+                                    <i class="material-icons right blue-text">send</i>
+                                </button>
+
+                            </div>
 
 
                             </form>

@@ -37,6 +37,13 @@ def send_message():
 
 
 @login_required
+@bp_user.route('/setupd', methods=['GET'])
+def setupd():
+    iid = School.objects(id=g.user.schoolid).only('institute').first()
+    return render_template('setupd.html', iid=str(iid.institute))
+
+
+@login_required
 @roles_required('admin')
 @bp_user.route('/institute', methods=['GET', 'POST'])
 def institute():
