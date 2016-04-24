@@ -41,10 +41,15 @@ def send_message():
 @bp_user.route('/institute', methods=['GET', 'POST'])
 def institute():
     if request.method == 'GET':
-        Role(name='student').save()
-        Role(name='parent').save()
-        Role(name='teacher').save()
-        Role(name='staff').save()
+        a = Role.objects.filter(name='student').first()
+        if a is None:
+            Role(name='student').save()
+        a = Role.objects.filter(name='parent').first()
+        if a is None:
+            Role(name='parent').save()
+        a = Role.objects.filter(name='teacher').first()
+        if a is None:
+            Role(name='teacher').save()
         return cruder(request, Institute, 'institute.html', 'institute', 'Institute')
 
     else:

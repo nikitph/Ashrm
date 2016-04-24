@@ -88,9 +88,11 @@ class Teacher(db.Document):
 
 class ClassRoom(db.Document):
     school = db.StringField(required=True, max_length=50)
-    class_name = db.StringField(required=True, max_length=50)
+    class_name = db.StringField(required=True, max_length=50, help_text='perm_identity')
     class_teacher = db.ReferenceField(Teacher, required=True)
     subjects = ListField(ReferenceField(Subject), required=True)
+    location = db.StringField(required=False, max_length=100, help_text='location_on')
+    description = db.StringField(required=False, help_text='description')
 
     def __str__(self):
         return self.class_name
