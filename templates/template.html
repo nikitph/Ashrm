@@ -87,11 +87,10 @@
             });
 
             socket.on('notification', function (event) {
-        var data = JSON.parse(event.data);
-        $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + data.id + ' class="collection-item">' + data.subject + ' </a>');
-        var count = parseInt($('#noti').text());
-        $('#noti').text(count + 1);
-    });
+                $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + event.id + ' class="collection-item">' + event.subject + ' </a>');
+                var count = parseInt($('#noti').text());
+                $('#noti').text(count + 1);
+            });
 
 
         });

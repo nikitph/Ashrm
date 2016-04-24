@@ -52,12 +52,63 @@ class Standard(db.Document):
     __rpr__ = __str__
 
 
+class Subject(db.Document):
+    code = db.StringField(required=True, max_length=50, help_text='code')
+    subject_name = db.StringField(required=True, max_length=50, help_text='book')
+    books = db.StringField(required=True, max_length=50, help_text='library_books')
+    syllabus = db.StringField(required=True, max_length=50, help_text='content_paste')
+    total_theory_hours = db.IntField(required=True, help_text='hourglass_empty')
+    class_duration = db.IntField(required=True, help_text='hourglass_full')
+    description = db.StringField(required=True, help_text='description')
+    school = db.StringField(required=True, max_length=50, help_text='')
+
+    def __str__(self):
+        return self.subject_name
+
+    __rpr__ = __str__
+
+
+class Teacher(db.Document):
+    teacher_name = db.StringField(required=True, max_length=50, help_text='perm_identity')
+    gender = db.BooleanField(required=True)
+    street_address = db.StringField(required=True, help_text='location_on')
+    city = db.StringField(required=True, max_length=20, help_text='location_city')
+    state = db.StringField(required=True, max_length=20, help_text='navigation')
+    pincode = db.StringField(required=True, max_length=20, help_text='local_parking')
+    email = db.StringField(required=True, max_length=50, help_text='email')
+    phone = db.StringField(required=True, max_length=50, help_text='phone')
+    school = db.StringField(required=True, max_length=100, help_text='')
+    subjects = db.ListField(ReferenceField(Subject, required=True))
+
+    def __str__(self):
+        return self.teacher_name
+
+    __rpr__ = __str__
+
+
+class ClassRoom(db.Document):
+    school = db.StringField(required=True, max_length=50)
+    class_name = db.StringField(required=True, max_length=50)
+    class_teacher = db.ReferenceField(Teacher, required=True)
+    subjects = ListField(ReferenceField(Subject), required=True)
+
+    def __str__(self):
+        return self.class_name
+
+    __rpr__ = __str__
+
+    meta = {'queryset_class': CustomQuerySet}
+
+    def to_json(self, *args, **kwargs):
+        data = self.to_mongo()
+        data["class_teacher"] = self.class_teacher.teacher_name
+        return json_util.dumps(data, *args, **kwargs)
+
+
 class Student(db.Document):
     school = db.StringField(required=True, max_length=20, help_text='')
     student_name = db.StringField(required=True, max_length=20, help_text='perm_identity')
-    standard = db.ReferenceField(Standard, required=True, help_text='activateSlave(this);')
-    section = db.StringField(required=True, max_length=5, verbose_name='Student Section',
-                             help_text='airline_seat_legroom_extra')
+    student_class = db.ReferenceField(ClassRoom, required=True, help_text='activateSlave(this);')
     street_address = db.StringField(required=True, help_text='location_on')
     city = db.StringField(required=True, max_length=20, help_text='location_city')
     state = db.StringField(required=True, max_length=20, help_text='navigation')
@@ -73,6 +124,13 @@ class Student(db.Document):
         return self.student_name
 
     __rpr__ = __str__
+
+    meta = {'queryset_class': CustomQuerySet}
+
+    def to_json(self, *args, **kwargs):
+        data = self.to_mongo()
+        data["student_class"] = self.student_class.class_name
+        return json_util.dumps(data, *args, **kwargs)
 
 
 class Parent(db.Document):
@@ -124,38 +182,7 @@ class Award(db.Document):
         stu.update(**set_new)
 
 
-class Subject(db.Document):
-    code = db.StringField(required=True, max_length=50, help_text='code')
-    subject_name = db.StringField(required=True, max_length=50, help_text='book')
-    books = db.StringField(required=True, max_length=50, help_text='library_books')
-    syllabus = db.StringField(required=True, max_length=50, help_text='content_paste')
-    total_theory_hours = db.IntField(required=True, help_text='hourglass_empty')
-    class_duration = db.IntField(required=True, help_text='hourglass_full')
-    description = db.StringField(required=True, help_text='description')
-    school = db.StringField(required=True, max_length=50, help_text='')
 
-    def __str__(self):
-        return self.subject_name
-
-    __rpr__ = __str__
-
-
-class Teacher(db.Document):
-    teacher_name = db.StringField(required=True, max_length=50, help_text='perm_identity')
-    gender = db.BooleanField(required=True)
-    street_address = db.StringField(required=True, help_text='location_on')
-    city = db.StringField(required=True, max_length=20, help_text='location_city')
-    state = db.StringField(required=True, max_length=20, help_text='navigation')
-    pincode = db.StringField(required=True, max_length=20, help_text='local_parking')
-    email = db.StringField(required=True, max_length=50, help_text='email')
-    phone = db.StringField(required=True, max_length=50, help_text='phone')
-    school = db.StringField(required=True, max_length=100, help_text='')
-    subjects = db.ListField(ReferenceField(Subject, required=True))
-
-    def __str__(self):
-        return self.teacher_name
-
-    __rpr__ = __str__
 
 
 class Profile(db.Document):
@@ -314,21 +341,4 @@ class HostelAssignment(db.Document):
         stu.update(**set_new)
 
 
-class ClassRoom(db.Document):
-    school = db.StringField(required=True, max_length=50)
-    class_name = db.StringField(required=True, max_length=50)
-    class_teacher = db.ReferenceField(Teacher, required=True)
-    subjects = ListField(ReferenceField(Subject), required=True)
-    students = ListField(ReferenceField(Student), required=True)
 
-    def __str__(self):
-        return self.class_name
-
-    __rpr__ = __str__
-
-    meta = {'queryset_class': CustomQuerySet}
-
-    def to_json(self, *args, **kwargs):
-        data = self.to_mongo()
-        data["class_teacher"] = self.class_teacher.teacher_name
-        return json_util.dumps(data, *args, **kwargs)

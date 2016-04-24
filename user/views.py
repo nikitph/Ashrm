@@ -405,8 +405,7 @@ def classroom():
     if request.method == 'GET':
         field_args = {'school': {'widget': wtforms.widgets.HiddenInput()}}
         list_args = {'school': {'widget': wtforms.widgets.HiddenInput()},
-                     'subjects': {'widget': wtforms.widgets.HiddenInput()},
-                     'students': {'widget': wtforms.widgets.HiddenInput()}}
+                     'subjects': {'widget': wtforms.widgets.HiddenInput()}}
         return cruder(request, ClassRoom, 'classroom.html', 'classroom', 'Class Room', field_args, list_args,
                       g.user.schoolid)
 
@@ -449,5 +448,5 @@ def taskstatus(task_id):
 
 @socketio.on('join', namespace='/test')
 def test_message(msg):
-    response = {'mtotal': '1'}
-    emit('my response', response)
+    response = {"subject": 'a', "id": 'b'}
+    emit('notification', response)
