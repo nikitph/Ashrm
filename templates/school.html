@@ -58,7 +58,15 @@
 
                                 {% for h in form %}
                                     {% if h.label.text =='Institute' %}
-                                        {{ h(type='hidden',value=request.args.get('iid')) }}
+                                        {% if mode == 1 %}
+
+                                            {{ h(type='hidden',value=request.args.get('iid')) }}
+
+                                        {% else %}
+
+                                            {{ h(type='hidden') }}
+                                        {% endif %}
+
 
                                     {% elif h.label.text =='User' %}
                                         {{ h(type='hidden',value=g.user.get_id()) }}

@@ -15,7 +15,7 @@ from tasks import email
 
 from public.models import *
 from user.models import User, Role, Notification
-from user.utility import cruder
+from user.utility import cruder, poster
 
 bp_user = Blueprint('users', __name__, static_folder='../static')
 
@@ -201,9 +201,7 @@ def subject():
         return cruder(request, Subject, 'subject.html', 'subject', 'Subject', field_args, list_args, g.user.schoolid)
 
     else:
-        obj_form = model_form(Subject)
-        form = obj_form(request.form)
-        return redirect(url_for('.subject', m='r', id=str(form.save().id)))
+        return redirect(url_for('.subject', m='r', id=poster(request, Subject)))
 
 
 @login_required
@@ -216,11 +214,9 @@ def teacher():
         return cruder(request, Teacher, 'teacher.html', 'teacher', 'Teacher', field_args, list_args)
 
     else:
-        obj_form = model_form(Teacher)
-        form = obj_form(request.form)
         CreateUserCommand().run(email=request.form['email'], password='234765', active=1)
         AddRoleCommand().run(user_identifier=request.form['email'], role_name='teacher')
-        return redirect(url_for('.teacher', m='r', id=str(form.save().id)))
+        return redirect(url_for('.teacher', m='r', id=poster(request, Teacher)))
 
 
 @login_required
@@ -264,9 +260,7 @@ def event():
         return cruder(request, Event, 'event.html', 'event', 'Event', field_args, list_args, g.user.schoolid)
 
     else:
-        obj_form = model_form(Event)
-        form = obj_form(request.form)
-        return redirect(url_for('.event', m='r', id=str(form.save().id)))
+        return redirect(url_for('.event', m='r', id=poster(request, Event)))
 
 
 @login_required
@@ -279,9 +273,7 @@ def conveyance():
                       g.user.schoolid)
 
     else:
-        obj_form = model_form(Conveyance)
-        form = obj_form(request.form)
-        return redirect(url_for('.conveyance', m='r', id=str(form.save().id)))
+        return redirect(url_for('.conveyance', m='r', id=poster(request, Conveyance)))
 
 
 @login_required
@@ -295,9 +287,7 @@ def driver():
         return cruder(request, Driver, 'driver.html', 'driver', 'Driver', field_args, list_args, g.user.schoolid)
 
     else:
-        obj_form = model_form(Driver)
-        form = obj_form(request.form)
-        return redirect(url_for('.driver', m='r', id=str(form.save().id)))
+        return redirect(url_for('.driver', m='r', id=poster(request, Driver)))
 
 
 @login_required
@@ -310,9 +300,7 @@ def busstop():
                       g.user.schoolid)
 
     else:
-        obj_form = model_form(BusStop)
-        form = obj_form(request.form)
-        return redirect(url_for('.busstop', m='r', id=str(form.save().id)))
+        return redirect(url_for('.busstop', m='r', id=poster(request, BusStop)))
 
 
 @login_required
@@ -325,9 +313,7 @@ def busroute():
                       g.user.schoolid)
 
     else:
-        obj_form = model_form(BusRoute)
-        form = obj_form(request.form)
-        return redirect(url_for('.busroute', m='r', id=str(form.save().id)))
+        return redirect(url_for('.busroute', m='r', id=poster(request, BusRoute)))
 
 
 @login_required
@@ -355,12 +341,11 @@ def bulknotify():
         id = str(form.save().id)
         x = Student.objects.only('email')
         rcp = []
-        response = {"subject": form['subject'].data, "id" : id}
-        socketio.emit('notification', response,namespace='/test')
+        response = {"subject": form['subject'].data, "id": id}
+        socketio.emit('notification', response, namespace='/test')
         notif = Notification(subject=form['subject'].data, url=id)
         User.objects(id=g.user.get_id()).update_one(add_to_set__notif=notif)
         g.user.reload()
-
 
         for s in x:
             rcp.append(str(s.email))
@@ -391,9 +376,7 @@ def hostel():
                       g.user.schoolid)
 
     else:
-        obj_form = model_form(Hostel)
-        form = obj_form(request.form)
-        return redirect(url_for('.hostel', m='r', id=str(form.save().id)))
+        return redirect(url_for('.hostel', m='r', id=poster(request, Hostel)))
 
 
 @login_required
@@ -406,9 +389,7 @@ def hostelroom():
                       g.user.schoolid)
 
     else:
-        obj_form = model_form(HostelRoom)
-        form = obj_form(request.form)
-        return redirect(url_for('.hostelroom', m='r', id=str(form.save().id)))
+        return redirect(url_for('.hostelroom', m='r', id=poster(request, HostelRoom)))
 
 
 @login_required
@@ -422,9 +403,7 @@ def classroom():
                       g.user.schoolid)
 
     else:
-        obj_form = model_form(ClassRoom)
-        form = obj_form(request.form)
-        return redirect(url_for('.classroom', m='r', id=str(form.save().id)))
+        return redirect(url_for('.classroom', m='r', id=poster(request, ClassRoom)))
 
 
 @bp_user.route('/status/<task_id>')

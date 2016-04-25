@@ -62,3 +62,15 @@ def get_mode(req):
         return 4
     elif mode == 'l':
         return 5
+
+
+def poster(request, usr_model_class):
+    if request.args.get('id') is None:
+        obj_form = model_form(usr_model_class)
+        form = obj_form(request.form)
+    else:
+        mod_obj = usr_model_class.objects(id=str(request.args.get('id'))).first()
+        usr_obj_form = model_form(usr_model_class)
+        form = usr_obj_form(request.form, mod_obj)
+
+    return str(form.save().id)
