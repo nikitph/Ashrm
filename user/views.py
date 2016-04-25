@@ -97,9 +97,7 @@ def standard():
                       g.user.schoolid)
 
     else:
-        obj_form = model_form(Standard)
-        form = obj_form(request.form)
-        return redirect(url_for('.standard', m='r', id=str(form.save().id)))
+        return redirect(url_for('.standard', m='r', id=poster(request, Standard)))
 
 
 @login_required
@@ -116,9 +114,7 @@ def student():
                       )
 
     else:
-        obj_form = model_form(Student)
-        form = obj_form(request.form)
-        return redirect(url_for('.student', m='r', id=str(form.save().id)))
+        return redirect(url_for('.student', m='r', id=poster(request, Student)))
 
 
 @login_required
@@ -129,9 +125,7 @@ def parent():
         return cruder(request, Parent, 'parent.html', 'parent', 'Parent', field_args)
 
     else:
-        obj_form = model_form(Parent)
-        form = obj_form(request.form)
-        return redirect(url_for('.parent', m='r', id=str(form.save().id)))
+        return redirect(url_for('.parent', m='r', id=poster(request, Parent)))
 
 
 @login_required
@@ -142,9 +136,7 @@ def scholarship():
         return cruder(request, Scholarship, 'scholarship.html', 'scholarship', 'Scholarship', field_args)
 
     else:
-        obj_form = model_form(Scholarship)
-        form = obj_form(request.form)
-        return redirect(url_for('.scholarship', m='r', id=str(form.save().id)))
+        return redirect(url_for('.scholarship', m='r', id=poster(request, Scholarship)))
 
 
 @login_required
@@ -155,9 +147,7 @@ def award():
         return cruder(request, Award, 'award.html', 'award', 'Award', field_args)
 
     else:
-        obj_form = model_form(Award)
-        form = obj_form(request.form)
-        return redirect(url_for('.award', m='r', id=str(form.save().id)))
+        return redirect(url_for('.award', m='r', id=poster(request, Award)))
 
 
 @login_required
@@ -171,9 +161,7 @@ def transportation():
                       list_args, request.args['sid'])
 
     else:
-        obj_form = model_form(Transportation)
-        form = obj_form(request.form)
-        return redirect(url_for('.transportation', m='r', id=str(form.save().id), sid=request.args['sid']))
+        return redirect(url_for('.transportation', m='r', id=poster(request, Transportation), sid=request.args['sid']))
 
 
 @login_required
@@ -187,9 +175,7 @@ def hostelassignment():
                       list_args, request.args['sid'])
 
     else:
-        obj_form = model_form(HostelAssignment)
-        form = obj_form(request.form)
-        return redirect(url_for('.hostelassignment', m='r', id=str(form.save().id), sid=request.args['sid']))
+        return redirect(url_for('.hostelassignment', m='r', id=poster(request, HostelAssignment), sid=request.args['sid']))
 
 
 @login_required
