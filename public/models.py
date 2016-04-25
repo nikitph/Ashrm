@@ -108,7 +108,7 @@ class ClassRoom(db.Document):
 
 
 class Student(db.Document):
-    school = db.StringField(required=True, max_length=20, help_text='')
+    school = db.StringField(required=True, max_length=100, help_text='')
     student_name = db.StringField(required=True, max_length=20, help_text='perm_identity')
     student_class = db.ReferenceField(ClassRoom, required=True, help_text='activateSlave(this);')
     street_address = db.StringField(required=True, help_text='location_on')

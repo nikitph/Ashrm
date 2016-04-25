@@ -154,7 +154,7 @@
     <div class="row">
         {% for h in form %}
             {% if h.label.text =='School' %}
-                {{ h(type='hidden',value=scid) }}
+                {{ h(type='hidden',value=g.user.schoolid|safe) }}
 
             {% elif h.label.text =='Student Section' %}
                 <div class="input-field col s12 m6">
@@ -199,7 +199,7 @@
     <div class="row">
         {% for h in form %}
             {% if h.label.text =='School' %}
-                {{ h(type='hidden',value=scid) }}
+                {{ h(type='hidden',value=g.user.schoolid|safe) }}
 
             {% elif h.label.text =='Csrf Token' %}
                 {{ h(type='hidden') }}
@@ -229,7 +229,7 @@
 
         {% for h in form %}
             {% if h.label.text =='School' %}
-                {{ h(type='hidden',value=scid) }}
+                {{ h(type='hidden',value=g.user.schoolid|safe) }}
 
             {% elif h.label.text =='Csrf Token' %}
                 {{ h(type='hidden') }}

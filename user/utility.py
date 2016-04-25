@@ -1,6 +1,5 @@
-from flask import render_template
+from flask import render_template, g
 from flask.ext.mongoengine.wtf import model_form
-from public.models import Student
 
 __author__ = 'Omkareshwar'
 
@@ -41,7 +40,8 @@ def cruder(req, usr_model_class, template, route_name, display_name, field_args=
     elif mode == 5:
         mod_obj = model_form(usr_model_class, field_args=list_args)
         form = mod_obj(req.form)
-        return render_template(route_name + 'list.html', msg=usr_model_class.objects().to_json(), form=form,
+        return render_template(route_name + 'list.html',
+                               msg=usr_model_class.objects(school=str(g.user.schoolid)).to_json(), form=form,
                                routename=route_name, displayname=display_name, key_id=key_id)
 
     else:
