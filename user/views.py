@@ -329,7 +329,7 @@ def bulknotify():
         rcp = []
         response = {"subject": form['subject'].data, "id": id}
         socketio.emit('notification', response, namespace='/test')
-        notif = Notification(subject=form['subject'].data, url=id)
+        notif = Notification(subject=form['subject'].data, url=id, read=False)
         User.objects(id=g.user.get_id()).update_one(add_to_set__notif=notif)
         g.user.reload()
 
@@ -425,5 +425,16 @@ def taskstatus(task_id):
 
 @socketio.on('join', namespace='/test')
 def test_message(msg):
+    response = {"subject": 'a', "id": 'b'}
+    emit('notification', response)
+
+
+@socketio.on('clear not', namespace='/test')
+def test_message(msg):
+    print current_user
+    u = User.objects(id=current_user).first()
+    for x in u.notif:
+        x.read = True
+        u.save()
     response = {"subject": 'a', "id": 'b'}
     emit('notification', response)

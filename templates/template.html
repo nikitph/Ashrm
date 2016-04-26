@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="static/scss/main/_main.scss"/>
-    <link rel="stylesheet" type="text/css" href="static/scss/main/_main.scss"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link href="/static/css/materialize.css" rel="stylesheet">
@@ -55,12 +53,17 @@
                 success: function (vehicles) {
                     for (var i = 0; i < vehicles._items.length; i++) {
                         var b = vehicles._items[i].notif;
+                        var y = 0;
                         for (var x = 0; x < b.length; x++) {
                             c = b[x];
-                            $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + c.url + ' class="collection-item">' + c.subject + ' </a>');
+                            if (!c.read)
+                            {
+                                $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + c.url + ' class="collection-item">' + c.subject + ' </a>');
+                                y++;
+                            }
 
                         }
-                        $('#noti').text(b.length);
+                        $('#noti').text(y);
                     }
 
                 }
@@ -101,6 +104,21 @@
             var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
             socket.emit('comment', i);
             $("#message").val('');
+        }
+
+        function clearNot() {
+            $('#dropdown3').remove('a');
+            $('#noti').text(0);
+
+            namespace = '/test'; // change to an empty string to use the global namespace
+            // the socket.io documentation recommends sending an explicit package upon connection
+            // this is specially important when using the global namespace
+            var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+            socket.emit('clear not', {
+                data: 'clear'
+
+            });
+            return true;
         }
     </script>
 
@@ -149,7 +167,7 @@
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
-            font-family: "Avenir", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-family: "Raleway", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             font-weight: 200;
@@ -166,20 +184,13 @@
 
 <body>
 
-<ul id="dropdown1" class="dropdown-content">
-    <li>Dcheck</li>
-    <li>Change Inventory</li>
-    <li>Change Inventory(minors)</li>
-
-
-</ul>
 
 <div class="topbar">
     <div class="top-logo">
-        <div class="logo-container center">
+        <div class="logo-container center hvr-bounce-in">
             <a href="/student?m=l" class="center brand-logo black-text"><img class="anm"
-                                                                           src="/static/img/ashrm.svg" height="40px"
-                                                                           style="margin-top: 4px"></a></div>
+                                                                             src="/static/img/ashrm.svg" height="40px"
+                                                                             style="margin-top: 4px"></a></div>
     </div>
     <div class="action-menu">
         <div class="institute-name center">
@@ -190,19 +201,20 @@
 
         <div class="notifier center" style="margin: auto">
 
-            <a href="#!"><i class="material-icons dropdown-button" data-activates='dropdown3'
+            <a href="#!"><i class="material-icons dropdown-button hvr-bounce-in" data-activates='dropdown3'
                             data-alignment="right">notifications</i></a>
             <span class="new badge" id="noti"></span>
             <ul id='dropdown3' class='dropdown-content-topbar collection'>
-                <li class="center collection-item">
-                    <a href="#!" class="center">Notifications</a></li>
+                <li class="collection-item">
+                    <a class="btn-flat blue-text text-darken-3"
+                       onclick="clearNot();"><i class="material-icons right blue-text">clear_all</i>Alerts</a>
             </ul>
 
         </div>
         <div class="name-menu">
 
 
-            <div>
+            <div class="hvr-bounce-in">
                 <img src='{{ g.user.image }}' width=35px height=35px style="border-radius: 50%; margin: auto">
             </div>
             <div style="margin:auto;">
