@@ -92,6 +92,7 @@
                 $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + event.id + ' class="collection-item">' + event.subject + ' </a>');
                 var count = parseInt($('#noti').text());
                 $('#noti').text(count + 1);
+                Materialize.toast('<i class="material-icons left">info_outline</i>Hello', 5000)
             });
 
 
@@ -117,6 +118,8 @@
                 data: 'clear'
 
             });
+            Materialize.toast('<i class="material-icons left">info_outline</i>Hello', 5000)
+
             return true;
         }
     </script>

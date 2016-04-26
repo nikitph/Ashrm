@@ -9834,6 +9834,7 @@ small {
 
 .toast {
   border-radius: 2px;
+  border: 1px solid darkgreen;
   top: 0;
   width: auto;
   clear: both;
@@ -9844,11 +9845,11 @@ small {
   min-height: 48px;
   line-height: 1.5em;
   word-break: break-all;
-  background-color: #323232;
+  background-color: white;
   padding: 10px 25px;
   font-size: 1.1rem;
   font-weight: 300;
-  color: #fff;
+  color: #1976D2;
   display: flex;
   align-items: center;
   justify-content: space-between;
