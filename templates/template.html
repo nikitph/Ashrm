@@ -56,8 +56,7 @@
                         var y = 0;
                         for (var x = 0; x < b.length; x++) {
                             c = b[x];
-                            if (!c.read)
-                            {
+                            if (!c.read) {
                                 $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + c.url + ' class="collection-item">' + c.subject + ' </a>');
                                 y++;
                             }

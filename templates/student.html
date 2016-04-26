@@ -34,32 +34,6 @@
 
         }
     </script>
-    <script type="text/javascript" charset="utf-8">
-        $(document).ready(function () {
-
-            var key = '{{ g.user.get_id() }}';
-
-            $.ajax({
-                type: "GET",
-                dataType: 'json',
-                accepts: "application/json; charset=utf-8",
-                url: 'http://0.0.0.0:5001/user?where={"_id": "' + key + '"}',
-                success: function (vehicles) {
-                    for (var i = 0; i < vehicles._items.length; i++) {
-                        var b = vehicles._items[i].notif;
-                        for (var x=0; x < b.length; x++)
-                        {
-                            c = b[x];
-                            $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + c.url + ' class="collection-item">' + c.subject + ' </a>');
-
-                        }
-            $('#noti').text(b.length);
-                    }
-
-                }
-            })});
-
-    </script>
 
 
 {#    <script type="text/javascript">#}
