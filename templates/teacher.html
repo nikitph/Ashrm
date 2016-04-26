@@ -16,7 +16,7 @@
 
             {% if h.label.text == 'School' %}
 
-                {{ h(value=request.args['sid']) }}
+                {{ h(value=g.user.schoolid) }}
 
             {% elif h.label.text == 'Gender' %}
                 <div class="switch col s12 m6">

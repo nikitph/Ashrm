@@ -1,246 +1,226 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-  <title>Parallax Template - Materialize</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Aashram | Schools Simplified</title>
+    <meta name="msapplication-TileColor" content="#663fb5">
+    <meta name="msapplication-TileImage" content="img/favicon/mstile-144x144.png">
+    <meta name="msapplication-config" content="img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#663fb5">
+    <link rel="stylesheet" href="/static/css/landio.css">
+  </head>
 
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-<style>
+  <body>
 
-    /* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
+    <!-- Navigation
+    ================================================== -->
 
-    html {
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            font-family: "Avenir", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            font-weight: 100;
-        }
-
-nav ul a,
-nav .brand-logo {
-  color: #444;
-}
-
-p {
-  line-height: 2rem;
-}
-
-.button-collapse {
-  color: #26a69a;
-}
-
-.parallax-container {
-  min-height: 380px;
-  line-height: 0;
-  height: auto;
-  color: rgba(255,255,255,.9);
-}
-  .parallax-container .section {
-    width: 100%;
-  }
-
-@media only screen and (max-width : 992px) {
-  .parallax-container .section {
-    position: absolute;
-    top: 40%;
-  }
-  #index-banner .section {
-    top: 10%;
-  }
-}
-
-@media only screen and (max-width : 600px) {
-  #index-banner .section {
-    top: 0;
-  }
-}
-
-.icon-block {
-  padding: 0 15px;
-}
-.icon-block .material-icons {
-  font-size: inherit;
-}
-
-footer.page-footer {
-  margin: 0;
-}
-</style>
-
-</head>
-<body>
-  <nav class="white z-depth-0" role="navigation">
-    <div class="nav-wrapper container">
-      <div>
-                    <a href="/" class="center brand-logo black-text"><img class="anm"
-                                                                          src="/static/img/ashrm.svg" height="49px" width="49px"
-                            style="margin-top: 4px;border: 1px solid #8b0000;border-radius: 50%;  z-index: 2000"></a>
-                </div>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
-
-    <div class="section no-pad-bot">
+    <nav class="navbar navbar-dark bg-inverse bg-inverse-custom navbar-fixed-top">
       <div class="container">
-          <div style="background-color: white; border-radius: 8px ">
-        <h3 class="header center red-text text-darken-4 ">Ashram</h3>
+        <a class="navbar-brand" href="#">
+          <span><img
+                                                                           src="/static/img/ashrm.svg" height="40px"
+                                                                           ></span>
+          <span class="sr-only">Aashram</span>
+        </a>
+        <a class="navbar-toggler hidden-md-up pull-xs-right" data-toggle="collapse" href="#collapsingNavbar" aria-expanded="false" aria-controls="collapsingNavbar">
+        &#9776;
+      </a>
+        <a class="navbar-toggler navbar-toggler-custom hidden-md-up pull-xs-right" data-toggle="collapse" href="#collapsingMobileUser" aria-expanded="false" aria-controls="collapsingMobileUser">
+          <span class="icon-user"></span>
+        </a>
+        <div id="collapsingNavbar" class="collapse navbar-toggleable-custom" role="tabpanel" aria-labelledby="collapsingNavbar">
+          <ul class="nav navbar-nav pull-xs-right">
+            <li class="nav-item nav-item-toggable">
+              <a class="nav-link" href="/login"><small></small>LogIn<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="navbar-divider hidden-sm-down"></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section
+    ================================================== -->
+
+    <header class="jumbotron bg-inverse text-xs-center center-vertically" role="banner">
+      <div class="container">
+        <h1 class="display-3">Aashram</h1>
+        <h2 class="m-b-3">Simplified Management for your Educational Institute, <em>absolutely free</em>.</h2>
+        <a class="btn btn-secondary-outline m-b-1" href="/register" role="button">Get Started</a>
+      </div>
+    </header>
+
+    <!-- Intro
+    ================================================== -->
+
+    <section class="section-intro bg-faded text-xs-center">
+      <div class="container">
+        <h3 class="wp wp-1">Simplified Management of Institute operations</h3>
+        <p class="lead wp wp-2">Right down to real-time level</p>
+        <img src="/static/img/ss.png" alt="iPad mock" class="img-fluid wp wp-3 center-block" height="200px" width="600px">
+      </div>
+    </section>
+
+    <!-- Features
+    ================================================== -->
+
+    <section class="section-features text-xs-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-block">
+                <span class="icon-pen display-1"></span>
+                <h4 class="card-title"> >10</h4>
+                <h6 class="card-subtitle text-muted">Modules</h6>
+                <p class="card-text">Student management, transportation management, academic details, hostel management & much more</p>
               </div>
-        <div class="row center">
-          <h5 class="header col s12 blue-text">Let's redfine student management</h5>
-        </div>
-        <div class="row center">
-          <a href="/register" id="download-button" class="btn-large waves-effect waves-light blue lighten-1">Get Started</a>
-        </div>
-      </div>
-    </div>
-
-
-  <div class="container">
-    <div class="section">
-
-      <!--   Icon Section   -->
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
-            <h5 class="center">Speeds up development</h5>
-
-            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+            </div>
           </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">group</i></h2>
-            <h5 class="center">User Experience Focused</h5>
-
-            <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-block">
+                <span class="icon-thunderbolt display-1"></span>
+                <h4 class="card-title">Ultra</h4>
+                <h6 class="card-subtitle text-muted">Modern design</h6>
+                <p class="card-text">Superfast and ultramodern UI. Realtime websocket technology</p>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
-            <h5 class="center">Easy to work with</h5>
-
-            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+          <div class="col-md-4">
+            <div class="card m-b-0">
+              <div class="card-block">
+                <span class="icon-heart display-1"></span>
+                <h4 class="card-title">Free</h4>
+                <h6 class="card-subtitle text-muted">For a limited time</h6>
+                <p class="card-text">Special offer for our initial customers</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-    </div>
-  </div>
+    <!-- Video
+    ================================================== -->
 
 
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
+
+    <!-- Pricing
+    ================================================== -->
+
+    <section class="section-pricing bg-faded text-xs-center">
       <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+        <h3>Pricing Offers</h3>
+        <div class="row p-y-3">
+          <div class="col-md-4 p-t-md wp wp-5">
+            <div class="card pricing-box">
+              <div class="card-header text-uppercase">
+                Schools
+              </div>
+              <div class="card-block">
+                <p class="card-title">Schools upto a 1000 students </p>
+                <h4 class="card-text">
+                  <sup class="pricing-box-currency">$</sup>
+                  <span class="pricing-box-price">20 </span>
+                  <small class="text-muted text-uppercase">/month</small>
+                </h4>
+              </div>
+              <ul class="list-group list-group-flush p-x">
+                <li class="list-group-item">Dedicated DB</li>
+                <li class="list-group-item">Dedicated Server</li>
+                <li class="list-group-item">Customer support</li>
+              </ul>
+              <a href="#" class="btn btn-primary-outline">Get Started</a>
+            </div>
+          </div>
+          <div class="col-md-4 stacking-top">
+            <div class="card pricing-box pricing-best p-x-0">
+              <div class="card-header text-uppercase">
+                Beta Customers
+              </div>
+              <div class="card-block">
+                <p class="card-title">Special offer for our initial customers</p>
+                <h4 class="card-text">
+                  <sup class="pricing-box-currency">$</sup>
+                  <span class="pricing-box-price">0 </span>
+                  <small class="text-muted text-uppercase">/month</small>
+                </h4>
+              </div>
+              <ul class="list-group list-group-flush p-x">
+                <li class="list-group-item">Shared DB</li>
+                <li class="list-group-item">Shared Server</li>
+                <li class="list-group-item">Customer support</li>
+              </ul>
+              <a href="#" class="btn btn-primary">Get Started</a>
+            </div>
+          </div>
+          <div class="col-md-4 p-t-md wp wp-6">
+            <div class="card pricing-box">
+              <div class="card-header text-uppercase">
+                Enterprise
+              </div>
+              <div class="card-block">
+                <p class="card-title">For schools and colleges > 1000 students</p>
+                <h4 class="card-text">
+                  <sup class="pricing-box-currency">$</sup>
+                  <span class="pricing-box-price">50 </span>
+                  <small class="text-muted text-uppercase">/month</small>
+                </h4>
+              </div>
+              <ul class="list-group list-group-flush p-x">
+                <li class="list-group-item">Dedicated DB</li>
+                <li class="list-group-item">Dedicated Server</li>
+                <li class="list-group-item">Customer support</li>
+              </ul>
+              <a href="#" class="btn btn-primary-outline">Get Started</a>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="parallax"><img src="/static/img/background2.jpg" alt="Unsplashed background img 2"></div>
-  </div>
+    </section>
 
-  <div class="container">
-    <div class="section">
-
-      <div class="row">
-        <div class="col s12 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Contact Us</h4>
-          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
+    <!-- Testimonials
+    ================================================== -->
 
 
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
+    <!-- Text Content
+    ================================================== -->
+
+
+
+    <!-- News
+    ================================================== -->
+
+
+    <!-- Sign Up
+    ================================================== -->
+
+
+    <!-- Footer
+    ================================================== -->
+
+    <footer class="section-footer bg-inverse" role="contentinfo">
       <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+        <div class="row">
+          <div class="col-md-6 col-lg-5">
+            <div class="media">
+              <small class="media-body media-bottom">
+                &copy; Aashram 2016 <br>
+                Designed and developed by Nikit Phadke, exclusively for You.
+              </small>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-7">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="parallax"><img src="/static/img/background3.jpg" alt="Unsplashed background img 3"></div>
-  </div>
+    </footer>
 
-  <footer class="page-footer teal">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Company Bio</h5>
-          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      <div class="container">
-      Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-      </div>
-    </div>
-  </footer>
-
-
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-  <script>
-
-      (function($){
-  $(function(){
-
-    $('.button-collapse').sideNav();
-    $('.parallax').parallax();
-
-  }); // end of document ready
-})(jQuery); // end of jQuery name space
-  </script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/static/js/landio.min.js"></script>
   </body>
 </html>
