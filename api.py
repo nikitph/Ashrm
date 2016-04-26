@@ -28,6 +28,8 @@ ext.add_model(Transportation)
 ext.add_model(HostelRoom)
 ext.add_model(User)
 ext.add_model(Subject)
+ext.add_model(Teacher)
+ext.add_model(ClassRoom)
 
 
 

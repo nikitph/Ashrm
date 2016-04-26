@@ -35,6 +35,39 @@
         }
     </script>
 
+<script type="text/javascript" charset="utf-8">
+        $(window).load(function() {
+
+            var sel = $('#student_class');
+            var school = '{{ g.user.schoolid|safe }}';
+
+
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                accepts: "application/json; charset=utf-8",
+                url: 'http://127.0.0.1:5001/classroom',
+                success: function (subjects) {
+                                            var d = '';
+                    for (var i = 0; i < subjects._items.length; i++) {
+                        var b = subjects._items[i];
+                        var c = b._id;
+                        if (b.school == school)
+                        {
+                            d += 'option[value!="' + c + '"]';
+                        }
+                    }
+                        sel.find(d).remove();
+                        $('select').material_select();
+
+
+
+                }
+            });
+
+        });
+    </script>
+
 
 {#    <script type="text/javascript">#}
 {#        $(document).ready(function () {#}
