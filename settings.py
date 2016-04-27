@@ -27,6 +27,7 @@ class Config(object):
     SECURITY_REGISTERABLE = True
     SECURITY_RECOVERABLE = True
     SECURITY_CONFIRMABLE = False
+    SECURITY_CHANGEABLE = True
     SECURITY_TRACKABLE = True
     SECURITY_PASSWORD_HASH = 'bcrypt'
     SECURITY_PASSWORD_SALT = '3nF3Rn0'
@@ -34,6 +35,7 @@ class Config(object):
     SECURITY_POST_LOGIN_VIEW = '/student?m=l'
     SECURITY_POST_CONFIRM_VIEW = '/student?m=l'
     SECURITY_POST_REGISTER_VIEW = '/institute'
+    SECURITY_POST_CHANGE_VIEW = '/profile'
 
     #flask mail settings - Mailgun
     MAIL_SERVER = 'smtp.mailgun.com'
