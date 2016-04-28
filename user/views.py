@@ -436,5 +436,3 @@ def test_message(msg):
     for x in u.notif:
         x.read = True
         u.save()
-    response = {"subject": 'a', "id": 'b'}
-    emit('notification', response)
