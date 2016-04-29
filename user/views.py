@@ -305,10 +305,10 @@ def busroute():
 @login_required
 @bp_user.route('/transportd', methods=['GET'])
 def transportd():
-    vehicle = Conveyance.objects().to_json()
-    driver = Driver.objects().to_json()
-    stop = BusStop.objects().to_json()
-    route = BusRoute.objects().to_json()
+    vehicle = Conveyance.objects(school=str(g.user.schoolid)).to_json()
+    driver = Driver.objects(school=str(g.user.schoolid)).to_json()
+    stop = BusStop.objects(school=str(g.user.schoolid)).to_json()
+    route = BusRoute.objects(school=str(g.user.schoolid)).to_json()
     return render_template('transportd.html', vehicle=vehicle, driver=driver, stop=stop, route=route)
 
 
@@ -347,8 +347,8 @@ def allowed_file(filename):
 @login_required
 @bp_user.route('/hosteld', methods=['GET'])
 def hosteld():
-    hostels = Hostel.objects().to_json()
-    room = HostelRoom.objects().to_json()
+    hostels = Hostel.objects(school=str(g.user.schoolid)).to_json()
+    room = HostelRoom.objects(school=str(g.user.schoolid)).to_json()
     return render_template('hosteld.html', hostel=hostels, room=room)
 
 
