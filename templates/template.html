@@ -54,13 +54,16 @@
                     for (var i = 0; i < vehicles._items.length; i++) {
                         var b = vehicles._items[i].notif;
                         var y = 0;
-                        for (var x = 0; x < b.length; x++) {
-                            c = b[x];
-                            if (!c.read) {
-                                $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + c.url + ' class="collection-item">' + c.subject + ' </a>');
-                                y++;
-                            }
+                        if (b != null)
+                        {
+                            for (var x = 0; x < b.length; x++) {
+                                c = b[x];
+                                if (!c.read) {
+                                    $('#dropdown3').append('<a href="/bulknotify?m=r&id="' + c.url + ' class="collection-item">' + c.subject + ' </a>');
+                                    y++;
+                                }
 
+                            }
                         }
                         $('#noti').text(y);
                     }
