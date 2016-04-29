@@ -31,6 +31,9 @@ ext.add_model(User)
 ext.add_model(Subject)
 ext.add_model(Teacher)
 ext.add_model(ClassRoom)
+ext.add_model(BusStop)
+ext.add_model(Driver)
+ext.add_model(Conveyance)
 
 
 
