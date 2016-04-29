@@ -426,7 +426,6 @@ def taskstatus(task_id):
 @socketio.on('join', namespace='/test')
 def test_message(msg):
     response = {"subject": 'a', "id": 'b'}
-    emit('notification', response)
 
 
 @socketio.on('clear not', namespace='/test')
