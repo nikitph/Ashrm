@@ -3,6 +3,7 @@
 import eventlet
 import eventlet.wsgi
 import os
+from extensions import socketio
 from flask.ext.script import Manager, Shell, Server
 from flask.ext.security.script import CreateUserCommand, AddRoleCommand, RemoveRoleCommand, ActivateUserCommand, \
     DeactivateUserCommand
@@ -55,4 +56,4 @@ manager.add_command('install',InstallCommand())
 
 
 if __name__ == '__main__':
-    manager.run()
+    socketio.run(app)
