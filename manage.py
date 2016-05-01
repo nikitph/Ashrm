@@ -40,7 +40,7 @@ def _make_context():
 def server():
     app.debug = False
     # WSGIServer(('127.0.0.1', 5000), app).serve_forever()
-    eventlet.wsgi.server(eventlet.listen(('127.0.0.1', 5000)), app)
+    eventlet.wsgi.server(eventlet.listen(('127.0.0.1', 7000)), app)
 
 
 manager.add_command('server', server())
