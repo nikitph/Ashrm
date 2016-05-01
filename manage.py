@@ -38,12 +38,12 @@ def _make_context():
 
 
 def server():
-    app.debug = True
+    app.debug = False
     # WSGIServer(('127.0.0.1', 5000), app).serve_forever()
     eventlet.wsgi.server(eventlet.listen(('127.0.0.1', 5000)), app)
 
 
-manager.add_command('server', Server())
+manager.add_command('server', server())
 manager.add_command('shell', Shell(make_context=_make_context))
 
 manager.add_command('create_user', CreateUserCommand())
