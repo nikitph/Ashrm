@@ -3,7 +3,6 @@
 import eventlet
 import eventlet.wsgi
 import os
-from extensions import socketio
 from flask.ext.script import Manager, Shell, Server
 from flask.ext.security.script import CreateUserCommand, AddRoleCommand, RemoveRoleCommand, ActivateUserCommand, \
     DeactivateUserCommand
@@ -12,7 +11,7 @@ from app import create_app
 
 from settings import DevConfig, ProdConfig
 
-eventlet.monkey_patch()
+# eventlet.monkey_patch()
 
 # local settings should be ignored by git
 try:
@@ -52,8 +51,8 @@ manager.add_command('remove_role', RemoveRoleCommand())
 manager.add_command('deactivate_user', DeactivateUserCommand())
 manager.add_command('activate_user', ActivateUserCommand())
 manager.add_command('reset_user', ResetUserCommand())
-manager.add_command('install',InstallCommand())
+manager.add_command('install', InstallCommand())
 
 
 if __name__ == '__main__':
-    socketio.run(app)
+    manager.run(app)

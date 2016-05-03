@@ -1,11 +1,9 @@
 import datetime
 
-from extensions import socketio
 from flask import Blueprint, request, redirect, url_for, g, jsonify
 
 from flask.ext.security import login_required, current_user, roles_required
 from flask.ext.security.script import CreateUserCommand, AddRoleCommand
-from flask.ext.socketio import emit
 from flask.ext.sse import sse
 from flask.templating import render_template
 from werkzeug.utils import secure_filename
@@ -328,7 +326,7 @@ def bulknotify():
         x = Student.objects.only('email')
         rcp = []
         response = {"subject": form['subject'].data, "id": id}
-        socketio.emit('notification', response, namespace='/test')
+        # socketio.emit('notification', response, namespace='/test')
         notif = Notification(subject=form['subject'].data, url=id, read=False)
         User.objects(id=g.user.get_id()).update_one(add_to_set__notif=notif)
         g.user.reload()
@@ -423,15 +421,15 @@ def taskstatus(task_id):
     return jsonify(response)
 
 
-@socketio.on('join', namespace='/test')
-def test_message(msg):
-    response = {"subject": 'a', "id": 'b'}
-
-
-@socketio.on('clear not', namespace='/test')
-def test_message(msg):
-    print current_user
-    u = User.objects(id=current_user).first()
-    for x in u.notif:
-        x.read = True
-        u.save()
+# @socketio.on('join', namespace='/test')
+# def test_message(msg):
+#     response = {"subject": 'a', "id": 'b'}
+#
+#
+# @socketio.on('clear not', namespace='/test')
+# def test_message(msg):
+#     print current_user
+#     u = User.objects(id=current_user).first()
+#     for x in u.notif:
+#         x.read = True
+#         u.save()
