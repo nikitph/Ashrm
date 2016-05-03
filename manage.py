@@ -55,4 +55,4 @@ manager.add_command('install', InstallCommand())
 
 
 if __name__ == '__main__':
-    manager.run(app)
+    manager.run()
