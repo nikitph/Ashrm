@@ -58,9 +58,9 @@ class ProdConfig(Config):
 class DevConfig(Config):
     """Development configuration."""
     ENV = 'dev'
-    DEBUG = True
-    DEBUG_TB_ENABLED = True
-    ASSETS_DEBUG = True  # Don't bundle/minify static assets
+    DEBUG = False
+    DEBUG_TB_ENABLED = False
+    ASSETS_DEBUG = False  # Don't bundle/minify static assets
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
     BROKER_URL = 'redis://localhost:6379/10'
     REDIS_URL = 'redis://localhost:6379/10'
