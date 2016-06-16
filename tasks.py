@@ -10,11 +10,14 @@ def make_celery(app):
     celery = Celery(app.import_name, broker=Config.BROKER_URL)
     celery.conf.update(app.config)
     TaskBase = celery.Task
+
     class ContextTask(TaskBase):
         abstract = True
+
         def __call__(self, *args, **kwargs):
             with app.app_context():
                 return TaskBase.__call__(self, *args, **kwargs)
+
     celery.Task = ContextTask
     return celery
 
@@ -47,7 +50,7 @@ def email(self, subj, body, rlist):
             msg.body = str(body)
             mail.send(msg)
             self.update_state(state='PROGRESS',
-                          meta={'current': i, 'total': total,
-                                'status': 'Email sent to ' + s})
+                              meta={'current': i, 'total': total,
+                                    'status': 'Email sent to ' + s})
         return {'current': 100, 'total': 100, 'status': 'Task completed!',
-            'result': 42}
+                'result': 42}
