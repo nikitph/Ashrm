@@ -216,12 +216,6 @@ def upload():
 
 
 @login_required
-@bp_user.route('/dashboard', methods=['GET'])
-def dashboard():
-    return render_template('dashboard.html')
-
-
-@login_required
 @bp_user.route('/profile', methods=['GET', 'POST'])
 def profile():
     if request.method == 'GET':
@@ -419,17 +413,3 @@ def taskstatus(task_id):
             'status': str(task.info),  # this is the exception raised
         }
     return jsonify(response)
-
-
-# @socketio.on('join', namespace='/test')
-# def test_message(msg):
-#     response = {"subject": 'a', "id": 'b'}
-#
-#
-# @socketio.on('clear not', namespace='/test')
-# def test_message(msg):
-#     print current_user
-#     u = User.objects(id=current_user).first()
-#     for x in u.notif:
-#         x.read = True
-#         u.save()
