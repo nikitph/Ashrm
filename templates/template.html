@@ -44,6 +44,8 @@
             $('.modal-trigger').leanModal();
 
             var key = '{{ g.user.get_id() }}';
+            $('#noti').text(0);
+
 
             $.ajax({
                 type: "GET",
